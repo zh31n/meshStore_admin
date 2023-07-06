@@ -1,0 +1,46 @@
+.inputCont {
+    width: 400px;
+    height: 75px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.sup {
+    font-size: 16px;
+    color: white;
+}
+
+.eyeCont {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.input_eye {
+    background-color: transparent;
+    width: 100%;
+    height: 70%;
+    border: 0;
+    outline: 0;
+    font-size: 18px;
+    color: white;
+    font-family: 'Manrope', sans-serif;
+}
+
+.input_eye::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+}
+
+.imgeye {
+    cursor: pointer;
+}
