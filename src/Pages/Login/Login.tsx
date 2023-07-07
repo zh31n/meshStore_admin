@@ -29,7 +29,7 @@ const Login = () => {
                 <CustomInputEye err={state.isError}  text={'Пароль*'} type={state.visiblePass ? 'text' : 'password'}
                                 state={state} setState={setState} placeholder={'Введите пароль'}/>
             </div>
-            <Link to={'/main'} className={s.btn}>Войти</Link>
+            <Link to={'/profile'} className={s.btn}>Войти</Link>
             <Link className={s.forgot}>Забыли пароль?</Link>
             <div className={s.lang}>
                 <span onClick={ChangeLang}

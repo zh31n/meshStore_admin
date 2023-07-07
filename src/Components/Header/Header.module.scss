@@ -1,0 +1,51 @@
+
+.header {
+  width: 100%;
+  gap: 10px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .header_inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+
+    .logo {
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      .navItem {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #838383;
+        font-size: 16px;
+      }
+
+    }
+
+    .lang {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      color: #838383;
+
+      span{
+        cursor: pointer;
+        font-family: 'Manrope';
+      }
+    }
+  }
+
+
+}

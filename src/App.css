@@ -1,26 +1,33 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arkhip';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arkhip';
 }
 
-#root{
-
+#root {
+    background: #020202;
+    color: white;
+    height: 100vh;
 }
 
-input{
-  /*background-color: transparent !important;*/
-  /*background: none !important;*/
-  outline: 0;
-  border: 0;
+input {
+    outline: 0;
+    border: 0;
 }
-a{
-  text-decoration: none;
-  color: white;
+
+.container {
+    width: 1160px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 input:-internal-autofill-selected {
-  background: transparent !important;
+    background: transparent !important;
 }
 
