@@ -10,7 +10,7 @@ const Profile = () => {
             <Header/>
             <div className={s.content}>
                 <Routes>
-                    <Route element={<Today/>} path={'/today'}/>
+                    <Route element={<Today/>} path={'/today/*'}/>
                 </Routes>
             </div>
         </div>

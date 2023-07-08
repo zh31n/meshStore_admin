@@ -28,7 +28,14 @@ a {
     color: white;
 }
 
-input:-internal-autofill-selected {
+input::-internal-autofill-selected {
     background: transparent !important;
+}
+
+input::-webkit-calendar-picker-indicator{
+    display: none;
+    position: relative;
+    z-index: 1;
+    right: 50px;
 }
 
