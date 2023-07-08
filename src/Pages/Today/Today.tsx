@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Today.module.scss';
+import EventItem from "../../Components/EventItem/EventItem";
 
 const data = [
     {length: 15, type: 'мин', name: 'Название события', id: 1, time: '14:00'},
@@ -8,7 +9,7 @@ const data = [
     {length: 2, type: 'часа', name: 'Название события', id: 4, time: '14:00'},
 ]
 
-const eventItems = data.map(e => <div style={{color:'black'}}>{e.name}</div>)
+const eventItems = data.map(e => <EventItem name={e.name} time={e.time} length={e.length} type={e.type}/>)
 
 const Today = () => {
     return (
@@ -24,6 +25,7 @@ const Today = () => {
                     <div className={s.container_event}>
                         {eventItems}
                     </div>
+                    <div className={s.btn_blue}>Добавить событие</div>
                 </div>
             </div>
         </div>
