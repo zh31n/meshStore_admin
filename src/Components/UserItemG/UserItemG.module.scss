@@ -9,11 +9,14 @@
   padding-left: 1rem;
   padding-right: 1rem;
 
+  .points {
+    cursor: pointer;
+  }
 
   .info {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 
     span {
       color: #171717;
@@ -23,9 +26,5 @@
       font-weight: 500;
       line-height: 9.53px;
     }
-
   }
-}
-.image{
-  cursor: pointer;
 }

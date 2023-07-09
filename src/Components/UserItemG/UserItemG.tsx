@@ -12,10 +12,10 @@ const UserItemG = ({name, id, image}:Props) => {
     return (
         <div className={s.cont}>
             <div className={s.info}>
-                <img className={s.image} src={image} alt=""/>
+                <img src={image} alt=""/>
                 <span>{name}</span>
             </div>
-            <img src={btn} alt=""/>
+            <img className={s.points} src={btn} alt=""/>
         </div>
     );
 };

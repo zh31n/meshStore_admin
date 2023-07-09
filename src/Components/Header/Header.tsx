@@ -41,7 +41,7 @@ const Header = (props) => {
                                 </svg>
                                 Сегодня
                             </Link>
-                            <Link className={s.navItem}>
+                            <Link to={'/profile/clients'} className={s.navItem}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24"
                                      fill="none">
                                     <g clip-path="url(#clip0_100_1715)">
@@ -73,7 +73,7 @@ const Header = (props) => {
                                 </svg>
                                 Календарь
                             </Link>
-                            <Link to={'/profile/clients'} className={s.navItem}>
+                            <Link className={s.navItem}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                                      fill="none">
                                     <g clip-path="url(#clip0_100_1718)">
