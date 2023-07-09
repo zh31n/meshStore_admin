@@ -41,12 +41,24 @@
       align-items: center;
       color: #838383;
 
-      span{
+      span {
         cursor: pointer;
-        font-family: 'Manrope';
+        font-family: 'Manrope',sans-serif;
       }
     }
   }
 
+  .nav {
+    .navItem:hover {
+      transition: all .5s;
+      color: white;
 
+      path {
+        transition: all .5s;
+        stroke: white;
+      }
+
+    }
+
+  }
 }
