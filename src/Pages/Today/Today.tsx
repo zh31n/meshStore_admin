@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Today.module.scss';
 import EventItem from "../../Components/EventItem/EventItem";
-import {Routes,Route} from 'react-router-dom';
+import {Routes, Route, Link} from 'react-router-dom';
 import ChangeEvent from "../ChangeEvent/ChangeEvent";
+import AddEvent from "../AddEvent/AddEvent";
 
 const data = [
     {length: 15, type: 'мин', name: 'Название события', id: 1, time: '14:00'},
@@ -27,11 +28,12 @@ const Today = () => {
                     <div className={s.container_event}>
                         {eventItems}
                     </div>
-                    <div className={s.btn_blue}>Добавить событие</div>
+                    <Link to={'/profile/today/add'} className={s.btn_blue}>Добавить событие</Link>
                 </div>
                 <div className={s.page_content}>
                     <Routes>
                         <Route path={'/:eventId'} element={<ChangeEvent/>} />
+                        <Route path={'/add'} element={<AddEvent/>} />
                     </Routes>
                 </div>
             </div>
