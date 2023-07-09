@@ -23,6 +23,7 @@ const Users = (props: any) => {
 
 
     const navItems = data.header.map(i => <div className={s.nav_item}>{i.name}</div>)
+    const userItems = data.users.map(i => <UserItemG name={i.name} id={i.id} image={ava_img}/>)
 
     return (
         <>
@@ -35,7 +36,7 @@ const Users = (props: any) => {
             </div>
             <div className={s.cont}>
                 <div className={s.users}>
-                    <UserItemG name={'Фёдор Шишкин'} id={1} image={ava_img} />
+                    {userItems}
                 </div>
                 <div className={s.left}>
 

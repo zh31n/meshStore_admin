@@ -62,6 +62,9 @@
 
   .users {
     width: 49%;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
 
   }
 

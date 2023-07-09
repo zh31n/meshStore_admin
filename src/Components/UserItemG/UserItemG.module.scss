@@ -5,8 +5,27 @@
   height: 58px;
   align-items: center;
   display: flex;
+  justify-content: space-between;
   padding-left: 1rem;
-  .info{
+  padding-right: 1rem;
+
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    span {
+      color: #171717;
+      font-family: 'Manrope', sans-serif;
+      font-size: 19.812px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 9.53px;
+    }
 
   }
+}
+.image{
+  cursor: pointer;
 }
