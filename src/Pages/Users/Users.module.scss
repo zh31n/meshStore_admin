@@ -45,6 +45,7 @@
     padding: 5px 10px;
     border-bottom: 2px solid #838383;
   }
+
   .nav_item_active {
     cursor: pointer;
     transition: all 0.5s;
@@ -68,9 +69,17 @@
     display: flex;
     gap: 1rem;
     flex-direction: column;
+    height: 72vh;
+    overflow: auto;
   }
 
   .left {
     width: 49%;
+    height: 420px;
+    border-radius: 29px;
+    background: #FFF;
+    padding: 30px;
+
+
   }
 }
