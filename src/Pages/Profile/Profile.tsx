@@ -5,6 +5,7 @@ import {Routes, Route} from "react-router-dom";
 import Today from "../Today/Today";
 import Users from "../Users/Users";
 import Settings from "../Settings/Settings";
+import Calendar from "../Calendar/Calendar";
 
 const Profile = () => {
     return (
@@ -15,6 +16,7 @@ const Profile = () => {
                     <Route element={<Today/>} path={'/today/*'}/>
                     <Route element={<Users/>} path={'/clients/*'}/>
                     <Route element={<Settings/>} path={'/settings'}/>
+                    <Route element={<Calendar/>} path={'/calendar'}/>
                 </Routes>
             </div>
         </div>

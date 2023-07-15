@@ -41,7 +41,7 @@ const Header = (props) => {
                                 </svg>
                                 Сегодня
                             </Link>
-                            <Link  className={s.navItem}>
+                            <Link to={'/profile/calendar'} className={s.navItem}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 26 24"
                                      fill="none">
                                     <g clip-path="url(#clip0_100_1715)">
