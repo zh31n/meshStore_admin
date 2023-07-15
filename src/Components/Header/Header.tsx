@@ -98,7 +98,7 @@ const Header = (props) => {
                                 </svg>
                                 Клиенты
                             </Link>
-                            <Link className={s.navItem}>
+                            <Link to={'/profile/settings'} className={s.navItem}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                                      fill="none">
                                     <g clip-path="url(#clip0_100_1721)">

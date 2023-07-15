@@ -3,7 +3,7 @@ import {Routes, Route} from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Profile from "./Pages/Profile/Profile";
 
-const App = (props) => {
+const App = () => {
 
     return (
         <>
