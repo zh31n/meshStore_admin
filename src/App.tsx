@@ -12,7 +12,7 @@ const App = () => {
       <Routes>
         {isReg == true ? (
           <>
-            <Route path="*" element={<Navigate to={"/profile/settings"} />} />
+            <Route path="*" element={<Navigate to={"/profile/today"} />} />
             <Route path={"/profile/*"} element={<Profile />} />
           </>
         ) : (

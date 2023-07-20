@@ -1,8 +1,10 @@
-import React from "react";
+import { useState } from "react";
 import s from "./Header.module.scss";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [currentLink, setCurrentLink] = useState<string>("today");
+
   return (
     <>
       <div className={s.header}>
@@ -12,8 +14,12 @@ const Header = () => {
             <div className={s.nav}>
               <Link
                 to={"/profile/today"}
-                className={s.navItem}
-                style={{ color: "white" }}
+                className={
+                  currentLink == "today" ? s.navItem_active : s.navItem
+                }
+                onClick={() => {
+                  setCurrentLink("today");
+                }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +73,15 @@ const Header = () => {
                 </svg>
                 Сегодня
               </Link>
-              <Link to={"/profile/calendar"} className={s.navItem}>
+              <Link
+                to={"/profile/calendar"}
+                className={
+                  currentLink == "calendar" ? s.navItem_active : s.navItem
+                }
+                onClick={() => {
+                  setCurrentLink("calendar");
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="26"
@@ -127,7 +141,15 @@ const Header = () => {
                 </svg>
                 Календарь
               </Link>
-              <Link className={s.navItem} to={"/profile/clients"}>
+              <Link
+                className={
+                  currentLink == "clients" ? s.navItem_active : s.navItem
+                }
+                onClick={() => {
+                  setCurrentLink("clients");
+                }}
+                to={"/profile/clients"}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
@@ -171,7 +193,15 @@ const Header = () => {
                 </svg>
                 Клиенты
               </Link>
-              <Link to={"/profile/settings"} className={s.navItem}>
+              <Link
+                to={"/profile/settings"}
+                className={
+                  currentLink == "settings" ? s.navItem_active : s.navItem
+                }
+                onClick={() => {
+                  setCurrentLink("settings");
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"

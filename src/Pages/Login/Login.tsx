@@ -30,7 +30,6 @@ const Login = () => {
         const role: number = res.data.role;
         const data = { token, role };
         dispatch(setUsers(data));
-        console.log(res.data);
       }
     });
   };
