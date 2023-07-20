@@ -2,12 +2,12 @@ import React from 'react';
 import s from './UserItem.module.scss';
 import trash from '../../assets/white_trash.svg';
 
-const UserItem = (props) => {
+const UserItem = ({img,name}) => {
     return (
         <div className={s.contant}>
             <div className={s.u_cont}>
-                <img src={props.img} alt="user image"/>
-                <span>{props.name}</span>
+                <img src={img} alt="user image"/>
+                <span>{name}</span>
             </div>
             <div className={s.trash}>
                 <img src={trash} alt=""/>

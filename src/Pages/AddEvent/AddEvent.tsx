@@ -6,6 +6,7 @@ import upload from '../../assets/File_Upload.svg';
 import e_users from "../../assets/clients.svg";
 import ava from "../../assets/ava_uu.png";
 import UserItem from "../../Components/UserItem/UserItem";
+import {Link, NavLink} from "react-router-dom";
 
 const data = [
     {img: ava, name: 'Иван Шишкин', id: 1},
@@ -64,7 +65,7 @@ const AddEvent = (props: any) => {
                         <div className={s.user_items}>
                             {userItems}
                         </div>
-                        <div className={s.add_btn}>+</div>
+                        <NavLink to={'/profile/clients/add'} className={s.add_btn}>+</NavLink>
                     </div>
                 </div>
             </div>

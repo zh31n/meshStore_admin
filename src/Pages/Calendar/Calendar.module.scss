@@ -1,0 +1,76 @@
+.cont {
+  max-height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .cont_day {
+    width: 49%;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    padding: 25px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .btns{
+
+      }
+      .info {
+        .count {
+          color: rgba(18, 18, 18, 0.50);
+          font-family: 'Manrope', sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 112.1%; /* 17.936px */
+          margin-bottom: 10px;
+        }
+
+        .day {
+          color: #121212;
+          font-family: 'Manrope', sans-serif;
+          font-size: 36px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 27px; /* 75% */
+        }
+      }
+
+    }
+
+    .calend_i {
+      max-height: 65vh;
+      overflow: auto;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 57px;
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      background: #121212;
+      box-shadow: 0px 4px 4px 0px rgba(66, 59, 255, 0.17);
+      color: #FFF;
+      text-align: center;
+      leading-trim: both;
+      text-edge: cap;
+      font-family: 'Manrope',sans-serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 75% */
+      cursor: pointer;
+      float: right;
+    }
+  }
+}
