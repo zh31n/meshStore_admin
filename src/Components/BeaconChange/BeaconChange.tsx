@@ -32,15 +32,13 @@ const BeaconChange = () => {
 
   const handleDelete = () => {
     const id = currentBeacon.id;
-    Api.deleteBeacon(token, id).then(res => {
-      console.log(res);
+    Api.deleteBeacon(token, id).then(() => {
       setChange(false);
       setName("");
       setNetwork("");
       setUuid("");
       Api.getAllBeacon(token).then(res => {
         setBeaconContainer(res.data.beacons);
-        console.log(res.data.beacons);
       });
     });
   };
@@ -57,18 +55,17 @@ const BeaconChange = () => {
       Api.createBeacond(token, name, uuid, id).then(res => {
         console.log(res);
         Api.getAllBeacon(token).then(res => {
+          console.log(res);
           setBeaconContainer(res.data.beacons);
-          console.log(res.data.beacons);
         });
       });
     }
 
     if (change === true) {
-      Api.changeBeacon(token, name, uuid, id).then(res => {
-        console.log(res);
+      const beacon = currentBeacon.id;
+      Api.changeBeacon(token, name, uuid, beacon).then(() => {
         Api.getAllBeacon(token).then(res => {
           setBeaconContainer(res.data.beacons);
-          console.log(res.data.beacons);
         });
       });
     }
@@ -79,11 +76,10 @@ const BeaconChange = () => {
   useEffect(() => {
     Api.getAllBeacon(token).then(res => {
       setBeaconContainer(res.data.beacons);
-      console.log(res.data.beacons);
     });
     Api.getNetworks(token).then(res => {
       setAllNetworks(res.data.networks);
-      setNetwork(allNetworks[0].name);
+      setNetwork(res.data.networks[0].name);
     });
   }, []);
 

@@ -25,6 +25,8 @@ type UserArray = {
 };
 
 const Users = () => {
+  const [findText, setFindText] = useState<string>("");
+
   const [currentNetwork, setCurrentNetwork] = useState<string>("");
   const [currentNetworkId, setCurrentNetworkId] = useState<number>(0);
 
@@ -45,11 +47,26 @@ const Users = () => {
     });
   }, []);
 
+  const filteredUsers = users.filter(el => {
+    if (currentNetwork == el.network) {
+      if (el.name.toLowerCase().includes(findText.toLowerCase())) {
+        return el;
+      }
+    }
+  });
+
   return (
     <>
       <div className={s.input_search}>
         <img src={i_search} alt="icon search" />
-        <input type="text" placeholder="Поиск по группам" />
+        <input
+          type="text"
+          placeholder="Поиск по группам"
+          value={findText}
+          onChange={e => {
+            setFindText(e.target.value);
+          }}
+        />
       </div>
       <SelectNetwork
         networks={networks}
@@ -64,7 +81,7 @@ const Users = () => {
       <div className={s.cont}>
         <div className={s.users}>
           <UserList
-            data={users}
+            data={filteredUsers}
             currentNetwork={currentNetwork}
             image={ava_img}
           />
