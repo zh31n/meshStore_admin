@@ -1,27 +1,47 @@
-.cont{
+.cont {
   max-height: 100%;
   width: 100%;
   background-color: white;
   border-radius: 30px;
   padding: 30px 35px;
-  .title{
+  .title {
     color: #121212;
-    font-family: 'Manrope',sans-serif;
+    font-family: "Manrope", sans-serif;
     font-size: 36px;
     font-style: normal;
     font-weight: 500;
     line-height: 30px; /* 83.333% */
     margin-bottom: 2rem;
-  }
-  .cont_i{
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 460px;
-    .line{
-      height: 100%;
-      width: 2px;
-      background: #8E8E8E;
+    justify-content: space-between;
+    .nav {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      gap: 10px;
+      .nav_item {
+        width: 120px;
+        display: flex;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .selected_nav {
+        background-color: #443bff;
+        color: white;
+        width: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      p {
+        font-family: "Manrope", sans-serif;
+      }
     }
   }
 }

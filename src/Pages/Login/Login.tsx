@@ -7,9 +7,12 @@ import { useDispatch } from "react-redux";
 import Api from "../../Api/Api";
 import { setUsers } from "../../store/action/userAction";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
   const dispatch: any = useDispatch();
+
+  const [setCookie] = useCookies();
 
   const user = useTypedSelector(state => state.user);
 

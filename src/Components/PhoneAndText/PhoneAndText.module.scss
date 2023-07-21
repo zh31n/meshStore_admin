@@ -1,0 +1,11 @@
+.cont_i {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 460px;
+  .line {
+    height: 100%;
+    width: 2px;
+    background: #8e8e8e;
+  }
+}

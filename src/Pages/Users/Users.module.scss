@@ -28,36 +28,6 @@
   }
 }
 
-.nav_users {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 1rem;
-  gap: 2rem;
-
-  .nav_item {
-    cursor: pointer;
-    transition: all 0.5s;
-    color: #838383;
-    font-size: 16px;
-    font-family: "Manrope", sans-serif;
-    padding: 5px 10px;
-    border-bottom: 2px solid #838383;
-  }
-
-  .nav_item_active {
-    cursor: pointer;
-    transition: all 0.5s;
-    color: white;
-    font-size: 16px;
-    font-family: "Manrope", sans-serif;
-    padding: 5px 10px;
-    border-bottom: 2px solid #838383;
-    border-bottom: 2px solid #443bff;
-  }
-}
-
 .cont {
   width: 100%;
   display: flex;
@@ -77,9 +47,7 @@
     width: 49%;
     height: 420px;
     border-radius: 29px;
-    background: #FFF;
+    background: #fff;
     padding: 30px;
-
-
   }
 }

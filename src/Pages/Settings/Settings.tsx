@@ -1,29 +1,38 @@
-import React from 'react';
-import s from './Settings.module.scss';
-import fileImg from '../../assets/e_mater.svg';
+import { useState } from "react";
+import s from "./Settings.module.scss";
 import SettingItem from "../../Components/SettingItem/SettingItem";
+import PhoneAndText from "../../Components/PhoneAndText/PhoneAndText";
+import BeaconChange from "../../Components/BeaconChange/BeaconChange";
 
 const Settings = () => {
-    return (
-        <div className={s.cont}>
-            <div className={s.title}>Настройки</div>
-            <div className={s.cont_i}>
-                <div style={{display: 'flex', flexDirection: 'column', gap: '3rem'}}>
-                    <SettingItem title={'фон заставки'} sup={'Текст для экрана заставки'}
-                                 place={'Основной текст для заставки'}/>
-                    <SettingItem title={'фон входа в сеть'} sup={'Текст для экрана входа в сеть'}
-                                 place={'Основной текст для заставки после входа в сеть'}/>
-                </div>
-                <div className={s.line}></div>
-                <div style={{display: 'flex', flexDirection: 'column', gap: '3rem'}}>
-                    <SettingItem title={'фон заставки / eng'} sup={'Текст для экрана заставки'}
-                                 place={'Основной текст для заставки'}/>
-                    <SettingItem title={'фон входа в сеть / eng'} sup={'Текст для экрана входа в сеть / eng'}
-                                 place={'Основной текст для заставки после входа в сет'}/>
-                </div>
-            </div>
+  const [nav, setNav] = useState<boolean>(false);
+
+  return (
+    <div className={s.cont}>
+      <div className={s.title}>
+        Настройки{" "}
+        <div className={s.nav}>
+          <div
+            className={nav == false ? s.selected_nav : s.nav_item}
+            onClick={() => {
+              setNav(!nav);
+            }}
+          >
+            <p>маячки</p>
+          </div>
+          <div
+            className={nav == true ? s.selected_nav : s.nav_item}
+            onClick={() => {
+              setNav(!nav);
+            }}
+          >
+            <p>фон и текст</p>
+          </div>
         </div>
-    );
+      </div>
+      {nav == true ? <PhoneAndText /> : <BeaconChange />}
+    </div>
+  );
 };
 
 export default Settings;

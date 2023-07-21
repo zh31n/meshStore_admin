@@ -12,13 +12,11 @@ const Api = {
   Auth(email: string, password: string) {
     return instance.get(`auth-admin?email=${email}&password=${password}`);
   },
-  getUsers(token: string, page: number, perPage: number) {
-    return instance.get(
-      `users?token=${token}&page=${page}&per-page=${perPage}`
-    );
+  getUsers(token: string) {
+    return instance.get(`users?token=${token}`);
   },
   editUser(token: string, argName: string, userId: number, value: string) {
-    return instance.post(`edit-user?token=${token}`, {
+    return instance.put(`edit-user?token=${token}`, {
       arg_name: argName,
       user_id: userId,
       new_value: value,
@@ -30,8 +28,8 @@ const Api = {
     email: string,
     phone: number,
     tagId: string,
-    network: string,
-    role: string
+    network: number,
+    role: number
   ) {
     return instance.post(`add-user?token=${token}`, {
       name,
@@ -43,7 +41,19 @@ const Api = {
     });
   },
   deleteUser(token: string, user: number) {
-    return instance.get(`delete-user?token=${token}&${user}`);
+    return instance.delete(`delete-user?token=${token}&user=${user}`);
+  },
+  getNetworks(token: string) {
+    return instance.get(`networks?token=${token}`);
+  },
+  getSettings(token: string) {
+    return instance.get(`settings?token=${token}`);
+  },
+  changeNetwork(token: string, data: object) {
+    return instance.put(`edit-network?token=${token}`, data);
+  },
+  getAllBeacon(token: string) {
+    return instance.get(`beacons?token=${token}`);
   },
 };
 

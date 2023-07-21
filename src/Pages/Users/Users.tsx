@@ -1,69 +1,84 @@
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import s from "./Users.module.scss";
 import i_search from "../../assets/Search.svg";
 import ava_img from "../../assets/ava_uu.png";
 import UserItemG from "../../Components/UserItemG/UserItemG";
-import {Route,Routes} from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 import AddClient from "../AddClient/AddClient";
 import AddClientsEvent from "../AddClientsEvent/AddClientsEvent";
+import Api from "../../Api/Api";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import UserList from "../../Components/UserList/UserList";
+import SelectNetwork from "../../Components/SelectNetwork/SelectNetwork";
+import ChangeClient from "../AddClient/ChangeClient";
+
+type UserArray = {
+  id: 0;
+  name: string;
+  email: string;
+  phone: string;
+  phone_confirmed: number;
+  status: string;
+  role: string;
+  network: string;
+  tag: string;
+};
 
 const Users = () => {
-    const [view, setView] = useState<boolean>(false);
+  const [currentNetwork, setCurrentNetwork] = useState<string>("");
+  const [currentNetworkId, setCurrentNetworkId] = useState<number>(0);
 
-    const data = {
-        users: [
-            {name: "Фёдор Шишкин", id: 1, image: ava_img},
-            {name: "Фёдор Шишкин", id: 1, image: ava_img},
-            {name: "Фёдор Шишкин", id: 1, image: ava_img},
-            {name: "Фёдор Шишкин", id: 1, image: ava_img},
-            {name: "Фёдор Шишкин", id: 1, image: ava_img},
-        ],
-    };
+  const [networks, setNetworks] = useState<any[]>([]);
 
-    const userItems = data.users.map(u => <UserItemG add={false} name={u.name} id={u.id} image={u.image}/>)
-    const userItemsAdd = data.users.map(u => <UserItemG add={true} name={u.name} id={u.id} image={u.image}/>)
+  const [users, setUsers] = useState<UserArray[]>([]);
 
-    return (
-        <>
-            <div className={s.input_search}>
-                <img src={i_search} alt="icon search"/>
-                <input type="text" placeholder="Поиск по группам"/>
-            </div>
-            <div className={s.nav_users}>
-                <div
-                    className={view ? s.nav_item : s.nav_item_active}
-                    onClick={() => {
-                        setView(!view);
-                    }}
-                >
-                    Сотрудники
-                </div>
-                <div
-                    className={view ? s.nav_item_active : s.nav_item}
-                    onClick={() => {
-                        setView(!view);
-                    }}
-                >
-                    Клиенты
-                </div>
-            </div>
-            <div className={s.cont}>
-                <div className={s.users}>
-                    <Routes>
-                        <Route path={'/'} element={userItems}/>
-                        <Route path={'/add'} element={[userItemsAdd,userItemsAdd]}/>
-                    </Routes>
-                    {/*{userItems}{userItems}{userItems}*/}
-                </div>
-                <div className={s.left}>
-                    <Routes>
-                        <Route path={'/'} element={<AddClient/>}/>
-                        <Route path={'/add'} element={<AddClientsEvent/>}/>
-                    </Routes>
-                </div>
-            </div>
-        </>
-    );
+  const token = useTypedSelector(state => state.user.token);
+  const change = useTypedSelector(state => state.change.changin);
+
+  useEffect(() => {
+    Api.getNetworks(token).then(res => {
+      setNetworks(res.data.networks);
+      setCurrentNetwork(res.data.networks[0].name);
+    });
+    Api.getUsers(token).then(res => {
+      setUsers(res.data.users);
+    });
+  }, []);
+
+  return (
+    <>
+      <div className={s.input_search}>
+        <img src={i_search} alt="icon search" />
+        <input type="text" placeholder="Поиск по группам" />
+      </div>
+      <SelectNetwork
+        networks={networks}
+        setNetworks={setNetworks}
+        currentNetwork={currentNetwork}
+        setCurrentNetworkId={setCurrentNetworkId}
+        setCurrentNetwork={setCurrentNetwork}
+        token={token}
+        id={currentNetworkId}
+        setUsers={setUsers}
+      />
+      <div className={s.cont}>
+        <div className={s.users}>
+          <UserList
+            data={users}
+            currentNetwork={currentNetwork}
+            image={ava_img}
+          />
+        </div>
+        <div className={s.left}>
+          {change == true ? (
+            <ChangeClient setUsers={setUsers} />
+          ) : (
+            <AddClient setUsers={setUsers} currentNetwork={currentNetworkId} />
+          )}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Users;
