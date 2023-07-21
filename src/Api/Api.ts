@@ -55,6 +55,15 @@ const Api = {
   getAllBeacon(token: string) {
     return instance.get(`beacons?token=${token}`);
   },
+  deleteBeacon(token: string, id: number) {
+    return instance.delete(`delete-beacon?token=${token}&beacon=${id}`);
+  },
+  createBeacond(token: string, name: string, uuid: string, network: number) {
+    return instance.post(`add-beacon?token=${token}`, { name, uuid, network });
+  },
+  changeBeacon(token: string, name: string, uuid: string, network: number) {
+    return instance.put(`edit-beacon?token=${token}`, { name, uuid, network });
+  },
 };
 
 export default Api;

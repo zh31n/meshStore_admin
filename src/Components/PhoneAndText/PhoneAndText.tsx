@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./PhoneAndText.module.scss";
 import SettingItem from "../SettingItem/SettingItem";
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import s from "./Settings.module.scss";
-import SettingItem from "../../Components/SettingItem/SettingItem";
 import PhoneAndText from "../../Components/PhoneAndText/PhoneAndText";
 import BeaconChange from "../../Components/BeaconChange/BeaconChange";
 

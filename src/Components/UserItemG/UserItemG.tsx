@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import s from "./UserItemG.module.scss";
 import btn from "../../assets/More_btnsvg.svg";
 import add_btn from "../../assets/Add_bnt.svg";
 import added_btn from "../../assets/btn_Check.svg";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
-import {
-  setUsersChange,
-  setUsersChangeDefault,
-} from "../../store/action/userChangeAction";
-import { setUsers } from "../../store/action/userAction";
+import { setUsersChange } from "../../store/action/userChangeAction";
 
 interface Props {
   name: string;
@@ -21,8 +17,6 @@ interface Props {
 
 const UserItemG = ({ name, id, image, add, u }: Props) => {
   let [selectedUser, setSelectedUser] = useState(false);
-
-  const change = useTypedSelector(state => state.change.changin);
 
   const dispatch: any = useDispatch();
 
