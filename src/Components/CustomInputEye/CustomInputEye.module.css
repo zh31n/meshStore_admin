@@ -44,3 +44,9 @@
 .imgeye {
     cursor: pointer;
 }
+
+@media (max-width: 480px) {
+    .inputCont{
+        width: 90%;
+    }
+}

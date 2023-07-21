@@ -30,3 +30,9 @@
     font-family: 'Manrope', sans-serif;
     font-weight: 300;
 }
+
+@media (max-width: 480px) {
+    .inputCont{
+        width: 90%;
+    }
+}

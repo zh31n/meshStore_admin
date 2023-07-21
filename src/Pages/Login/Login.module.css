@@ -71,3 +71,9 @@
   color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
 }
+
+@media (max-width: 480px) {
+  .title{
+    font-size: 48px;
+  }
+}

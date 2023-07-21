@@ -37,7 +37,23 @@ const ChangeClient = ({ setUsers }: Props) => {
 
   const user = useTypedSelector(state => state.change.user);
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    const networkid = 0;
+    const data = {
+      name,
+      email,
+      phone: number,
+      tag: tagId,
+      user_id: user.id,
+    };
+    Api.editUser(token, data).then(res => {
+      console.log(res);
+      dispatch(setUsersChangeDefault());
+      Api.getUsers(token).then(res => {
+        setUsers(res.data.users);
+      });
+    });
+  };
 
   const handleDelete = () => {
     const id = user.id;

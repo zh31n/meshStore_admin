@@ -27,7 +27,6 @@ const Login = () => {
 
   const handleClick = () => {
     Api.Auth(login, password).then(res => {
-      console.log("res", res);
       if (res.status == 200) {
         const token: string = res.data.token;
         const role: number = res.data.role;

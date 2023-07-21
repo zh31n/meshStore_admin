@@ -15,12 +15,8 @@ const Api = {
   getUsers(token: string) {
     return instance.get(`users?token=${token}`);
   },
-  editUser(token: string, argName: string, userId: number, value: string) {
-    return instance.put(`edit-user?token=${token}`, {
-      arg_name: argName,
-      user_id: userId,
-      new_value: value,
-    });
+  editUser(token: string, data: object) {
+    return instance.put(`edit-user?token=${token}`, data);
   },
   addUser(
     token: string,
@@ -62,7 +58,11 @@ const Api = {
     return instance.post(`add-beacon?token=${token}`, { name, uuid, network });
   },
   changeBeacon(token: string, name: string, uuid: string, network: number) {
-    return instance.put(`edit-beacon?token=${token}`, { name, uuid, network });
+    return instance.put(`edit-beacon?token=${token}`, {
+      name,
+      uuid,
+      beacons: network,
+    });
   },
 };
 
