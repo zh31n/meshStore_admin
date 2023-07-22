@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router-dom";
 import Api from "../../Api/Api";
 import styles from "./SelectNetwork.module.scss";
 import { useState, useEffect } from "react";
@@ -57,36 +58,48 @@ const SelectNetwork = ({
 
   return (
     <div className={styles.nav_users}>
-      {networks.map((el, index) => (
-        <div
-          key={index}
-          className={
-            currentNetwork === el.name
-              ? styles.nav_item_active
-              : styles.nav_item
-          }
-          onDoubleClick={() => {
-            setText(el.name);
-            setChange(true);
-          }}
-          onClick={() => {
-            setCurrentNetwork(el.name);
-            setCurrentNetworkId(el.id);
-          }}
-        >
-          {change && currentNetwork === el.name ? (
-            <input
-              value={text}
-              onChange={e => {
-                setText(e.target.value);
-              }}
-              onDoubleClick={handleClick}
-            />
-          ) : (
-            el.name
-          )}
-        </div>
-      ))}
+      <div className={styles.contanainer}>
+        {networks.map((el, index) => (
+          <div
+            key={index}
+            className={
+              currentNetwork === el.name
+                ? styles.nav_item_active
+                : styles.nav_item
+            }
+            onDoubleClick={() => {
+              setText(el.name);
+              setChange(true);
+            }}
+            onClick={() => {
+              setCurrentNetwork(el.name);
+              setCurrentNetworkId(el.id);
+            }}
+          >
+            {change && currentNetwork === el.name ? (
+              <input
+                value={text}
+                onChange={e => {
+                  setText(e.target.value);
+                }}
+                onDoubleClick={handleClick}
+              />
+            ) : (
+              el.name
+            )}
+          </div>
+        ))}
+      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={<div className={styles.create_network}>Создать сеть</div>}
+        />
+        <Route
+          path="/add"
+          element={<div className={styles.create_network}>Создать группу</div>}
+        />
+      </Routes>
     </div>
   );
 };

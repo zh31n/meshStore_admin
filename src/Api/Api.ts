@@ -61,8 +61,30 @@ const Api = {
     return instance.put(`edit-beacon?token=${token}`, {
       name,
       uuid,
-      beacons: network,
+      beacon: network,
     });
+  },
+  changeSettings(token: string, data: object) {
+    console.log(data);
+    return instance.patch(`update-text?token=${token}`, data);
+  },
+  allNotifications(token: string) {
+    return instance.get(`notifications?token=${token}`);
+  },
+  addNotification(
+    token: string,
+    beacon: number,
+    group: number,
+    start: string,
+    finish: string,
+    title: string,
+    text: string,
+    file: any
+  ) {
+    return instance.post(`add-notification`);
+  },
+  getUsersGroup(token: string) {
+    return instance.get(`user-groups?token=${token}`);
   },
 };
 

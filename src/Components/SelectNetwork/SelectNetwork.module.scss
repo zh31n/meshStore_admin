@@ -1,10 +1,31 @@
 .nav_users {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-  gap: 2rem;
+
+  .contanainer {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .create_network {
+    display: flex;
+    color: #fff;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: "Manrope";
+    font-size: 16px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 600;
+    padding: 12px;
+    border-bottom: 2px solid #443bff;
+    line-height: 112.1%;
+  }
 
   .nav_item {
     cursor: pointer;
