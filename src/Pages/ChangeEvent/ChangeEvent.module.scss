@@ -187,3 +187,29 @@
   align-items: center;
 
 }
+
+@media (max-width: 480px) {
+  .event_container {
+    .title{
+      font-size: 30px;
+    }
+    .sup{
+      font-size: 15px;
+    }
+    .event_info{
+      overflow: auto;
+      overflow-x: hidden;
+      flex-direction: column;
+      align-items: center;
+      height: 50vh;
+      margin-bottom: 10px;
+      .about_event{
+        width: 100%;
+      }
+      .clients{
+        padding: 0;
+        width: 100%;
+      }
+    }
+  }
+}

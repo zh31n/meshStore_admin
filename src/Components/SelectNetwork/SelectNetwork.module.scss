@@ -48,3 +48,28 @@
     border-bottom: 2px solid #443bff;
   }
 }
+
+@media (max-width: 480px) {
+  .nav_users{
+    .nav_item{
+      display: flex;
+      flex: 1;
+      align-items: center;
+      min-width: fit-content;
+    }
+    .nav_item_active{
+      display: flex;
+      flex: 1;
+      min-width: fit-content;
+    }
+    .contanainer{
+      width: 80%;
+      align-items: flex-start;
+      justify-content: space-between;
+      overflow-x: auto;
+    }
+    .create_network {
+      min-width: fit-content;
+    }
+  }
+}

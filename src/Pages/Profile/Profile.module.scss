@@ -1,4 +1,10 @@
 .content{
   width: 100%;
-  height: 85vh;
+  height: 84vh;
+}
+
+@media (max-width: 480px) {
+  .content{
+    height: 80vh;
+  }
 }

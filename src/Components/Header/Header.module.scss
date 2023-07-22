@@ -33,14 +33,17 @@
         path {
           stroke: #838383;
         }
+
         font-size: 16px;
       }
+
       .navItem_active {
         color: white;
         display: flex;
         align-items: center;
         gap: 10px;
         font-size: 16px;
+
         path {
           stroke: white;
         }
@@ -70,11 +73,34 @@
         stroke: white;
       }
     }
+
     .navItem_active {
       color: white;
+
       path {
         stroke: white;
       }
     }
   }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 60px;
+    justify-content: center;
+
+    .header_inner {
+      justify-content: center;
+
+      .nav {
+        display: none;
+      }
+
+      .lang {
+        display: none;
+      }
+    }
+  }
+
+
 }

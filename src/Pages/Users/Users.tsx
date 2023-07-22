@@ -46,7 +46,7 @@ const Users = () => {
       setUsers(res.data.users);
     });
   }, []);
-
+  console.log(users)
   const filteredUsers = users.filter(el => {
     if (currentNetwork == el.network) {
       if (el.name.toLowerCase().includes(findText.toLowerCase())) {

@@ -51,3 +51,23 @@
     padding: 30px;
   }
 }
+
+@media (max-width: 480px) {
+  .cont{
+    flex-direction: column-reverse;
+    overflow: auto;
+    height: 65vh;
+    .users {
+      width: 100%;
+      height: auto;
+      //height: 400px;
+      overflow: unset;
+      margin-top: 10px;
+    }
+
+    .left {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

@@ -43,14 +43,14 @@ input::-webkit-calendar-picker-indicator {
 
 /* Firefox */
 * {
-    scrollbar-width: thin;
+    scrollbar-width: 1px;
     scrollbar-color: #397524 #DFE9EB;
 }
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-    width: 0px;
-    width: 0px;
+    width: 1px;
+    width: 1px;
 }
 
 *::-webkit-scrollbar-track {
@@ -84,5 +84,20 @@ input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+@media (max-width: 480px) {
+
+    * {
+        scrollbar-width: 0px;
+        scrollbar-color: #397524 #DFE9EB;
+    }
+
+    /* Chrome, Edge and Safari */
+    *::-webkit-scrollbar {
+        display: none;
+    }
+    .container{
+        padding: 0 10px;
+    }
 }
 

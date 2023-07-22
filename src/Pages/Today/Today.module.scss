@@ -85,3 +85,33 @@
   background: #443BFF;
   font-family: 'Manrope', sans-serif;
 }
+
+@media (max-width: 480px) {
+  .content {
+    padding: 20px;
+    .cont_i{
+      .page_content{
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 0;
+      }
+      .sidebar{
+        border: 0;
+        width: 100%;
+        padding: 0;
+        .title{
+          font-size: 30px;
+        }
+        .container_event{
+          height: auto;
+          max-height: 75%;
+          padding-top: 1rem;
+          gap: 10px;
+        }
+      }
+    }
+  }
+
+
+}
