@@ -1,5 +1,7 @@
 import s from "./SettingItem.module.scss";
 import fileImg from "../../assets/e_mater.svg";
+import Api from "../../Api/Api";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 type Props = {
   tittle: any;
@@ -7,10 +9,29 @@ type Props = {
   setText: React.Dispatch<React.SetStateAction<string>>;
   text: any;
   filename: any;
+  name: string;
 };
 
-const SettingItem = ({ tittle, text, filename, setText, setTittle }: Props) => {
-  const handleSave = () => {};
+const SettingItem = ({
+  tittle,
+  text,
+  filename,
+  setText,
+  setTittle,
+  name,
+}: Props) => {
+  const token = useTypedSelector(state => state.user.token);
+
+  const handleSave = () => {
+    const data = {
+      name,
+      title: tittle,
+      text: text,
+    };
+    Api.changeSettings(token, data).then(res => {
+      console.log(res);
+    });
+  };
 
   return (
     <div className={s.set_item}>

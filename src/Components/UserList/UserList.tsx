@@ -15,9 +15,10 @@ type Props = {
   data: UserArray[];
   image: any;
   currentNetwork: string;
+  add: boolean;
 };
 
-const UserList = ({ data, image, currentNetwork }: Props) => {
+const UserList = ({ data, image, currentNetwork, add }: Props) => {
   return (
     <>
       {data.map((u, index) => {
@@ -25,7 +26,7 @@ const UserList = ({ data, image, currentNetwork }: Props) => {
           return (
             <UserItemG
               u={u}
-              add={false}
+              add={add}
               name={u.name}
               key={index}
               id={u.id}

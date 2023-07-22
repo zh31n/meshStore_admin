@@ -80,18 +80,48 @@ const Users = () => {
       />
       <div className={s.cont}>
         <div className={s.users}>
-          <UserList
-            data={filteredUsers}
-            currentNetwork={currentNetwork}
-            image={ava_img}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <UserList
+                  data={filteredUsers}
+                  currentNetwork={currentNetwork}
+                  image={ava_img}
+                  add={false}
+                />
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                <UserList
+                  data={filteredUsers}
+                  currentNetwork={currentNetwork}
+                  image={ava_img}
+                  add={true}
+                />
+              }
+            />
+          </Routes>
         </div>
         <div className={s.left}>
-          {change == true ? (
-            <ChangeClient setUsers={setUsers} />
-          ) : (
-            <AddClient setUsers={setUsers} currentNetwork={currentNetworkId} />
-          )}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                change == true ? (
+                  <ChangeClient setUsers={setUsers} />
+                ) : (
+                  <AddClient
+                    setUsers={setUsers}
+                    currentNetwork={currentNetworkId}
+                  />
+                )
+              }
+            />
+            <Route path="/add" element={<AddClientsEvent />} />
+          </Routes>
         </div>
       </div>
     </>

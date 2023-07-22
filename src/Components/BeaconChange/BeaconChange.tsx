@@ -53,9 +53,10 @@ const BeaconChange = () => {
 
     if (change === false) {
       Api.createBeacond(token, name, uuid, id).then(res => {
-        console.log(res);
+        setName("");
+        setNetwork("");
+        setUuid("");
         Api.getAllBeacon(token).then(res => {
-          console.log(res);
           setBeaconContainer(res.data.beacons);
         });
       });
@@ -64,13 +65,15 @@ const BeaconChange = () => {
     if (change === true) {
       const beacon = currentBeacon.id;
       Api.changeBeacon(token, name, uuid, beacon).then(() => {
+        setChange(false);
+        setName("");
+        setNetwork("");
+        setUuid("");
         Api.getAllBeacon(token).then(res => {
           setBeaconContainer(res.data.beacons);
         });
       });
     }
-
-    console.log(id);
   };
 
   useEffect(() => {

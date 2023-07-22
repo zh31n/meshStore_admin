@@ -1,21 +1,40 @@
 import s from "./AddEvent.module.scss";
+import { useEffect, useState, useRef } from "react";
 import trash from "../../assets/Trash.svg";
 import calend from "../../assets/e_data.svg";
 import upload from "../../assets/File_Upload.svg";
 import e_users from "../../assets/clients.svg";
-import ava from "../../assets/ava_uu.png";
 import UserItem from "../../Components/UserItem/UserItem";
 import { NavLink } from "react-router-dom";
-
-const data = [
-  { img: ava, name: "Иван Шишкин", id: 1 },
-  { img: ava, name: "Иван Шишкин", id: 2 },
-  { img: ava, name: "Иван Шишкин", id: 3 },
-];
-
-const userItems = data.map(u => <UserItem img={u.img} name={u.name} />);
+import Api from "../../Api/Api";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import UserGroup from "../../Components/UserGroup/UserGroup";
 
 const AddEvent = () => {
+  const ref = useRef<any>();
+
+  const [title, setTitle] = useState<string>("");
+  const [text, setText] = useState<string>("");
+
+  const [allBeacons, setAllBeacons] = useState<any[]>([]);
+
+  const [currentBeacon, setCurrentBeacon] = useState<number>(1);
+
+  const [start, setStart] = useState<string>("");
+  const [finish, setFinish] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+
+  const [file, setFile] = useState<any>();
+
+  const token = useTypedSelector(state => state.user.token);
+
+  useEffect(() => {
+    Api.getAllBeacon(token).then(res => {
+      setAllBeacons(res.data.beacons);
+      setCurrentBeacon(res.data.beacons[0].id);
+    });
+  }, []);
+
   return (
     <div>
       <div className={s.title}>
@@ -26,22 +45,69 @@ const AddEvent = () => {
         <div className={s.right}>
           <div className={s.name_ev}>
             <div className={s.title}>Название для события*</div>
-            <input type="text" placeholder="Введите своё название" />
+            <input
+              type="text"
+              value={title}
+              onChange={e => {
+                setTitle(e.target.value);
+              }}
+              placeholder="Введите своё название"
+            />
           </div>
           <div className={s.comm}>
             <div className={s.title}>Добавьте комментарий*</div>
-            <textarea placeholder="Текст для сообщения" />
+            <textarea
+              placeholder="Текст для сообщения"
+              value={text}
+              onChange={e => {
+                setText(e.target.value);
+              }}
+            />
+          </div>
+          <div className={s.select}>
+            <div className={s.title}>Выберите маячок*</div>
+            <select
+              value={currentBeacon}
+              onChange={e => {
+                const value: number = Number(e.target.value);
+                setCurrentBeacon(value);
+                console.log(value);
+              }}
+            >
+              {allBeacons.map(el => (
+                <option value={el.id}>{el.name}</option>
+              ))}
+            </select>
           </div>
           <div className={s.date}>
             <div className={s.title}>Время и дата события*</div>
             <div style={{ display: "flex", gap: "10px" }}>
               <div className={s.timing}>
-                <input type="time" />
+                <input
+                  type="time"
+                  value={start}
+                  onChange={e => {
+                    setStart(e.target.value);
+                  }}
+                />
                 -
-                <input type="time" style={{ marginLeft: "5px" }} />
+                <input
+                  type="time"
+                  style={{ marginLeft: "5px" }}
+                  value={finish}
+                  onChange={e => {
+                    setFinish(e.target.value);
+                  }}
+                />
               </div>
               <div className={s.timing}>
-                <input type="date" />
+                <input
+                  type="date"
+                  value={date}
+                  onChange={e => {
+                    setDate(e.target.value);
+                  }}
+                />
               </div>
               <img
                 style={{ marginLeft: "10px" }}
@@ -52,27 +118,49 @@ const AddEvent = () => {
           </div>
         </div>
         <div className={s.left}>
-          <div className={s.materials}>
+          <div
+            className={s.materials}
+            onClick={() => {
+              ref.current.click();
+            }}
+          >
             <div>
               <div className={s.title}>Прикрепите материалы</div>
               <span>По необходимости</span>
             </div>
             <img src={upload} alt="" />
-            <input type="file" style={{ display: "none" }} />
+            <input
+              ref={ref}
+              type="file"
+              style={{ display: "none" }}
+              value={file}
+              onChange={e => {
+                setFile(e.target.files);
+              }}
+            />
           </div>
           <div className={s.clients}>
             <div className={s.title}>
               <img src={e_users} alt="users icon" />
               Список клиентов
             </div>
-            <div className={s.user_items}>{userItems}</div>
+            <div className={s.user_items}>
+              <UserGroup />
+            </div>
             <NavLink to={"/profile/clients/add"} className={s.add_btn}>
               +
             </NavLink>
           </div>
         </div>
       </div>
-      <div className={s.blue_btn}>Добавить в расписание</div>
+      <div
+        className={s.blue_btn}
+        onClick={() => {
+          console.log(start, finish, date);
+        }}
+      >
+        Добавить в расписание
+      </div>
     </div>
   );
 };

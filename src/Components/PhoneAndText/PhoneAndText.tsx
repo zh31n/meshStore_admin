@@ -5,8 +5,6 @@ import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const PhoneAndText = () => {
-  const [settings, setSettings] = useState<any>({});
-
   const token = useTypedSelector(state => state.user.token);
 
   const [tittleEn, setTittleEn] = useState<string>("");
@@ -18,8 +16,6 @@ const PhoneAndText = () => {
 
   useEffect(() => {
     Api.getSettings(token).then(res => {
-      setSettings(res.data.data);
-      console.log(res.data.data);
       setFilenameEn(res.data.data.screensaver_text_en.filename);
       setFilenameRu(res.data.data.screensaver_text_ru.filename);
       setTittleEn(res.data.data.screensaver_text_en.title);
@@ -38,6 +34,7 @@ const PhoneAndText = () => {
           setText={setTextRu}
           setTittle={setTittltRu}
           filename={filenameRu}
+          name="screensaver-text-ru"
         />
       </div>
       <div className={s.line}></div>
@@ -48,6 +45,7 @@ const PhoneAndText = () => {
           setText={setTextEn}
           setTittle={setTittleEn}
           filename={filenameEn}
+          name="screensaver-text-en"
         />
       </div>
     </div>
