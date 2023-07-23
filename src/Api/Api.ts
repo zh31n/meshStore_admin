@@ -86,6 +86,9 @@ const Api = {
   getUsersGroup(token: string) {
     return instance.get(`user-groups?token=${token}`);
   },
+  createUserGroup(token:string,data:object){
+    return instance.post(`add-user-group?token=${token}`,{...data})
+  }
 };
 
 export default Api;

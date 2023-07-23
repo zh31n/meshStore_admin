@@ -108,6 +108,7 @@
         line-height: 112.1%;
         margin-bottom: 5px;
       }
+
       select {
         width: 50%;
         font-size: 12px;
@@ -207,6 +208,7 @@
     }
   }
 }
+
 .clients {
   .title {
     display: flex;
@@ -229,6 +231,7 @@
     gap: 10px;
     //padding-top: 1rem;
     overflow: auto;
+
     select {
       width: 90%;
       font-size: 12px;
@@ -282,10 +285,12 @@
     overflow-x: hidden;
     height: 53vh;
     margin-bottom: 1rem;
+
     .right {
       width: 100%;
       height: auto;
     }
+
     .left {
       height: auto;
       width: 100%;
