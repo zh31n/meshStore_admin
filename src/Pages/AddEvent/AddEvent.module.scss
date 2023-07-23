@@ -229,6 +229,26 @@
     gap: 10px;
     //padding-top: 1rem;
     overflow: auto;
+    select {
+      width: 90%;
+      font-size: 12px;
+      color: black;
+      font-family: "Manrope", sans-serif;
+      background-color: transparent;
+      margin-top: 5px;
+      border: 0;
+      color: rgba(18, 18, 18, 0.5);
+      outline: 0;
+
+      option {
+        font-family: "Manrope", sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 112.1%; /* 13.452px */
+        color: rgba(18, 18, 18, 0.5);
+      }
+    }
   }
 
   .add_btn {
@@ -251,22 +271,22 @@
 }
 
 @media (max-width: 480px) {
-  .title{
+  .title {
     font-size: 28px;
     gap: 2rem;
   }
-  .content{
+  .content {
     flex-direction: column;
     align-items: center;
     overflow: auto;
     overflow-x: hidden;
     height: 55vh;
     margin-bottom: 1rem;
-    .right{
+    .right {
       width: 100%;
       height: auto;
     }
-    .left{
+    .left {
       height: auto;
       width: 100%;
     }

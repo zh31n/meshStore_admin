@@ -1,126 +1,118 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Today.module.scss";
 import EventItem from "../../Components/EventItem/EventItem";
-import {Routes, Route, Link} from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import ChangeEvent from "../ChangeEvent/ChangeEvent";
 import AddEvent from "../AddEvent/AddEvent";
 import Api from "../../Api/Api";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+
+interface notifications {
+  date: string;
+  day: number;
+  len: number;
+  notifications: any[];
+}
 
 const Today = () => {
-    const [todayArr, setTodayArr] = useState<any[]>([]);
+  const [todayArr, setTodayArr] = useState<notifications>({
+    date: "",
+    day: 2,
+    len: 2,
+    notifications: [],
+  });
 
-    const token = useTypedSelector(state => state.user.token);
-    const [deviceWidth, setDeviceWidth] = useState();
+  const token = useTypedSelector(state => state.user.token);
+  const [deviceWidth, setDeviceWidth] = useState<number>(2000);
 
-    useEffect(() => {
-        let aviableW = window.innerWidth;
-        setDeviceWidth(aviableW);
-        Api.allNotifications(token).then(res => {
-            setTodayArr(res.data.notifications);
-            console.log(res.data.notifications);
-        });
-    }, [setDeviceWidth]);
+  useEffect(() => {
+    let aviableW = window.innerWidth;
+    setDeviceWidth(aviableW);
+    Api.allNotifications(token).then(res => {
+      setTodayArr(res.data.notifications[0]);
+    });
+  }, [setDeviceWidth]);
 
-    if (deviceWidth >= 480) {
-        return (
-            <div className={s.content}>
-                <div className={s.cont_i}>
-                    <div className={s.sidebar}>
-                        <div className={s.title}>
-                            <div className={s.line_date}>
-                                Расписание <span className={s.date}>8 июля</span>
-                            </div>
-                            событий на сегодня
-                        </div>
-                        <div className={s.container_event}>
-                            <EventItem
-                                // key={index}
-                                id={1}
-                                length={15}
-                                type={"мин"}
-                                name={'Name'}
-                                time={"14:15 - 15:00"}
-                            />
-                            {todayArr.map((el, index) => {
-                                if (el.day == 1) {
-                                    return (
-                                        <EventItem
-                                            key={index}
-                                            id={el.id}
-                                            length={15}
-                                            type={"мин"}
-                                            name={el.tittle}
-                                            time={"14:15 - 15:00"}
-                                        />
-                                    );
-                                }
-                            })}
-                        </div>
-                        <Link to={"/profile/today/add"} className={s.btn_blue}>
-                            Добавить событие
-                        </Link>
-                    </div>
-                    <div className={s.page_content}>
-                        <Routes>
-                            <Route path={"/:eventId"} element={<ChangeEvent/>}/>
-                            <Route path={"/add"} element={<AddEvent/>}/>
-                        </Routes>
-                    </div>
-                </div>
+  if (deviceWidth >= 480) {
+    return (
+      <div className={s.content}>
+        <div className={s.cont_i}>
+          <div className={s.sidebar}>
+            <div className={s.title}>
+              <div className={s.line_date}>
+                Расписание <span className={s.date}>{todayArr.date}</span>
+              </div>
+              событий на сегодня
             </div>
-        );
-    } else {
-        return (
-            <div className={s.content}>
-                <div className={s.cont_i}>
-                    <div className={s.page_content}>
-                        <Routes>
-                            <Route path={'/'} element={<div className={s.sidebar}>
-                                <div className={s.title}>
-                                    <div className={s.line_date}>
-                                        Расписание <span className={s.date}>8 июля</span>
-                                    </div>
-                                    событий на сегодня
-                                </div>
-                                <div className={s.container_event}>
-                                    <EventItem
-                                        // key={index}
-                                        id={1}
-                                        length={15}
-                                        type={"мин"}
-                                        name={'Name'}
-                                        time={"14:15 - 15:00"}
-                                    />
-                                    {todayArr.map((el, index) => {
-                                        if (el.day == 1) {
-                                            return (
-                                                <EventItem
-                                                    key={index}
-                                                    id={el.id}
-                                                    length={15}
-                                                    type={"мин"}
-                                                    name={el.tittle}
-                                                    time={"14:15 - 15:00"}
-                                                />
-                                            );
-                                        }
-                                    })}
-                                </div>
-                                <Link to={"/profile/today/add"} className={s.btn_blue}>
-                                    Добавить событие
-                                </Link>
-                            </div>}/>
-                            <Route path={"/:eventId"} element={<ChangeEvent/>}/>
-                            <Route path={"/add"} element={<AddEvent/>}/>
-                        </Routes>
-                    </div>
-                </div>
+            <div className={s.container_event}>
+              {todayArr.notifications.map((el, index) => (
+                <EventItem
+                  key={index}
+                  id={el.id}
+                  length={el.length.length}
+                  type={el.length.measure}
+                  name={el.title}
+                  start={el.start}
+                  finish={el.finish}
+                />
+              ))}
             </div>
-        )
-    }
-
-
+            <Link to={"/profile/today/add"} className={s.btn_blue}>
+              Добавить событие
+            </Link>
+          </div>
+          <div className={s.page_content}>
+            <Routes>
+              <Route path={"/:eventId"} element={<ChangeEvent />} />
+              <Route path={"/add"} element={<AddEvent />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className={s.content}>
+        <div className={s.cont_i}>
+          <div className={s.page_content}>
+            <Routes>
+              <Route
+                path={"/"}
+                element={
+                  <div className={s.sidebar}>
+                    <div className={s.title}>
+                      <div className={s.line_date}>
+                        Расписание <span className={s.date}>8 июля</span>
+                      </div>
+                      событий на сегодня
+                    </div>
+                    <div className={s.container_event}>
+                      {todayArr.notifications.map((el, index) => (
+                        <EventItem
+                          key={index}
+                          id={el.id}
+                          length={el.length.length}
+                          type={el.length.measure}
+                          name={el.title}
+                          start={el.start}
+                          finish={el.finish}
+                        />
+                      ))}
+                    </div>
+                    <Link to={"/profile/today/add"} className={s.btn_blue}>
+                      Добавить событие
+                    </Link>
+                  </div>
+                }
+              />
+              <Route path={"/:eventId"} element={<ChangeEvent />} />
+              <Route path={"/add"} element={<AddEvent />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default Today;

@@ -8,10 +8,11 @@ interface Props {
   length: number;
   type: string;
   name: string;
-  time: string;
+  start: string;
+  finish: string;
 }
 
-const EventItem = ({ id, length, type, name, time }: Props) => {
+const EventItem = ({ id, length, type, name, start, finish }: Props) => {
   return (
     <Link to={`/profile/today/${id}`} className={s.wrapper}>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -23,7 +24,9 @@ const EventItem = ({ id, length, type, name, time }: Props) => {
           <div className={s.name}>{name}</div>
           <div className={s.timing}>
             <img src={timeImg} alt={"time image"} />
-            <span>{time}</span>
+            <span>
+              {start.split(" ")[1]} - {finish.split(" ")[1]}
+            </span>
           </div>
         </div>
       </div>

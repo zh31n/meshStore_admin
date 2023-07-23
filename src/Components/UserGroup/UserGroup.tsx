@@ -3,18 +3,26 @@ import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserItem from "../UserItem/UserItem";
 
-type Props = {};
+type Props = {
+  currentGroup: number;
+};
 
-const UserGroup = (props: Props) => {
-  const [groups, setGroups] = useState<any[]>([]);
+interface group {
+  id: number;
+  name: string;
+  network: string;
+  users_ids: number[];
+}
+
+const UserGroup = ({ currentGroup }: Props) => {
+  const [groups, setGroups] = useState<group[]>([]);
   const [users, setUsers] = useState<any[]>([]);
 
   const token = useTypedSelector(state => state.user.token);
 
   useEffect(() => {
     Api.getUsersGroup(token).then(res => {
-      // setGroups(res.data.user-groups);
-      console.log(res.data);
+      setGroups(res.data.user_groups);
     });
     Api.getUsers(token).then(res => {
       setUsers(res.data.users);
@@ -23,7 +31,17 @@ const UserGroup = (props: Props) => {
 
   return (
     <>
-      <UserItem name="Иван" />
+      {groups.map(elem => {
+        if (elem.id === currentGroup) {
+          return elem.users_ids.map(id => {
+            return users.map(el => {
+              if (id === el.id) {
+                return <UserItem name={el.name} />;
+              }
+            });
+          });
+        }
+      })}
     </>
   );
 };

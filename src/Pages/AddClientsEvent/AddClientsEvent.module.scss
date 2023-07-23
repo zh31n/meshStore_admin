@@ -3,7 +3,7 @@
 
   .title {
     color: #121212;
-    font-family: 'Manrope', sans-serif;
+    font-family: "Manrope", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -12,11 +12,27 @@
     align-items: center;
     gap: 10px;
   }
-  .userCont{
+  .userCont {
     transition: all 0.3s;
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: 50%;
+    overflow: auto;
+  }
+  .btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    font-family: "Manrope", sans-serif;
+    background: #443bff;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    height: 40px;
+    cursor: pointer;
   }
 }

@@ -4,7 +4,6 @@ import trash from "../../assets/Trash.svg";
 import calend from "../../assets/e_data.svg";
 import upload from "../../assets/File_Upload.svg";
 import e_users from "../../assets/clients.svg";
-import UserItem from "../../Components/UserItem/UserItem";
 import { NavLink } from "react-router-dom";
 import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -17,12 +16,18 @@ const AddEvent = () => {
   const [text, setText] = useState<string>("");
 
   const [allBeacons, setAllBeacons] = useState<any[]>([]);
+  const [allGroups, setAllGroups] = useState<any[]>([]);
 
   const [currentBeacon, setCurrentBeacon] = useState<number>(1);
+  const [currentGroup, setCurrentGroup] = useState<number>(0);
 
   const [start, setStart] = useState<string>("");
   const [finish, setFinish] = useState<string>("");
   const [date, setDate] = useState<string>("");
+
+  const [finishedTime, setFinishedTime] = useState<string>("");
+  const [finishedTimeEnd, setFinishedTimeEnd] = useState<string>("");
+  const [finishedDate, setFinishedDate] = useState<string>("");
 
   const [file, setFile] = useState<any>();
 
@@ -33,7 +38,17 @@ const AddEvent = () => {
       setAllBeacons(res.data.beacons);
       setCurrentBeacon(res.data.beacons[0].id);
     });
+    Api.getUsersGroup(token).then(res => {
+      setAllGroups(res.data.user_groups);
+      setCurrentGroup(res.data.user_groups[0].id);
+    });
   }, []);
+
+  const handleSave = () => {
+    const data = new FormData();
+
+    // data.append('beacon', )
+  };
 
   return (
     <div>
@@ -74,8 +89,10 @@ const AddEvent = () => {
                 console.log(value);
               }}
             >
-              {allBeacons.map(el => (
-                <option value={el.id}>{el.name}</option>
+              {allBeacons.map((el, index) => (
+                <option key={index} value={el.id}>
+                  {el.name}
+                </option>
               ))}
             </select>
           </div>
@@ -115,6 +132,40 @@ const AddEvent = () => {
                 alt="calendar icon"
               />
             </div>
+            <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+              <div className={s.timing}>
+                <input
+                  type="time"
+                  value={finishedTime}
+                  onChange={e => {
+                    setFinishedTime(e.target.value);
+                  }}
+                />
+                -
+                <input
+                  type="time"
+                  style={{ marginLeft: "5px" }}
+                  value={finishedTimeEnd}
+                  onChange={e => {
+                    setFinishedTimeEnd(e.target.value);
+                  }}
+                />
+              </div>
+              <div className={s.timing}>
+                <input
+                  type="date"
+                  value={finishedDate}
+                  onChange={e => {
+                    setFinishedDate(e.target.value);
+                  }}
+                />
+              </div>
+              <img
+                style={{ marginLeft: "10px" }}
+                src={calend}
+                alt="calendar icon"
+              />
+            </div>
           </div>
         </div>
         <div className={s.left}>
@@ -145,7 +196,19 @@ const AddEvent = () => {
               Список клиентов
             </div>
             <div className={s.user_items}>
-              <UserGroup />
+              <select
+                value={currentGroup}
+                onChange={e => {
+                  setCurrentGroup(Number(e.target.value));
+                }}
+              >
+                {allGroups.map(el => (
+                  <option key={el.id} value={el.id}>
+                    {el.name}
+                  </option>
+                ))}
+              </select>
+              <UserGroup currentGroup={currentGroup} />
             </div>
             <NavLink to={"/profile/clients/add"} className={s.add_btn}>
               +
@@ -153,12 +216,7 @@ const AddEvent = () => {
           </div>
         </div>
       </div>
-      <div
-        className={s.blue_btn}
-        onClick={() => {
-          console.log(start, finish, date);
-        }}
-      >
+      <div className={s.blue_btn} onClick={handleSave}>
         Добавить в расписание
       </div>
     </div>

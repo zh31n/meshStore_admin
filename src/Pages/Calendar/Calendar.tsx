@@ -40,7 +40,7 @@ const Calendar = () => {
                   length={"15"}
                   type={"мин"}
                   name={el.tittle}
-                  time={"14:15 - 15:00"}
+                  time={el.start}
                 />
               );
             }
