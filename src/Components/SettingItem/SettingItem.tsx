@@ -66,9 +66,9 @@ const SettingItem = ({
           }}
           placeholder={"Основной текст для заставки"}
         />
-        <div className={s.btn} onClick={handleSave}>
-          Сохранить
-        </div>
+      </div>
+      <div className={s.btn} onClick={handleSave}>
+        Сохранить
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ const PhoneAndText = () => {
 
   return (
     <div className={s.cont_i}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
+      <div className={s.set_cont}>
         <SettingItem
           tittle={tittltRu}
           text={textRu}
@@ -38,7 +38,7 @@ const PhoneAndText = () => {
         />
       </div>
       <div className={s.line}></div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "3rem" }}>
+      <div className={s.set_cont}>
         <SettingItem
           tittle={tittleEn}
           text={textEn}
