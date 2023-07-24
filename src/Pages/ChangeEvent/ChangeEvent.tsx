@@ -7,6 +7,7 @@ import e_per from '../../assets/e_period.svg';
 import e_users from '../../assets/clients.svg';
 import ava from '../../assets/ava_uu.png';
 import UserItem from "../../Components/UserItem/UserItem";
+import {Link} from "react-router-dom";
 
 const data = [
     {img: ava, name: 'Иван Шишкин', id: 1},
@@ -15,7 +16,6 @@ const data = [
 ]
 
 const userItems = data.map(u => <UserItem img={u.img} name={u.name}/>)
-
 
 const ChangeEvent = (props) => {
     return (
@@ -74,7 +74,7 @@ const ChangeEvent = (props) => {
                     <div className={s.user_items}>
                         {userItems}
                     </div>
-                    <div className={s.add_btn}>+</div>
+                    <Link to={'/profile/clients/add'} className={s.add_btn}>+</Link>
                 </div>
             </div>
             <div className={s.btn_blue}>Сохранить изменения</div>

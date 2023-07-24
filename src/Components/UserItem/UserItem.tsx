@@ -25,7 +25,7 @@ const UserItem = ({name, id, setAddedUsers, addedUsers}: Props) => {
                 <span>{name}</span>
             </div>
             <div className={s.trash} onClick={deleteUser}>
-                <img  src={trash} alt=""/>
+                <img src={trash} alt=""/>
             </div>
         </div>
     );

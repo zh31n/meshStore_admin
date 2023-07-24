@@ -34,6 +34,7 @@ const Users = () => {
     const [networks, setNetworks] = useState<any[]>([]);
 
     const [users, setUsers] = useState<UserArray[]>([]);
+    const [changingUsers, setChangingUsers] = useState<boolean>(false)
 
     const token = useTypedSelector(state => state.user.token);
     const change = useTypedSelector(state => state.change.changin);
@@ -63,9 +64,7 @@ const Users = () => {
                     type="text"
                     placeholder="Поиск по группам"
                     value={findText}
-                    onChange={e => {
-                        setFindText(e.target.value);
-                    }}
+                    onChange={e => setFindText(e.target.value)}
                 />
             </div>
             <SelectNetwork
@@ -77,6 +76,7 @@ const Users = () => {
                 token={token}
                 id={currentNetworkId}
                 setUsers={setUsers}
+                setChangingUsers={setChangingUsers}
             />
             <div className={s.cont}>
                 <div className={s.users}>
@@ -89,6 +89,8 @@ const Users = () => {
                                     currentNetwork={currentNetwork}
                                     image={ava_img}
                                     add={false}
+                                    setAddedUsers={setAddedUsers}
+                                    addedUsers={addedUsers}
                                 />
                             }
                         />
@@ -123,7 +125,9 @@ const Users = () => {
                             }
                         />
                         <Route path="/add"
-                               element={<AddClientsEvent addedUsers={addedUsers} setAddedUsers={setAddedUsers}/>}/>
+                               element={<AddClientsEvent setChange={setChangingUsers} change={changingUsers}
+                                                         addedUsers={addedUsers} setAddedUsers={setAddedUsers}/>}
+                        />
                     </Routes>
                 </div>
             </div>

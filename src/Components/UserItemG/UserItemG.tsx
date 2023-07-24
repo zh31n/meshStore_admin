@@ -8,7 +8,6 @@ import {useDispatch} from "react-redux";
 import {setUsersChange} from "../../store/action/userChangeAction";
 
 
-
 interface Props {
     name: string;
     id: number;
@@ -23,13 +22,13 @@ const UserItemG = ({name, id, image, add, u, setAddedUsers, addedUsers}: Props) 
     let [selectedUser, setSelectedUser] = useState(false);
     useEffect(() => {
         addedUsers.map(el => {
-            if(el.id !== id){
+            if (el.id !== id) {
                 setSelectedUser(false)
             } else {
                 setSelectedUser(true)
             }
         })
-        console.log(addedUsers)
+        // console.log(addedUsers)
     }, [])
     const dispatch: any = useDispatch();
     const toggleAdding = () => {
@@ -58,7 +57,7 @@ const UserItemG = ({name, id, image, add, u, setAddedUsers, addedUsers}: Props) 
                     }}
                 />
             </div>
-            {selectedUser ? (
+            {selectedUser && id ? (
                 <img
                     className={s.add_btn}
                     // onClick={toggleAdding}
