@@ -1,7 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Api from "../../Api/Api";
 import styles from "./SelectNetwork.module.scss";
-import { useState, useEffect } from "react";
 
 type UserArray = {
   id: 0;
@@ -24,6 +22,10 @@ type Props = {
   id: number;
   setNetworks: any;
   setUsers: React.Dispatch<React.SetStateAction<UserArray[]>>;
+  createNetwork: boolean;
+  setCreateNetwork: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentNetwor: React.Dispatch<React.SetStateAction<object>>;
+  setChangeNetwork: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const SelectNetwork = ({
@@ -31,34 +33,22 @@ const SelectNetwork = ({
   setCurrentNetwork,
   currentNetwork,
   setCurrentNetworkId,
-  token,
-  id,
-  setNetworks,
-  setUsers,
+  createNetwork,
+  setCreateNetwork,
+  setChangeNetwork,
+  setCurrentNetwor,
 }: Props) => {
-  const [change, setChange] = useState(false);
-  const [text, setText] = useState("");
-
-  const handleClick = () => {
-    Api.changeNetwork(token, { network: id, name: text }).then(() => {
-      setChange(false);
-      Api.getNetworks(token).then(res => {
-        setNetworks(res.data.networks);
-        setCurrentNetwork(res.data.networks[id].name);
-      });
-      Api.getUsers(token).then(res => {
-        setUsers(res.data.users);
-      });
-    });
-  };
-
-  useEffect(() => {
-    setChange(false);
-  }, [currentNetwork]);
-
   return (
     <div className={styles.nav_users}>
       <div className={styles.contanainer}>
+        <p
+          className={styles.text}
+          onClick={() => {
+            setChangeNetwork(true);
+          }}
+        >
+          Изм
+        </p>
         {networks.map((el, index) => (
           <div
             key={index}
@@ -67,33 +57,29 @@ const SelectNetwork = ({
                 ? styles.nav_item_active
                 : styles.nav_item
             }
-            onDoubleClick={() => {
-              setText(el.name);
-              setChange(true);
-            }}
             onClick={() => {
               setCurrentNetwork(el.name);
               setCurrentNetworkId(el.id);
+              setCurrentNetwor(el);
             }}
           >
-            {change && currentNetwork === el.name ? (
-              <input
-                value={text}
-                onChange={e => {
-                  setText(e.target.value);
-                }}
-                onDoubleClick={handleClick}
-              />
-            ) : (
-              el.name
-            )}
+            {el.name}
           </div>
         ))}
       </div>
       <Routes>
         <Route
           path="/"
-          element={<div className={styles.create_network}>Создать сеть</div>}
+          element={
+            <div
+              className={styles.create_network}
+              onClick={() => {
+                setCreateNetwork(!createNetwork);
+              }}
+            >
+              Создать сеть
+            </div>
+          }
         />
         <Route
           path="/add"

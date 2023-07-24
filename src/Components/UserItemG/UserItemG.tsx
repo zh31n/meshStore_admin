@@ -3,7 +3,6 @@ import s from "./UserItemG.module.scss";
 import btn from "../../assets/More_btnsvg.svg";
 import add_btn from "../../assets/Add_bnt.svg";
 import added_btn from "../../assets/btn_Check.svg";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
 import { setUsersChange } from "../../store/action/userChangeAction";
 
@@ -15,7 +14,7 @@ interface Props {
   u: object;
 }
 
-const UserItemG = ({ name, id, image, add, u }: Props) => {
+const UserItemG = ({ name, image, add, u }: Props) => {
   let [selectedUser, setSelectedUser] = useState(false);
 
   const dispatch: any = useDispatch();

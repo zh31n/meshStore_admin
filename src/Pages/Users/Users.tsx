@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import s from "./Users.module.scss";
 import i_search from "../../assets/Search.svg";
 import ava_img from "../../assets/ava_uu.png";
-import UserItemG from "../../Components/UserItemG/UserItemG";
 import { Route, Routes } from "react-router-dom";
 import AddClient from "../AddClient/AddClient";
 import AddClientsEvent from "../AddClientsEvent/AddClientsEvent";
@@ -11,6 +10,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserList from "../../Components/UserList/UserList";
 import SelectNetwork from "../../Components/SelectNetwork/SelectNetwork";
 import ChangeClient from "../AddClient/ChangeClient";
+import CreateNetwork from "../../Components/CreateNetwork/CreateNetwork";
 
 type UserArray = {
   id: 0;
@@ -25,6 +25,11 @@ type UserArray = {
 };
 
 const Users = () => {
+  const [createNetwork, setCreateNetwork] = useState<boolean>(false);
+  const [changeNetwork, setChangeNetwork] = useState<boolean>(false);
+
+  const [currentNetwor, setCurrentNetwor] = useState<object>({});
+
   const [findText, setFindText] = useState<string>("");
 
   const [currentNetwork, setCurrentNetwork] = useState<string>("");
@@ -46,7 +51,6 @@ const Users = () => {
       setUsers(res.data.users);
     });
   }, []);
-  console.log(users)
   const filteredUsers = users.filter(el => {
     if (currentNetwork == el.network) {
       if (el.name.toLowerCase().includes(findText.toLowerCase())) {
@@ -77,12 +81,27 @@ const Users = () => {
         token={token}
         id={currentNetworkId}
         setUsers={setUsers}
+        createNetwork={createNetwork}
+        setCreateNetwork={setCreateNetwork}
+        setCurrentNetwor={setCurrentNetwor}
+        setChangeNetwork={setChangeNetwork}
       />
       <div className={s.cont}>
         <div className={s.users}>
           <Routes>
             <Route
               path="/"
+              element={
+                <UserList
+                  data={filteredUsers}
+                  currentNetwork={currentNetwork}
+                  image={ava_img}
+                  add={false}
+                />
+              }
+            />
+            <Route
+              path="/create"
               element={
                 <UserList
                   data={filteredUsers}
@@ -107,19 +126,36 @@ const Users = () => {
         </div>
         <div className={s.left}>
           <Routes>
-            <Route
-              path="/"
-              element={
-                change == true ? (
-                  <ChangeClient setUsers={setUsers} />
-                ) : (
-                  <AddClient
-                    setUsers={setUsers}
-                    currentNetwork={currentNetworkId}
+            {createNetwork ? (
+              <Route
+                path="/"
+                element={
+                  <CreateNetwork
+                    setNetworks={setNetworks}
+                    setCurrentNetwork={setCurrentNetwork}
+                    changeNetwork={changeNetwork}
+                    setChangeNetwork={setChangeNetwork}
+                    currentNetwor={currentNetwor}
+                    setCreateNetwork={setCreateNetwork}
                   />
-                )
-              }
-            />
+                }
+              />
+            ) : (
+              <Route
+                path="/"
+                element={
+                  change == true ? (
+                    <ChangeClient setUsers={setUsers} />
+                  ) : (
+                    <AddClient
+                      setUsers={setUsers}
+                      currentNetwork={currentNetworkId}
+                    />
+                  )
+                }
+              />
+            )}
+
             <Route path="/add" element={<AddClientsEvent />} />
           </Routes>
         </div>

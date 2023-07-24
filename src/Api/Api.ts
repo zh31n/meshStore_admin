@@ -48,6 +48,12 @@ const Api = {
   changeNetwork(token: string, data: object) {
     return instance.put(`edit-network?token=${token}`, data);
   },
+  createNetwork(token: string, name: string) {
+    return instance.post(`add-network?token=${token}`, { name });
+  },
+  deleteNetwork(token: string, network: number) {
+    return instance.delete(`delete-network/?token=${token}&network=${network}`);
+  },
   getAllBeacon(token: string) {
     return instance.get(`beacons?token=${token}`);
   },
@@ -71,20 +77,16 @@ const Api = {
   allNotifications(token: string) {
     return instance.get(`notifications?token=${token}`);
   },
-  addNotification(
-    token: string,
-    beacon: number,
-    group: number,
-    start: string,
-    finish: string,
-    title: string,
-    text: string,
-    file: any
-  ) {
-    return instance.post(`add-notification`);
+  addNotification(token: string, data: any) {
+    return instance.post(`add-notification?token=${token}`, data);
   },
   getUsersGroup(token: string) {
     return instance.get(`user-groups?token=${token}`);
+  },
+  deleteNotification(token: string, id: number) {
+    return instance.delete(
+      `delete_notification?token=${token}&notification-id=${id}`
+    );
   },
 };
 

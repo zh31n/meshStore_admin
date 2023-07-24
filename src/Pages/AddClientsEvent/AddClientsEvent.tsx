@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import s from "./AddClientsEvent.module.scss";
 import clientsI from "../../assets/clients.svg";
 import ava_img from "../../assets/ava_uu.png";
@@ -20,15 +19,13 @@ const data = {
     { name: "Фёдор Шишкин", id: 1, image: ava_img },
     { name: "Фёдор Шишкин", id: 1, image: ava_img },
     { name: "Фёдор Шишкин", id: 1, image: ava_img },
-    { name: "Фёдор Шишкин", id: 1, image: ava_img },
-    { name: "Фёдор Шишкин", id: 1, image: ava_img },
   ],
 };
 
-const AddClientsEvent = (props: any) => {
-  const [currentGroup, setCurrentGroup] = useState<number>(0);
-
-  const userItems = data.users.map(u => <UserItem name={u.name} />);
+const AddClientsEvent = () => {
+  const userItems = data.users.map(u => (
+    <UserItem trash={true} name={u.name} />
+  ));
 
   return (
     <div className={s.cont}>

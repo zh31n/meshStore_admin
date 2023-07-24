@@ -7,7 +7,21 @@
 
   .contanainer {
     display: flex;
+    align-items: center;
     gap: 2rem;
+    .text {
+      color: #c6c6c6;
+      text-align: center;
+      leading-trim: both;
+      text-edge: cap;
+      cursor: pointer;
+      font-variant-numeric: lining-nums proportional-nums;
+      font-family: "Manrope";
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 112.1%;
+    }
   }
 
   .create_network {
@@ -50,19 +64,19 @@
 }
 
 @media (max-width: 480px) {
-  .nav_users{
-    .nav_item{
+  .nav_users {
+    .nav_item {
       display: flex;
       flex: 1;
       align-items: center;
       min-width: fit-content;
     }
-    .nav_item_active{
+    .nav_item_active {
       display: flex;
       flex: 1;
       min-width: fit-content;
     }
-    .contanainer{
+    .contanainer {
       width: 80%;
       align-items: flex-start;
       justify-content: space-between;

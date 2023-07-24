@@ -9,7 +9,18 @@ import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserGroup from "../../Components/UserGroup/UserGroup";
 
-const AddEvent = () => {
+interface notifications {
+  date: string;
+  day: number;
+  len: number;
+  notifications: any[];
+}
+
+interface Props {
+  setNewArr: React.Dispatch<React.SetStateAction<notifications>>;
+}
+
+const AddEvent = ({ setNewArr }: Props) => {
   const ref = useRef<any>();
 
   const [title, setTitle] = useState<string>("");
@@ -25,8 +36,6 @@ const AddEvent = () => {
   const [finish, setFinish] = useState<string>("");
   const [date, setDate] = useState<string>("");
 
-  const [finishedTime, setFinishedTime] = useState<string>("");
-  const [finishedTimeEnd, setFinishedTimeEnd] = useState<string>("");
   const [finishedDate, setFinishedDate] = useState<string>("");
 
   const [file, setFile] = useState<any>();
@@ -45,9 +54,44 @@ const AddEvent = () => {
   }, []);
 
   const handleSave = () => {
-    const data = new FormData();
+    if (file) {
+      const data = {
+        beacon: currentBeacon,
+        group: currentGroup,
+        start: `${date}T${start}`,
+        finish: `${finishedDate}T${finish}`,
+        title: title,
+        text: text,
+        file: file[0],
+      };
 
-    // data.append('beacon', )
+      console.log(data);
+      Api.addNotification(token, data).then(res => {
+        console.log(res);
+        Api.allNotifications(token).then(res => {
+          console.log(res.data);
+          setNewArr(res.data.notifications[0]);
+        });
+      });
+    } else {
+      const data = {
+        beacon: currentBeacon,
+        group: currentGroup,
+        start: `${date}T${start}`,
+        finish: `${finishedDate}T${finish}`,
+        title: title,
+        text: text,
+        file: "",
+      };
+
+      console.log(data);
+      Api.addNotification(token, data).then(res => {
+        console.log(res);
+        Api.allNotifications(token).then(res => {
+          setNewArr(res.data.notifications[0]);
+        });
+      });
+    }
   };
 
   return (
@@ -107,15 +151,6 @@ const AddEvent = () => {
                     setStart(e.target.value);
                   }}
                 />
-                -
-                <input
-                  type="time"
-                  style={{ marginLeft: "5px" }}
-                  value={finish}
-                  onChange={e => {
-                    setFinish(e.target.value);
-                  }}
-                />
               </div>
               <div className={s.timing}>
                 <input
@@ -136,18 +171,9 @@ const AddEvent = () => {
               <div className={s.timing}>
                 <input
                   type="time"
-                  value={finishedTime}
+                  value={finish}
                   onChange={e => {
-                    setFinishedTime(e.target.value);
-                  }}
-                />
-                -
-                <input
-                  type="time"
-                  style={{ marginLeft: "5px" }}
-                  value={finishedTimeEnd}
-                  onChange={e => {
-                    setFinishedTimeEnd(e.target.value);
+                    setFinish(e.target.value);
                   }}
                 />
               </div>
@@ -184,9 +210,10 @@ const AddEvent = () => {
               ref={ref}
               type="file"
               style={{ display: "none" }}
-              value={file}
               onChange={e => {
-                setFile(e.target.files);
+                setFile([]);
+                const files = e.target.files;
+                setFile(files);
               }}
             />
           </div>
