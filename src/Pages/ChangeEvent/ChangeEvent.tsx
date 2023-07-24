@@ -17,7 +17,9 @@ const data = [
   { img: ava, name: "Иван Шишкин", id: 3 },
 ];
 
-const userItems = data.map(u => <UserItem name={u.name} trash={false} />);
+const userItems = data.map(u => (
+  <UserItem id={1} addedUsers={[]} setAddedUsers={1} name={u.name} />
+));
 
 const ChangeEvent = ({ setNewArr }: any) => {
   const token = useTypedSelector(state => state.user.token);

@@ -55,18 +55,18 @@ const AddEvent = ({ setNewArr }: Props) => {
 
   const handleSave = () => {
     if (file) {
-      const data = {
-        beacon: currentBeacon,
-        group: currentGroup,
-        start: `${date}T${start}`,
-        finish: `${finishedDate}T${finish}`,
-        title: title,
-        text: text,
-        file: file[0],
-      };
+      const date = new FormData();
 
-      console.log(data);
-      Api.addNotification(token, data).then(res => {
+      date.append("beacon", String(currentBeacon));
+      date.append("group", String(currentGroup));
+      date.append("start", `${date}T${start}`);
+      date.append("finish", `${finishedDate}T${finish}`);
+      date.append("title", title);
+      date.append("text", text);
+      date.append("file", file[0]);
+
+      console.log(date);
+      Api.addNotification(token, date).then(res => {
         console.log(res);
         Api.allNotifications(token).then(res => {
           console.log(res.data);
@@ -74,23 +74,22 @@ const AddEvent = ({ setNewArr }: Props) => {
         });
       });
     } else {
-      const data = {
-        beacon: currentBeacon,
-        group: currentGroup,
-        start: `${date}T${start}`,
-        finish: `${finishedDate}T${finish}`,
-        title: title,
-        text: text,
-        file: "",
-      };
-
-      console.log(data);
-      Api.addNotification(token, data).then(res => {
-        console.log(res);
-        Api.allNotifications(token).then(res => {
-          setNewArr(res.data.notifications[0]);
-        });
-      });
+      // const data = {
+      //   beacon: currentBeacon,
+      //   group: currentGroup,
+      //   start: `${date}T${start}`,
+      //   finish: `${finishedDate}T${finish}`,
+      //   title: title,
+      //   text: text,
+      //   file: "",
+      // };
+      // console.log(data);
+      // Api.addNotification(token, data).then(res => {
+      //   console.log(res);
+      //   Api.allNotifications(token).then(res => {
+      //     setNewArr(res.data.notifications[0]);
+      //   });
+      // });
     }
   };
 
@@ -171,6 +170,7 @@ const AddEvent = ({ setNewArr }: Props) => {
               <div className={s.timing}>
                 <input
                   type="time"
+                  style={{ marginLeft: "5px" }}
                   value={finish}
                   onChange={e => {
                     setFinish(e.target.value);
@@ -211,9 +211,9 @@ const AddEvent = ({ setNewArr }: Props) => {
               type="file"
               style={{ display: "none" }}
               onChange={e => {
-                setFile([]);
-                const files = e.target.files;
-                setFile(files);
+                setFile("");
+                const file: any = e.target.files;
+                setFile(file);
               }}
             />
           </div>

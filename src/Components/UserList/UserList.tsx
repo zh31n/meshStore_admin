@@ -11,14 +11,29 @@ type UserArray = {
   network: string;
   tag: string;
 };
+type AddedUsers = {
+  id: number;
+};
 type Props = {
   data: UserArray[];
   image: any;
   currentNetwork: string;
   add: boolean;
+  setAddedUsers: any;
+  addedUsers: AddedUsers[];
 };
 
-const UserList = ({ data, image, currentNetwork, add }: Props) => {
+const UserList = ({
+  data,
+  image,
+  currentNetwork,
+  add,
+  setAddedUsers,
+  addedUsers,
+}: Props) => {
+  // useEffect(() => {
+  //     console.log(addedUsers)
+  // },[addedUsers])
   return (
     <>
       {data.map((u, index) => {
@@ -31,6 +46,8 @@ const UserList = ({ data, image, currentNetwork, add }: Props) => {
               key={index}
               id={u.id}
               image={image}
+              setAddedUsers={setAddedUsers}
+              addedUsers={addedUsers}
             />
           );
         }

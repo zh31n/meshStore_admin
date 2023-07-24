@@ -88,9 +88,7 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
           <input
             type="email"
             value={email}
-            onChange={e => {
-              setEmail(e.target.value);
-            }}
+            onChange={e => setEmail(e.target.value)}
             placeholder="test@mail.com"
           />
         </div>
@@ -98,9 +96,7 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
           <div className={s.title}>Статус пользователя</div>
           <select
             value={role}
-            onChange={e => {
-              setRole(Number(e.target.value));
-            }}
+            onChange={e => setRole(Number(e.target.value))}
           >
             <option value={0}>Клиент</option>
             <option value={1}>Администратор</option>

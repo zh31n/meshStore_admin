@@ -10,7 +10,6 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserList from "../../Components/UserList/UserList";
 import SelectNetwork from "../../Components/SelectNetwork/SelectNetwork";
 import ChangeClient from "../AddClient/ChangeClient";
-import CreateNetwork from "../../Components/CreateNetwork/CreateNetwork";
 
 type UserArray = {
   id: 0;
@@ -25,19 +24,15 @@ type UserArray = {
 };
 
 const Users = () => {
-  const [createNetwork, setCreateNetwork] = useState<boolean>(false);
-  const [changeNetwork, setChangeNetwork] = useState<boolean>(false);
-
-  const [currentNetwor, setCurrentNetwor] = useState<object>({});
-
   const [findText, setFindText] = useState<string>("");
-
+  const [addedUsers, setAddedUsers] = useState<UserArray[]>([]);
   const [currentNetwork, setCurrentNetwork] = useState<string>("");
   const [currentNetworkId, setCurrentNetworkId] = useState<number>(0);
 
   const [networks, setNetworks] = useState<any[]>([]);
 
   const [users, setUsers] = useState<UserArray[]>([]);
+  const [changingUsers, setChangingUsers] = useState<boolean>(false);
 
   const token = useTypedSelector(state => state.user.token);
   const change = useTypedSelector(state => state.change.changin);
@@ -67,9 +62,7 @@ const Users = () => {
           type="text"
           placeholder="Поиск по группам"
           value={findText}
-          onChange={e => {
-            setFindText(e.target.value);
-          }}
+          onChange={e => setFindText(e.target.value)}
         />
       </div>
       <SelectNetwork
@@ -81,10 +74,7 @@ const Users = () => {
         token={token}
         id={currentNetworkId}
         setUsers={setUsers}
-        createNetwork={createNetwork}
-        setCreateNetwork={setCreateNetwork}
-        setCurrentNetwor={setCurrentNetwor}
-        setChangeNetwork={setChangeNetwork}
+        setChangingUsers={setChangingUsers}
       />
       <div className={s.cont}>
         <div className={s.users}>
@@ -97,17 +87,8 @@ const Users = () => {
                   currentNetwork={currentNetwork}
                   image={ava_img}
                   add={false}
-                />
-              }
-            />
-            <Route
-              path="/create"
-              element={
-                <UserList
-                  data={filteredUsers}
-                  currentNetwork={currentNetwork}
-                  image={ava_img}
-                  add={false}
+                  setAddedUsers={setAddedUsers}
+                  addedUsers={addedUsers}
                 />
               }
             />
@@ -119,6 +100,8 @@ const Users = () => {
                   currentNetwork={currentNetwork}
                   image={ava_img}
                   add={true}
+                  setAddedUsers={setAddedUsers}
+                  addedUsers={addedUsers}
                 />
               }
             />
@@ -126,37 +109,30 @@ const Users = () => {
         </div>
         <div className={s.left}>
           <Routes>
-            {createNetwork ? (
-              <Route
-                path="/"
-                element={
-                  <CreateNetwork
-                    setNetworks={setNetworks}
-                    setCurrentNetwork={setCurrentNetwork}
-                    changeNetwork={changeNetwork}
-                    setChangeNetwork={setChangeNetwork}
-                    currentNetwor={currentNetwor}
-                    setCreateNetwork={setCreateNetwork}
+            <Route
+              path="/"
+              element={
+                change == true ? (
+                  <ChangeClient setUsers={setUsers} />
+                ) : (
+                  <AddClient
+                    setUsers={setUsers}
+                    currentNetwork={currentNetworkId}
                   />
-                }
-              />
-            ) : (
-              <Route
-                path="/"
-                element={
-                  change == true ? (
-                    <ChangeClient setUsers={setUsers} />
-                  ) : (
-                    <AddClient
-                      setUsers={setUsers}
-                      currentNetwork={currentNetworkId}
-                    />
-                  )
-                }
-              />
-            )}
-
-            <Route path="/add" element={<AddClientsEvent />} />
+                )
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                <AddClientsEvent
+                  setChange={setChangingUsers}
+                  change={changingUsers}
+                  addedUsers={addedUsers}
+                  setAddedUsers={setAddedUsers}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

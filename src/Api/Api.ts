@@ -80,13 +80,19 @@ const Api = {
   addNotification(token: string, data: any) {
     return instance.post(`add-notification?token=${token}`, data);
   },
-  getUsersGroup(token: string) {
-    return instance.get(`user-groups?token=${token}`);
-  },
   deleteNotification(token: string, id: number) {
     return instance.delete(
       `delete_notification?token=${token}&notification-id=${id}`
     );
+  },
+  getUsersGroup(token: string) {
+    return instance.get(`user-groups?token=${token}`);
+  },
+  createUserGroup(token: string, data: object) {
+    return instance.post(`add-user-group?token=${token}`, { ...data });
+  },
+  deleteUserGroup(token: string, id: number) {
+    return instance.delete(`delete-user-group?token=${token}&group-id=${id}`);
   },
 };
 

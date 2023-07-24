@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./UserItemG.module.scss";
 import btn from "../../assets/More_btnsvg.svg";
 import add_btn from "../../assets/Add_bnt.svg";
@@ -12,15 +12,34 @@ interface Props {
   image: string;
   add: boolean;
   u: object;
+  setAddedUsers: React.Dispatch<React.SetStateAction<any[]>>;
+  addedUsers: any[];
 }
 
-const UserItemG = ({ name, image, add, u }: Props) => {
+const UserItemG = ({
+  name,
+  id,
+  image,
+  add,
+  u,
+  setAddedUsers,
+  addedUsers,
+}: Props) => {
   let [selectedUser, setSelectedUser] = useState(false);
-
+  useEffect(() => {
+    addedUsers.map(el => {
+      if (el.id !== id) {
+        setSelectedUser(false);
+      } else {
+        setSelectedUser(true);
+      }
+    });
+    // console.log(addedUsers)
+  }, []);
   const dispatch: any = useDispatch();
-
   const toggleAdding = () => {
-    setSelectedUser(!selectedUser);
+    setSelectedUser(true);
+    setAddedUsers(data => [...data, u]);
   };
 
   return (
@@ -44,10 +63,10 @@ const UserItemG = ({ name, image, add, u }: Props) => {
           }}
         />
       </div>
-      {selectedUser ? (
+      {selectedUser && id ? (
         <img
           className={s.add_btn}
-          onClick={toggleAdding}
+          // onClick={toggleAdding}
           src={added_btn}
           alt=""
         />
