@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./EventItem.module.scss";
 import timeImg from "../../assets/clock.svg";
 import { Link } from "react-router-dom";

@@ -1,7 +1,7 @@
 .event_container {
   .title {
     color: #121212;
-    font-family: 'Manrope', sans-serif;
+    font-family: "Manrope", sans-serif;
     font-size: 36px;
     font-style: normal;
     font-weight: 500;
@@ -9,8 +9,8 @@
   }
 
   .sup {
-    color: rgba(18, 18, 18, 0.50);
-    font-family: 'Manrope', sans-serif;
+    color: rgba(18, 18, 18, 0.5);
+    font-family: "Manrope", sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -25,13 +25,17 @@
     height: 1px;
     margin-right: auto;
     margin-left: auto;
-    background: radial-gradient(5411845.72% 206.30% at 50.15% 0.10%, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.00) 100%);
+    background: radial-gradient(
+      5411845.72% 206.3% at 50.15% 0.1%,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   .event_info {
     display: flex;
     width: 100%;
-    height: 60vh;
+    height: 55vh;
     padding-top: 2rem;
 
     .about_event {
@@ -51,7 +55,7 @@
           width: 120px;
           height: 35px;
           border-radius: 6px;
-          background: #443BFF;
+          background: #443bff;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -63,7 +67,7 @@
             width: 100%;
             text-align: center;
             //padding-left: 1rem;
-            font-family: 'Manrope', sans-serif;
+            font-family: "Manrope", sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
@@ -76,7 +80,7 @@
           align-items: center;
           gap: 10px;
           color: #121212;
-          font-family: 'Manrope', sans-serif;
+          font-family: "Manrope", sans-serif;
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
@@ -93,8 +97,8 @@
         align-items: center;
 
         span {
-          color: rgba(18, 18, 18, 0.70);
-          font-family: 'Manrope', sans-serif;
+          color: rgba(18, 18, 18, 0.7);
+          font-family: "Manrope", sans-serif;
           font-size: 16px;
           font-style: normal;
           font-weight: 600;
@@ -102,13 +106,13 @@
         }
 
         select {
-          font-family: 'Manrope', sans-serif;
+          font-family: "Manrope", sans-serif;
           font-size: 16px;
           border: 0;
           outline: 0;
 
           option {
-            font-family: 'Manrope', sans-serif;
+            font-family: "Manrope", sans-serif;
             font-size: 16px;
           }
         }
@@ -118,14 +122,13 @@
           align-items: center;
           gap: 10px;
           color: #121212;
-          font-family: 'Manrope', sans-serif;
+          font-family: "Manrope", sans-serif;
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
           line-height: 112.1%;
         }
       }
-
     }
 
     .clients {
@@ -137,7 +140,7 @@
         align-items: center;
         gap: 5px;
         color: #121212;
-        font-family: 'Manrope', sans-serif;
+        font-family: "Manrope", sans-serif;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
@@ -156,7 +159,7 @@
         width: 45px;
         height: 45px;
         color: white;
-        font-family: 'Manrope', sans-serif;
+        font-family: "Manrope", sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -177,36 +180,52 @@
   width: 100%;
   height: 55px;
   border-radius: 12px;
-  background: #443BFF;
+  background: #443bff;
   color: white;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
+.btn_red {
+  cursor: pointer;
+  width: 100%;
+  height: 55px;
+  border-radius: 12px;
+  background: #ff623b;
+  color: white;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 480px) {
   .event_container {
-    .title{
+    .title {
       font-size: 30px;
     }
-    .sup{
+    .sup {
       font-size: 15px;
     }
-    .event_info{
+    .event_info {
       overflow: auto;
       overflow-x: hidden;
       flex-direction: column;
       align-items: center;
-      height: 50vh;
+      height: 40vh;
       margin-bottom: 10px;
-      .about_event{
+      .about_event {
         width: 100%;
       }
-      .clients{
+      .clients {
         padding: 0;
         width: 100%;
       }

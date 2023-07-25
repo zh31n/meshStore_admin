@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./Today.module.scss";
 import EventItem from "../../Components/EventItem/EventItem";
 import { Routes, Route, Link } from "react-router-dom";
@@ -63,8 +63,14 @@ const Today = () => {
           </div>
           <div className={s.page_content}>
             <Routes>
-              <Route path={"/:eventId"} element={<ChangeEvent />} />
-              <Route path={"/add"} element={<AddEvent />} />
+              <Route
+                path={"/:eventId"}
+                element={<ChangeEvent setNewArr={setTodayArr} />}
+              />
+              <Route
+                path={"/add"}
+                element={<AddEvent setNewArr={setTodayArr} />}
+              />
             </Routes>
           </div>
         </div>
@@ -105,8 +111,14 @@ const Today = () => {
                   </div>
                 }
               />
-              <Route path={"/:eventId"} element={<ChangeEvent />} />
-              <Route path={"/add"} element={<AddEvent />} />
+              <Route
+                path={"/:eventId"}
+                element={<ChangeEvent setNewArr={setTodayArr} />}
+              />
+              <Route
+                path={"/add"}
+                element={<AddEvent setNewArr={setTodayArr} />}
+              />
             </Routes>
           </div>
         </div>

@@ -54,9 +54,10 @@
 
 @media (max-width: 480px) {
   .cont{
+    justify-content: normal;
     flex-direction: column-reverse;
     overflow: auto;
-    height: 65vh;
+    height: 64vh;
     .users {
       width: 100%;
       height: auto;

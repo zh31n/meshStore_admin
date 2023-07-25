@@ -22,11 +22,11 @@ type Props = {
 };
 
 const ChangeClient = ({ setUsers }: Props) => {
-  const [error, setError] = useState<string>("");
+  const [error] = useState<string>("");
 
   const dispatch: any = useDispatch();
 
-  const [errorVis, setErrorVis] = useState<boolean>(false);
+  const [errorVis] = useState<boolean>(false);
 
   const [name, setName] = useState<string>("");
   const [number, setNumber] = useState<string>("");
@@ -38,7 +38,6 @@ const ChangeClient = ({ setUsers }: Props) => {
   const user = useTypedSelector(state => state.change.user);
 
   const handleClick = () => {
-    const networkid = 0;
     const data = {
       name,
       email,

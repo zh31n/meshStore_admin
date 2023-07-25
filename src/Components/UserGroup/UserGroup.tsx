@@ -36,7 +36,14 @@ const UserGroup = ({ currentGroup }: Props) => {
           return elem.users_ids.map(id => {
             return users.map(el => {
               if (id === el.id) {
-                return <UserItem name={el.name} />;
+                return (
+                  <UserItem
+                    id={el.id}
+                    name={el.name}
+                    setAddedUsers={"asd"}
+                    addedUsers={[]}
+                  />
+                );
               }
             });
           });

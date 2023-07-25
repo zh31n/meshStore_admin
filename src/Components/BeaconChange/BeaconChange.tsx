@@ -52,7 +52,7 @@ const BeaconChange = () => {
     });
 
     if (change === false) {
-      Api.createBeacond(token, name, uuid, id).then(res => {
+      Api.createBeacond(token, name, uuid, id).then(() => {
         setName("");
         setNetwork("");
         setUuid("");

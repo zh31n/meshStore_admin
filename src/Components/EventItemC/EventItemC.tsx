@@ -1,9 +1,17 @@
-import React from "react";
 import s from "./EventItemC.module.scss";
 import timeImg from "../../assets/clock.svg";
 import { Link } from "react-router-dom";
 
-const EventItemC = props => {
+interface event {
+  length: number;
+  type: string;
+  name: string;
+  start: string;
+  finish: string;
+  id: number;
+}
+
+const EventItemC = (props: event) => {
   return (
     <Link to={`/profile/today/${props.id}`} className={s.wrapper}>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -15,7 +23,9 @@ const EventItemC = props => {
           <div className={s.name}>{props.name}</div>
           <div className={s.timing}>
             <img src={timeImg} alt={"time image"} />
-            <span>{props.time}</span>
+            <span>
+              {props.start.split(" ")[1]} - {props.finish.split(" ")[1]}
+            </span>
           </div>
         </div>
       </div>
