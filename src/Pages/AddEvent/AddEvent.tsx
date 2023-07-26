@@ -8,6 +8,11 @@ import { NavLink } from "react-router-dom";
 import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserGroup from "../../Components/UserGroup/UserGroup";
+import {
+  setAddUsers,
+  setAddUsersDefault,
+} from "../../store/action/addUsersAction";
+import { useDispatch } from "react-redux";
 
 interface notifications {
   date: string;
@@ -41,6 +46,7 @@ const AddEvent = ({ setNewArr }: Props) => {
   const [file, setFile] = useState<any>();
 
   const token = useTypedSelector(state => state.user.token);
+  const dispatch: any = useDispatch();
 
   useEffect(() => {
     Api.getAllBeacon(token).then(res => {
@@ -48,25 +54,40 @@ const AddEvent = ({ setNewArr }: Props) => {
       setCurrentBeacon(res.data.beacons[0].id);
     });
     Api.getUsersGroup(token).then(res => {
-      setAllGroups(res.data.user_groups);
-      setCurrentGroup(res.data.user_groups[0].id);
+      if (res.data.user_groups.length !== 0) {
+        setAllGroups(res.data.user_groups);
+        setCurrentGroup(res.data.user_groups[0].id);
+        dispatch(setAddUsers(res.data.user_groups[0].users_ids));
+      } else {
+        dispatch(setAddUsersDefault());
+      }
     });
   }, []);
 
+  useEffect(() => {
+    allGroups.map(el => {
+      if (el.id === currentGroup) {
+        dispatch(setAddUsers(el.users_ids));
+      }
+    });
+  }, [currentGroup]);
+
   const handleSave = () => {
     if (file) {
-      const date = new FormData();
+      const datee = new FormData();
 
-      date.append("beacon", String(currentBeacon));
-      date.append("group", String(currentGroup));
-      date.append("start", `${date}T${start}`);
-      date.append("finish", `${finishedDate}T${finish}`);
-      date.append("title", title);
-      date.append("text", text);
-      date.append("file", file[0]);
+      const starting = `${date}T${start}`;
 
-      console.log(date);
-      Api.addNotification(token, date).then(res => {
+      datee.append("beacon", String(currentBeacon));
+      datee.append("group", String(currentGroup));
+      datee.append("start", String(starting));
+      datee.append("finish", String(`${finishedDate}T${finish}`));
+      datee.append("title", String(title));
+      datee.append("text", String(text));
+      datee.append("file", file[0]);
+
+      console.log(datee);
+      Api.addNotification(token, datee).then(res => {
         console.log(res);
         Api.allNotifications(token).then(res => {
           console.log(res.data);
@@ -74,22 +95,26 @@ const AddEvent = ({ setNewArr }: Props) => {
         });
       });
     } else {
-      // const data = {
-      //   beacon: currentBeacon,
-      //   group: currentGroup,
-      //   start: `${date}T${start}`,
-      //   finish: `${finishedDate}T${finish}`,
-      //   title: title,
-      //   text: text,
-      //   file: "",
-      // };
-      // console.log(data);
-      // Api.addNotification(token, data).then(res => {
-      //   console.log(res);
-      //   Api.allNotifications(token).then(res => {
-      //     setNewArr(res.data.notifications[0]);
-      //   });
-      // });
+      const datee = new FormData();
+
+      const starting = `${date}T${start}`;
+
+      datee.append("beacon", String(currentBeacon));
+      datee.append("group", String(currentGroup));
+      datee.append("start", String(starting));
+      datee.append("finish", String(`${finishedDate}T${finish}`));
+      datee.append("title", String(title));
+      datee.append("text", String(text));
+      datee.append("file", "");
+
+      console.log(datee);
+      Api.addNotification(token, datee).then(res => {
+        console.log(res);
+        Api.allNotifications(token).then(res => {
+          console.log(res.data);
+          setNewArr(res.data.notifications[0]);
+        });
+      });
     }
   };
 

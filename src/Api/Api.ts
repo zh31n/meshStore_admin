@@ -80,6 +80,15 @@ const Api = {
   addNotification(token: string, data: any) {
     return instance.post(`add-notification?token=${token}`, data);
   },
+  getNotification(token: string, id: number) {
+    return instance.get(`notification?token=${token}&id=${id}`);
+  },
+  editNotification(token: string, data: any, id: number) {
+    return instance.get(
+      `edit-notification?token=${token}&notification=${id}`,
+      data
+    );
+  },
   deleteNotification(token: string, id: number) {
     return instance.delete(
       `delete_notification?token=${token}&notification-id=${id}`
@@ -93,6 +102,15 @@ const Api = {
   },
   deleteUserGroup(token: string, id: number) {
     return instance.delete(`delete-user-group?token=${token}&group-id=${id}`);
+  },
+  changeUserGroup(token: string, id: number, users: number[], name: string) {
+    const data = {
+      users: [...users],
+      name: name,
+    };
+
+    console.log(data, id);
+    return instance.put(`edit-user-group?token=${token}&group-id=${id}`, data);
   },
 };
 

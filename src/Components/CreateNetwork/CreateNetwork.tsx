@@ -4,99 +4,101 @@ import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 type Props = {
-  changeNetwork: any;
-  setChangeNetwork: any;
-  currentNetwor: any;
-  setCreateNetwork: any;
   setNetworks: any;
   setCurrentNetwork: any;
+  changeNetwork: boolean;
+  currentNetwork: string;
+  setChangeNetwork: any;
 };
 
-const CreateNetwork = (props: Props) => {
+const CreateNetwork = ({
+  setCurrentNetwork,
+  setNetworks,
+  changeNetwork,
+  currentNetwork,
+  setChangeNetwork,
+}: Props) => {
   const token = useTypedSelector(state => state.user.token);
 
   const [name, setName] = useState<string>("");
 
-  const [nameone, setNameone] = useState<string>(props.changeNetwork.name);
+  const [nameone, setNameone] = useState<string>("");
+
+  const [id, setId] = useState<number>(0);
 
   const handleSave = () => {
-    if (props.changeNetwork == true) {
+    if (changeNetwork === true) {
       const data = {
-        network: props.currentNetwor.id,
-        name: nameone,
+        name: name,
+        network: id,
       };
       Api.changeNetwork(token, data).then(res => {
-        console.log(res);
-        props.setCreateNetwork(false);
-        props.setChangeNetwork(false);
+        console.log(res.data);
+        setName("");
         Api.getNetworks(token).then(res => {
-          props.setNetworks(res.data.networks);
-          props.setCurrentNetwork(res.data.networks[0].name);
+          setNetworks(res.data.networks);
+          setCurrentNetwork(res.data.networks[0].name);
+          setChangeNetwork(false);
         });
       });
-    }
-    if (props.changeNetwork == false) {
-      Api.createNetwork(token, name).then(res => {
-        console.log(res);
-        props.setCreateNetwork(false);
-        props.setChangeNetwork(false);
+    } else {
+      Api.createNetwork(token, nameone).then(res => {
+        console.log(res.data);
+        setNameone("");
         Api.getNetworks(token).then(res => {
-          props.setNetworks(res.data.networks);
-          props.setCurrentNetwork(res.data.networks[0].name);
+          setNetworks(res.data.networks);
+          setCurrentNetwork(res.data.networks[0].name);
+          setChangeNetwork(false);
         });
       });
     }
   };
 
   const handleDelete = () => {
-    Api.deleteNetwork(token, props.currentNetwor.id).then(res => {
-      console.log(res);
-      props.setCreateNetwork(false);
-      props.setChangeNetwork(false);
+    Api.deleteNetwork(token, id).then(res => {
+      console.log(res.data);
       Api.getNetworks(token).then(res => {
-        props.setNetworks(res.data.networks);
-        props.setCurrentNetwork(res.data.networks[0].name);
+        setNetworks(res.data.networks);
+        setCurrentNetwork(res.data.networks[0].name);
+        setChangeNetwork(false);
       });
     });
   };
 
   useEffect(() => {
-    if (props.changeNetwork == true) {
-      setNameone(props.currentNetwor.name);
-    }
-  }, [props.changeNetwork, props.currentNetwor]);
+    Api.getNetworks(token).then(res => {
+      res.data.networks.map((el: any) => {
+        if (el.name === currentNetwork) {
+          setName(el.name);
+          setId(el.id);
+        }
+      });
+    });
+  }, [changeNetwork, currentNetwork]);
 
   return (
     <div className={s.container}>
       <p className={s.text}>
-        {props.changeNetwork == true
-          ? "Изменить текущую сеть"
-          : "Создать новую сеть"}
+        {changeNetwork ? "Изменить" : "Создать новую"} сеть
       </p>
       <div className={s.inpt_cont}>
         <p className={s.title}>Название сети*</p>
-        {props.changeNetwork == true ? (
-          <input
-            placeholder="название сети"
-            value={nameone}
-            onChange={e => {
-              setNameone(e.target.value);
-            }}
-          />
-        ) : (
-          <input
-            placeholder="название сети"
-            value={name}
-            onChange={e => {
+        <input
+          placeholder="название сети"
+          value={changeNetwork ? name : nameone}
+          onChange={e => {
+            if (changeNetwork == true) {
               setName(e.target.value);
-            }}
-          />
-        )}
+            } else {
+              setNameone(e.target.value);
+            }
+          }}
+        />
       </div>
       <div className={s.blue_btn} onClick={handleSave}>
-        {props.changeNetwork == true ? "Сохранить" : "Создать сеть"}
+        {changeNetwork ? "Изменить" : "Создать"} сеть
       </div>
-      {props.changeNetwork == true && (
+      {changeNetwork && (
         <div className={s.red_btn} onClick={handleDelete}>
           Удалить
         </div>

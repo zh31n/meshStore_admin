@@ -30,8 +30,9 @@
 .content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   height: 66.1vh;
+  overflow: auto;
   width: 100%;
 
   .right {
@@ -185,7 +186,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
 
       .title {
         color: #121212;
@@ -270,6 +270,13 @@
     cursor: pointer;
     font-size: 28px;
     font-weight: 600;
+  }
+}
+
+@media (max-width: 1280px) and (max-height: 720px) {
+  .content{
+    height: auto;
+    max-height: 62vh;
   }
 }
 
