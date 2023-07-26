@@ -1,7 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import Api from "../../Api/Api";
 import styles from "./SelectNetwork.module.scss";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setAddUsersDefault } from "../../store/action/addUsersAction";
 
 type UserArray = {
   id: 0;
@@ -21,6 +23,8 @@ type Props = {
   currentNetwork: string;
   setCurrentNetworkId: React.Dispatch<React.SetStateAction<number>>;
   token: string;
+  changeNetwork: boolean;
+  setChangeNetwork: React.Dispatch<React.SetStateAction<boolean>>;
   id: number;
   setNetworks: any;
   setUsers: React.Dispatch<React.SetStateAction<UserArray[]>>;
@@ -37,7 +41,11 @@ const SelectNetwork = ({
   setNetworks,
   setUsers,
   setChangingUsers,
+  changeNetwork,
+  setChangeNetwork,
 }: Props) => {
+  const dispatch: any = useDispatch();
+
   const [change, setChange] = useState(false);
   const [text, setText] = useState("");
 
@@ -61,6 +69,14 @@ const SelectNetwork = ({
   return (
     <div className={styles.nav_users}>
       <div className={styles.contanainer}>
+        <div
+          className={styles.nav_item_active}
+          onClick={() => {
+            setChangeNetwork(!changeNetwork);
+          }}
+        >
+          Изм
+        </div>
         {networks.map((el, index) => (
           <div
             key={index}
@@ -95,13 +111,28 @@ const SelectNetwork = ({
       <Routes>
         <Route
           path="/"
-          element={<div className={styles.create_network}>Создать сеть</div>}
+          element={
+            <NavLink to={"/profile/clients/network"}>
+              <div className={styles.create_network}>Создать сеть</div>
+            </NavLink>
+          }
+        />
+        <Route
+          path="/network"
+          element={
+            <NavLink to={"/profile/clients/"}>
+              <div className={styles.create_network}>Вернуться</div>
+            </NavLink>
+          }
         />
         <Route
           path="/add"
           element={
             <div
-              onClick={() => setChangingUsers(true)}
+              onClick={() => {
+                dispatch(setAddUsersDefault());
+                setChangingUsers(true);
+              }}
               className={styles.create_network}
             >
               Создать группу

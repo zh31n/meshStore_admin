@@ -10,6 +10,8 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserList from "../../Components/UserList/UserList";
 import SelectNetwork from "../../Components/SelectNetwork/SelectNetwork";
 import ChangeClient from "../AddClient/ChangeClient";
+import UserListEvent from "../../Components/UserListEvents/UserListEvent";
+import CreateNetwork from "../../Components/CreateNetwork/CreateNetwork";
 
 type UserArray = {
   id: 0;
@@ -28,6 +30,7 @@ const Users = () => {
   const [addedUsers, setAddedUsers] = useState<UserArray[]>([]);
   const [currentNetwork, setCurrentNetwork] = useState<string>("");
   const [currentNetworkId, setCurrentNetworkId] = useState<number>(0);
+  const [changeNetwork, setChangeNetwork] = useState<boolean>(false);
 
   const [networks, setNetworks] = useState<any[]>([]);
 
@@ -67,6 +70,7 @@ const Users = () => {
       </div>
       <SelectNetwork
         networks={networks}
+        changeNetwork={changeNetwork}
         setNetworks={setNetworks}
         currentNetwork={currentNetwork}
         setCurrentNetworkId={setCurrentNetworkId}
@@ -74,6 +78,7 @@ const Users = () => {
         token={token}
         id={currentNetworkId}
         setUsers={setUsers}
+        setChangeNetwork={setChangeNetwork}
         setChangingUsers={setChangingUsers}
       />
       <div className={s.cont}>
@@ -93,17 +98,21 @@ const Users = () => {
               }
             />
             <Route
-              path="/add"
+              path="/network"
               element={
                 <UserList
                   data={filteredUsers}
                   currentNetwork={currentNetwork}
                   image={ava_img}
-                  add={true}
+                  add={false}
                   setAddedUsers={setAddedUsers}
                   addedUsers={addedUsers}
                 />
               }
+            />
+            <Route
+              path="/add"
+              element={<UserListEvent currentNetwork={currentNetwork} />}
             />
           </Routes>
         </div>
@@ -120,6 +129,18 @@ const Users = () => {
                     currentNetwork={currentNetworkId}
                   />
                 )
+              }
+            />
+            <Route
+              path="/network"
+              element={
+                <CreateNetwork
+                  setNetworks={setNetworks}
+                  setCurrentNetwork={setCurrentNetwork}
+                  changeNetwork={changeNetwork}
+                  currentNetwork={currentNetwork}
+                  setChangeNetwork={setChangeNetwork}
+                />
               }
             />
             <Route

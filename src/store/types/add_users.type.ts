@@ -1,13 +1,13 @@
 export interface defaultState {
-    users: number[],
+  users: number[];
 }
 
 export interface action {
-    type: string,
-    payload: number
+  type: string;
+  payload: number[];
 }
 
 export enum ActionType {
-    SET_USERS = 'SET_USERS',
-    SET_DEFAULT = 'SET_DEFAULT'
+  SET_USERS = "SET_USERS",
+  SET_DEFAULT = "SET_DEFAULT",
 }
