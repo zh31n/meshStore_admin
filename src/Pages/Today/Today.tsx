@@ -45,14 +45,6 @@ const Today = () => {
               событий на сегодня
             </div>
             <div className={s.container_event}>
-              <EventItem
-                  id={1}
-                  length={20}
-                  type={'min'}
-                  name={'hz'}
-                  start={'21:00'}
-                  finish={'21:00'}
-              />
               {todayArr.notifications.map((el, index) => (
                 <EventItem
                   key={index}
