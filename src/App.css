@@ -40,7 +40,6 @@ input::-webkit-calendar-picker-indicator {
     right: 50px;
 }
 
-
 /* Firefox */
 * {
     scrollbar-width: 1px;
@@ -85,6 +84,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
 @media (max-width: 480px) {
 
     * {
@@ -96,7 +96,8 @@ input::-webkit-inner-spin-button {
     *::-webkit-scrollbar {
         display: none;
     }
-    .container{
+
+    .container {
         padding: 0 10px;
     }
 }

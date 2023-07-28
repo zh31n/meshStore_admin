@@ -108,9 +108,11 @@ const Api = {
       users: [...users],
       name: name,
     };
-
-    console.log(data, id);
     return instance.put(`edit-user-group?token=${token}&group-id=${id}`, data);
+  },
+  changeBackground(token: string, data: any) {
+    console.log(data);
+    return instance.patch(`update-background?token=${token}`, data);
   },
 };
 

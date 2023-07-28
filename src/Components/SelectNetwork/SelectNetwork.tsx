@@ -68,7 +68,7 @@ const SelectNetwork = ({
 
   return (
     <div className={styles.nav_users}>
-      <div className={styles.contanainer}>
+      <div className={styles.contanainer} style={{ overflow: "auto" }}>
         <div
           className={styles.nav_item_active}
           onClick={() => {

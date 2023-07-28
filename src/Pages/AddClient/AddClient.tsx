@@ -33,8 +33,8 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
 
   const handleClick = () => {
     const phone = Number(number);
-    Api.addUser(token, name, email, phone, "", currentNetwork, role).then(
-      res => {
+    Api.addUser(token, name, email, phone, "", currentNetwork, role)
+      .then(res => {
         if (res.data.error) {
           setErrorVis(true);
           setError(res.data.error);
@@ -52,8 +52,12 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
             setUsers(res.data.users);
           });
         }
-      }
-    );
+      })
+      .catch(err => {
+        console.log(err);
+        setError("Ошибка при создании пользователя");
+        setErrorVis(true);
+      });
   };
 
   return (
@@ -94,10 +98,7 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
         </div>
         <div className={s.inpt_cont}>
           <div className={s.title}>Статус пользователя</div>
-          <select
-            value={role}
-            onChange={e => setRole(Number(e.target.value))}
-          >
+          <select value={role} onChange={e => setRole(Number(e.target.value))}>
             <option value={0}>Клиент</option>
             <option value={1}>Администратор</option>
             <option value={2}>Главный администратор</option>

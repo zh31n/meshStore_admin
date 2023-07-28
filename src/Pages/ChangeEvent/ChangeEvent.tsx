@@ -35,6 +35,8 @@ const ChangeEvent = ({ setNewArr }: any) => {
 
   const [file, setFile] = useState<any>();
 
+  const [path, setPath] = useState<string>("");
+
   useEffect(() => {
     Api.getAllBeacon(token).then(res => {
       setAllBeacons(res.data.beacons);
@@ -108,6 +110,7 @@ const ChangeEvent = ({ setNewArr }: any) => {
       setCurrentGroup(res.data.group.id);
       setText(res.data.text);
       setTitle(res.data.title);
+      setPath(res.data.link);
       setCurrentBeacon(res.data.beacon.id);
       setStart(res.data.start.split(" ")[1]);
       setFinish(res.data.finish.split(" ")[1]);
@@ -117,10 +120,22 @@ const ChangeEvent = ({ setNewArr }: any) => {
   }, [eventId]);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+      }}
+    >
       <div className={s.title}>
-        Новое событие для расписания
-        <img className={s.trash} src={trash} alt="trash icon" />
+        Изменение события для расписания
+        <img
+          className={s.trash}
+          src={trash}
+          alt="trash icon"
+          onClick={hadnleDelete}
+        />
       </div>
       <NavLink to={"/"} ref={navlink} style={{ display: "none" }}>
         asd
@@ -221,17 +236,35 @@ const ChangeEvent = ({ setNewArr }: any) => {
           </div>
         </div>
         <div className={s.left}>
-          <div
-            className={s.materials}
-            onClick={() => {
-              ref.current.click();
-            }}
-          >
+          <div className={s.materials}>
             <div>
-              <div className={s.title}>Прикрепите материалы</div>
-              <span>По необходимости</span>
+              <div
+                className={s.title}
+                onClick={() => {
+                  ref.current.click();
+                }}
+              >
+                Прикрепите материалы
+              </div>
+              <span
+                onClick={() => {
+                  ref.current.click();
+                }}
+              >
+                {" "}
+                По необходимости
+              </span>
+              <a href={`http://83.220.174.249:5123${path}`} target="_blank">
+                Посмотреть текущий файл
+              </a>
             </div>
-            <img src={upload} alt="" />
+            <img
+              src={upload}
+              alt=""
+              onClick={() => {
+                ref.current.click();
+              }}
+            />
             <input
               ref={ref}
               type="file"
@@ -269,9 +302,7 @@ const ChangeEvent = ({ setNewArr }: any) => {
           </div>
         </div>
       </div>
-      <div className={s.red_btn} onClick={hadnleDelete}>
-        Удалить
-      </div>
+
       <div className={s.blue_btn} onClick={handleSave}>
         Добавить в расписание
       </div>

@@ -30,8 +30,10 @@
 .content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   height: 66.1vh;
+  overflow: auto;
+  overflow-x: hidden;
   width: 100%;
 
   .right {
@@ -185,7 +187,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
 
       .title {
         color: #121212;
@@ -229,8 +230,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    //padding-top: 1rem;
     overflow: auto;
+    overflow-x: hidden;
 
     select {
       width: 90%;
@@ -270,6 +271,13 @@
     cursor: pointer;
     font-size: 28px;
     font-weight: 600;
+  }
+}
+
+@media (max-width: 1600px) {
+  .content {
+    height: auto;
+    max-height: 62vh;
   }
 }
 

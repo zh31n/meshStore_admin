@@ -23,14 +23,23 @@ const Login = () => {
   const [password, setPassword] = useState<string>("");
 
   const handleClick = () => {
-    Api.Auth(login, password).then(res => {
-      if (res.status == 200) {
-        const token: string = res.data.token;
-        const role: number = res.data.role;
-        const data = { token, role };
-        dispatch(setUsers(data));
-      }
-    });
+    Api.Auth(login, password)
+      .then(res => {
+        if (res.status == 200) {
+          const token: string = res.data.token;
+          const role: number = res.data.role;
+          const data = { token, role };
+          dispatch(setUsers(data));
+        } else {
+          console.log("error");
+        }
+      })
+      .catch(() => {
+        setState({ ...state, isError: true });
+        setTimeout(() => {
+          setState({ ...state, isError: false });
+        }, 1500);
+      });
   };
 
   const ChangeLang = () => setState({ ...state, selectEng: !state.selectEng });

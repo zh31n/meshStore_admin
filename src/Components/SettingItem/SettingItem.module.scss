@@ -3,6 +3,7 @@
   height: auto;
   .header {
     width: 100%;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,6 +24,14 @@
       font-weight: 500;
       line-height: 112.1%; /* 17.936px */
       margin: 0;
+      p {
+        color: #121212;
+        font-family: "Manrope", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 112.1%;
+      }
     }
     .file {
       color: rgba(18, 18, 18, 0.7);
@@ -94,7 +103,7 @@
 }
 
 @media (max-width: 480px) {
-  .set_item{
+  .set_item {
     width: 100%;
     height: auto;
     .main {

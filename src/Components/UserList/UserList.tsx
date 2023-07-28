@@ -31,10 +31,6 @@ const UserList = ({
   setAddedUsers,
   addedUsers,
 }: Props) => {
-  // useEffect(() => {
-  //     console.log(addedUsers)
-  // },[addedUsers])
-  console.log(data);
   return (
     <>
       {data.map((u, index) => {

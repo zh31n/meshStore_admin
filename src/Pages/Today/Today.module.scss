@@ -30,10 +30,12 @@
         padding-top: 2rem;
         margin-bottom: 1rem;
         overflow: auto;
+        overflow-x: hidden;
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        a.active{
+
+        a.active {
           background: linear-gradient(0deg, rgba(66, 59, 255, 0.10) 0%, rgba(66, 59, 255, 0.10) 100%), #F5F5F5;
         }
       }
@@ -86,24 +88,54 @@
   font-family: 'Manrope', sans-serif;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1600px) {
   .content {
     padding: 20px;
-    .cont_i{
-      .page_content{
+
+    .cont_i {
+      .page_content {
         width: 100%;
         margin-right: auto;
         margin-left: auto;
         padding: 0;
       }
-      .sidebar{
+
+      .sidebar {
+
+        .title {
+          font-size: 27px;
+        }
+
+        .container_event {
+          height: 78%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 20px;
+
+    .cont_i {
+      .page_content {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 0;
+      }
+
+      .sidebar {
         border: 0;
         width: 100%;
         padding: 0;
-        .title{
-          font-size: 30px;
+
+        .title {
+          font-size: 27px;
         }
-        .container_event{
+
+        .container_event {
           height: auto;
           max-height: 75%;
           padding-top: 1rem;
