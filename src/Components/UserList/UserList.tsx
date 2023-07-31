@@ -34,7 +34,7 @@ const UserList = ({
   // useEffect(() => {
   //     console.log(addedUsers)
   // },[addedUsers])
-  console.log(data);
+  // console.log(data);
   return (
     <>
       {data.map((u, index) => {
@@ -50,6 +50,19 @@ const UserList = ({
               setAddedUsers={setAddedUsers}
               addedUsers={addedUsers}
             />
+          );
+        } else {
+          return (
+              <UserItemG
+                  u={u}
+                  add={add}
+                  name={u.name}
+                  key={index}
+                  id={u.id}
+                  image={image}
+                  setAddedUsers={setAddedUsers}
+                  addedUsers={addedUsers}
+              />
           );
         }
       })}

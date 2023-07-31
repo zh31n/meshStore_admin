@@ -35,6 +35,8 @@ const UserListEvent = ({ currentNetwork }: Props) => {
       {users.map(el => {
         if (el.network === currentNetwork) {
           return <UserItemEvent id={el.id} name={el.name} />;
+        } else if(currentNetwork === 'Все'){
+          return <UserItemEvent id={el.id} name={el.name} />;
         }
       })}
     </>
