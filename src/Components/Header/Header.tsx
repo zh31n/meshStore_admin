@@ -191,7 +191,7 @@ const Header = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                Клиенты
+                Пользователи
               </Link>
               <Link
                 to={"/profile/settings"}

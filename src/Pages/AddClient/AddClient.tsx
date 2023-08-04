@@ -33,8 +33,8 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
 
   const handleClick = () => {
     const phone = Number(number);
-    Api.addUser(token, name, email, phone, "", currentNetwork, role)
-      .then(res => {
+    Api.addUser(token, name, email, phone, "", currentNetwork, role).then(
+      res => {
         if (res.data.error) {
           setErrorVis(true);
           setError(res.data.error);
@@ -52,12 +52,8 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
             setUsers(res.data.users);
           });
         }
-      })
-      .catch(err => {
-        console.log(err);
-        setError("Ошибка при создании пользователя");
-        setErrorVis(true);
-      });
+      }
+    );
   };
 
   return (

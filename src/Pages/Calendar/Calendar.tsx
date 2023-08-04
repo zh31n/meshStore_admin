@@ -45,7 +45,6 @@ const Calendar = () => {
           xmlns="http://www.w3.org/2000/svg"
           width="53"
           height="53"
-          path="white"
           viewBox="0 0 53 53"
           fill="white"
           onClick={() => {

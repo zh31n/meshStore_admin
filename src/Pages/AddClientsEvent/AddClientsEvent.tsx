@@ -121,7 +121,6 @@ const AddClientsEvent = (props: any) => {
           Список выбранных клиентов
         </div>
         <div className={s.userCont}>
-          {" "}
           <UserGroup currentGroup={currentGroup} />
         </div>
         <div className={s.btn} onClick={handleCreate}>
