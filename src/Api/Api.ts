@@ -116,6 +116,9 @@ const Api = {
       data
     );
   },
+  findByDate(token: string, date: string) {
+    return instance.get(`notifications-date?token=${token}&date=${date}`);
+  },
 };
 
 export default Api;

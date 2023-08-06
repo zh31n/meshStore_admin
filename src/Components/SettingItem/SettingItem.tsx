@@ -14,12 +14,18 @@ type Props = {
   apifilename: string;
   path: string;
   numbers: string;
+  setNumber: React.Dispatch<React.SetStateAction<string>>;
+  setPath: React.Dispatch<React.SetStateAction<string>>;
+  setFileName: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const SettingItem = ({
   tittle,
   text,
   filename,
+  setNumber,
+  setFileName,
+  setPath,
   setText,
   setTittle,
   name,
@@ -39,13 +45,28 @@ const SettingItem = ({
     };
     Api.changeSettings(token, data).then(res => {
       console.log(res);
+      Api.getSettings(token).then(res => {
+        if (apifilename === "screensaver-image-ru") {
+          setPath(res.data.data.screensaver_image_ru.link);
+          setFileName(res.data.data.screensaver_image_ru.filename);
+        } else {
+          setPath(res.data.data.screensaver_image_en.link);
+          setFileName(res.data.data.screensaver_image_en.filename);
+        }
+        setNumber(res.data.data.last_updated);
+      });
     });
   };
 
   return (
     <div className={s.set_item}>
       <div className={s.header}>
-        <div className={s.title}>
+        <div
+          className={s.title}
+          onClick={() => {
+            ref.current.click();
+          }}
+        >
           <img src={fileImg} alt="file icon" />
           фон заставки
         </div>

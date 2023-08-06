@@ -43,6 +43,9 @@ const PhoneAndText = () => {
           setTittle={setTittltRu}
           filename={filenameRu}
           numbers={numbers}
+          setNumber={setNumbers}
+          setPath={setFilepathRu}
+          setFileName={setFilenameRu}
           name="screensaver-text-ru"
           apifilename="screensaver-image-ru"
         />
@@ -56,6 +59,9 @@ const PhoneAndText = () => {
           setText={setTextEn}
           setTittle={setTittleEn}
           filename={filenameEn}
+          setNumber={setNumbers}
+          setPath={setFilepathEn}
+          setFileName={setFilepathEn}
           numbers={numbers}
           name="screensaver-text-en"
           apifilename="screensaver-image-en"

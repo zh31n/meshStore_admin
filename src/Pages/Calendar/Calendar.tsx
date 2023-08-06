@@ -5,6 +5,7 @@ import EventItemC from "../../Components/EventItemC/EventItemC";
 import whiteBtn from "../../assets/white_btn.svg";
 import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import ModalCalendar from "../../Components/ModalCalendar/ModalCalendar";
 
 interface Calendar {
   date: string;
@@ -14,6 +15,8 @@ interface Calendar {
 }
 
 const Calendar = () => {
+  const [modalVis, setModalVis] = useState<boolean>(false);
+
   const [calendarArr, setCalendarArr] = useState<Calendar[]>([]);
 
   const [day, setDay] = useState<number>(1);
@@ -31,6 +34,7 @@ const Calendar = () => {
   return (
     <>
       <div className={s.btns}>
+        {modalVis && <ModalCalendar setModal={setModalVis} />}
         <img
           src={whiteBtn}
           alt=""
@@ -47,6 +51,7 @@ const Calendar = () => {
           height="53"
           viewBox="0 0 53 53"
           fill="white"
+          stroke="white"
           onClick={() => {
             setDay(day + 2);
             setNextDay(nextDat + 2);
@@ -69,6 +74,9 @@ const Calendar = () => {
             </clipPath>
           </defs>
         </svg>
+      </div>
+      <div className={s.button} onClick={() => setModalVis(true)}>
+        Поиск по дате
       </div>
       <div className={s.cont}>
         {calendarArr.map((el, index) => {

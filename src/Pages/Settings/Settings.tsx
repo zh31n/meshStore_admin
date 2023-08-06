@@ -8,6 +8,20 @@ const Settings = () => {
 
   return (
     <div className={s.cont}>
+      {/* <p
+        onClick={() => {
+          const role = "Админ сети Bogdan Huylo yyyesss"; // Админ сервиса
+          const data = role.split(" ");
+          const newArr: any = [];
+          data.map((el, index) => {
+            if (index >= 2) newArr.push(el);
+          });
+          console.log(newArr.join(" "));
+          /// ["Админ", "сети", "MeshStore"]
+        }}
+      >
+        asdasdasd
+      </p> */}
       <div className={s.title}>
         Настройки{" "}
         <div className={s.nav}>
