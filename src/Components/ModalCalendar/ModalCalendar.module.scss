@@ -12,15 +12,26 @@
 
 .main_container {
   width: 60%;
+  overflow: auto;
   border-radius: 12px;
   background-color: white;
   height: 500px;
   padding: 15px;
+
   .text {
     font-weight: 600;
     margin-top: 10px;
     font-family: "Manrope", sans-serif;
   }
+
+  .event_container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    overflow: auto;
+  }
+
   .timing {
     width: 115px;
     height: 35px;

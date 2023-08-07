@@ -27,7 +27,7 @@ const ModalCalendar = ({ setModal }: Props) => {
 
   const handleClick = () => {
     Api.findByDate(token, date).then(res => {
-      console.log(res.data);
+      setDay(res.data);
     });
   };
 
@@ -47,17 +47,19 @@ const ModalCalendar = ({ setModal }: Props) => {
           </button>
         </div>
         <p className={styles.text}>Найдено {day.len} событий</p>
-        {day.notifications.map((elem, index) => (
-          <EventItemC
-            id={elem.id}
-            key={index}
-            length={elem.length.length}
-            type={elem.length.measure}
-            name={elem.title}
-            start={elem.start}
-            finish={elem.finish}
-          />
-        ))}
+        <div className={styles.event_container}>
+          {day.notifications.map((elem, index) => (
+            <EventItemC
+              id={elem.id}
+              key={index}
+              length={elem.length.length}
+              type={elem.length.measure}
+              name={elem.title}
+              start={elem.start}
+              finish={elem.finish}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ const Api = {
     return instance.post(`add-notification?token=${token}`, data);
   },
   getNotification(token: string, id: number) {
-    return instance.get(`notification?token=${token}&id=${id}`);
+    return instance.get(`notification?token=${token}&network=${id}`);
   },
   editNotification(token: string, data: any, id: number) {
     return instance.get(
@@ -98,7 +98,9 @@ const Api = {
     return instance.get(`user-groups?token=${token}`);
   },
   createUserGroup(token: string, data: object) {
-    return instance.post(`add-user-group?token=${token}`, { ...data });
+    return instance.post(`add-user-group?token=${token}&network=3`, {
+      ...data,
+    });
   },
   deleteUserGroup(token: string, id: number) {
     return instance.delete(`delete-user-group?token=${token}&group-id=${id}`);

@@ -1,3 +1,4 @@
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import UserItemG from "../UserItemG/UserItemG";
 
 type UserArray = {
@@ -31,15 +32,41 @@ const UserList = ({
   setAddedUsers,
   addedUsers,
 }: Props) => {
-  // useEffect(() => {
-  //     console.log(addedUsers)
-  // },[addedUsers])
-  // console.log(data);
+  const role = useTypedSelector(state => state.user.role);
+
   return (
     <>
-      {data.map((u, index) => {
-        if (currentNetwork == u.network) {
-          return (
+      {role === 2
+        ? data.map((u, index) => {
+            if (currentNetwork == u.network) {
+              return (
+                <UserItemG
+                  u={u}
+                  add={add}
+                  name={u.name}
+                  key={index}
+                  id={u.id}
+                  image={image}
+                  setAddedUsers={setAddedUsers}
+                  addedUsers={addedUsers}
+                />
+              );
+            } else {
+              return (
+                <UserItemG
+                  u={u}
+                  add={add}
+                  name={u.name}
+                  key={index}
+                  id={u.id}
+                  image={image}
+                  setAddedUsers={setAddedUsers}
+                  addedUsers={addedUsers}
+                />
+              );
+            }
+          })
+        : data.map((u, index) => (
             <UserItemG
               u={u}
               add={add}
@@ -50,22 +77,7 @@ const UserList = ({
               setAddedUsers={setAddedUsers}
               addedUsers={addedUsers}
             />
-          );
-        } else {
-          return (
-              <UserItemG
-                  u={u}
-                  add={add}
-                  name={u.name}
-                  key={index}
-                  id={u.id}
-                  image={image}
-                  setAddedUsers={setAddedUsers}
-                  addedUsers={addedUsers}
-              />
-          );
-        }
-      })}
+          ))}
     </>
   );
 };

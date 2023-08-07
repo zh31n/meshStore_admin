@@ -39,17 +39,37 @@ const Users = () => {
   const [changingUsers, setChangingUsers] = useState<boolean>(false);
 
   const token = useTypedSelector(state => state.user.token);
+  const role = useTypedSelector(state => state.user.role);
   const change = useTypedSelector(state => state.change.changin);
 
   useEffect(() => {
-    Api.getNetworks(token).then(res => {
-      setNetworks(res.data.networks);
-      setCurrentNetwork(res.data.networks[0].name);
-    });
-    Api.getUsers(token).then(res => setUsers(res.data.users));
+    role === 2 &&
+      Api.getNetworks(token)
+        .then(res => {
+          console.log(res.data);
+          setNetworks(res.data.networks);
+          setCurrentNetwork(res.data.networks[0].name);
+        })
+        .catch(() => {
+          console.log("Error");
+        });
+    Api.getUsers(token)
+      .then(res => {
+        console.log(res.data);
+        setUsers(res.data.users);
+      })
+      .catch(() => {
+        console.log("Error");
+      });
   }, []);
   const filteredUsers = users.filter(el => {
-    if (currentNetwork == el.network) {
+    if (role === 2) {
+      if (currentNetwork == el.network) {
+        if (el.name.toLowerCase().includes(findText.toLowerCase())) {
+          return el;
+        }
+      }
+    } else {
       if (el.name.toLowerCase().includes(findText.toLowerCase())) {
         return el;
       }
@@ -59,7 +79,13 @@ const Users = () => {
   return (
     <>
       <div className={s.input_search}>
-        <img src={i_search} alt="icon search" />
+        <img
+          src={i_search}
+          alt="icon search"
+          onClick={() => {
+            console.log(users);
+          }}
+        />
         <input
           type="text"
           placeholder="Поиск по группе"
@@ -67,19 +93,21 @@ const Users = () => {
           onChange={e => setFindText(e.target.value)}
         />
       </div>
-      <SelectNetwork
-        networks={networks}
-        changeNetwork={changeNetwork}
-        setNetworks={setNetworks}
-        currentNetwork={currentNetwork}
-        setCurrentNetworkId={setCurrentNetworkId}
-        setCurrentNetwork={setCurrentNetwork}
-        token={token}
-        id={currentNetworkId}
-        setUsers={setUsers}
-        setChangeNetwork={setChangeNetwork}
-        setChangingUsers={setChangingUsers}
-      />
+      {role === 2 && (
+        <SelectNetwork
+          networks={networks}
+          changeNetwork={changeNetwork}
+          setNetworks={setNetworks}
+          currentNetwork={currentNetwork}
+          setCurrentNetworkId={setCurrentNetworkId}
+          setCurrentNetwork={setCurrentNetwork}
+          token={token}
+          id={currentNetworkId}
+          setUsers={setUsers}
+          setChangeNetwork={setChangeNetwork}
+          setChangingUsers={setChangingUsers}
+        />
+      )}
       <div className={s.cont}>
         <div className={s.users}>
           <Routes>
