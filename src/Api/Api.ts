@@ -42,8 +42,8 @@ const Api = {
   getNetworks(token: string) {
     return instance.get(`networks?token=${token}`);
   },
-  getSettings(token: string) {
-    return instance.get(`settings?token=${token}`);
+  getSettings(token: string,network: number = 3) {
+    return instance.get(`settings?token=${token}&network=${network}`);
   },
   changeNetwork(token: string, data: object) {
     return instance.put(`edit-network?token=${token}`, data);
@@ -74,8 +74,8 @@ const Api = {
     console.log(data);
     return instance.patch(`update-text?token=${token}`, data);
   },
-  allNotifications(token: string) {
-    return instance.get(`notifications?token=${token}`);
+  allNotifications(token: string,network:number) {
+    return instance.get(`notifications?token=${token}&network=${network}`);
   },
   addNotification(token: string, data: any) {
     return instance.post(`add-notification?token=${token}`, data);

@@ -2,9 +2,11 @@ import { useState } from "react";
 import s from "./Settings.module.scss";
 import PhoneAndText from "../../Components/PhoneAndText/PhoneAndText";
 import BeaconChange from "../../Components/BeaconChange/BeaconChange";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 const Settings = () => {
   const [nav, setNav] = useState<boolean>(false);
+  const role = useTypedSelector(state => state.user.role)
 
   return (
     <div className={s.cont}>
@@ -43,7 +45,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-      {nav == true ? <PhoneAndText /> : <BeaconChange />}
+      {nav == true ? <PhoneAndText role={role} /> : <BeaconChange role={role} />}
     </div>
   );
 };
