@@ -42,7 +42,7 @@ const Api = {
   getNetworks(token: string) {
     return instance.get(`networks?token=${token}`);
   },
-  getSettings(token: string,network: number = 3) {
+  getSettings(token: string, network: number = 3) {
     return instance.get(`settings?token=${token}&network=${network}`);
   },
   changeNetwork(token: string, data: object) {
@@ -74,7 +74,7 @@ const Api = {
     console.log(data);
     return instance.patch(`update-text?token=${token}`, data);
   },
-  allNotifications(token: string,network:number) {
+  allNotifications(token: string, network: number) {
     return instance.get(`notifications?token=${token}&network=${network}`);
   },
   addNotification(token: string, data: any) {
@@ -118,8 +118,10 @@ const Api = {
       data
     );
   },
-  findByDate(token: string, date: string) {
-    return instance.get(`notifications-date?token=${token}&date=${date}`);
+  findByDate(token: string, date: string, network: string) {
+    return instance.get(
+      `notifications-date?token=${token}&date=${date}&network=${network}`
+    );
   },
 };
 

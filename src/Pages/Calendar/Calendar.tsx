@@ -19,6 +19,9 @@ const Calendar = () => {
 
   const [calendarArr, setCalendarArr] = useState<Calendar[]>([]);
 
+  const [networks, setNetworks] = useState<any[]>([]);
+  const [currentNetwork, setCurrentNetwork] = useState<number>(0);
+
   const [day, setDay] = useState<number>(1);
 
   const [nextDat, setNextDay] = useState<number>(2);
@@ -26,15 +29,28 @@ const Calendar = () => {
   const token = useTypedSelector(state => state.user.token);
 
   useEffect(() => {
-    Api.allNotifications(token).then(res => {
-      setCalendarArr(res.data.notifications);
+    Api.getNetworks(token).then(res => {
+      setNetworks(res.data.networks);
+
+      res.data.networks.lenght !== 0 &&
+        setCurrentNetwork(res.data.networks[0].id);
     });
   }, []);
+  useEffect(() => {
+    Api.allNotifications(token, currentNetwork).then(res => {
+      setCalendarArr(res.data.notifications);
+    });
+  }, [currentNetwork]);
 
   return (
     <>
       <div className={s.btns}>
-        {modalVis && <ModalCalendar setModal={setModalVis} />}
+        {modalVis && (
+          <ModalCalendar
+            setModal={setModalVis}
+            currentNetwork={currentNetwork}
+          />
+        )}
         <img
           src={whiteBtn}
           alt=""
@@ -75,8 +91,20 @@ const Calendar = () => {
           </defs>
         </svg>
       </div>
-      <div className={s.button} onClick={() => setModalVis(true)}>
-        Поиск по дате
+      <div className={s.container}>
+        <div className={s.button} onClick={() => setModalVis(true)}>
+          Поиск по дате
+        </div>
+        <div className={s.select}>
+          <select
+            value={currentNetwork}
+            onChange={e => setCurrentNetwork(Number(e.target.value))}
+          >
+            {networks.map(el => (
+              <option value={el.id}>{el.name}</option>
+            ))}
+          </select>
+        </div>
       </div>
       <div className={s.cont}>
         {calendarArr.map((el, index) => {

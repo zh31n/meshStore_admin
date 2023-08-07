@@ -72,6 +72,39 @@
   }
 }
 
+.container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  .select {
+    height: 30px;
+    border-radius: 12px;
+    background-color: white;
+    select {
+      background-color: white;
+      width: 200px;
+      font-size: 12px;
+      color: black;
+      font-family: "Manrope", sans-serif;
+      background-color: transparent;
+      margin-top: 5px;
+      border: 0;
+      color: rgba(18, 18, 18, 0.5);
+      outline: 0;
+
+      option {
+        font-family: "Manrope", sans-serif;
+        background-color: white;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 112.1%; /* 13.452px */
+        color: rgba(18, 18, 18, 0.5);
+      }
+    }
+  }
+}
+
 .button {
   background: #443bff;
   font-family: "Manrope", sans-serif;

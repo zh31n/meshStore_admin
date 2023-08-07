@@ -13,9 +13,10 @@ type day = {
 
 type Props = {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  currentNetwork: number;
 };
 
-const ModalCalendar = ({ setModal }: Props) => {
+const ModalCalendar = ({ setModal, currentNetwork }: Props) => {
   const token = useTypedSelector(state => state.user.token);
   const [date, setDate] = useState<string>("");
   const [day, setDay] = useState<day>({
@@ -26,7 +27,7 @@ const ModalCalendar = ({ setModal }: Props) => {
   });
 
   const handleClick = () => {
-    Api.findByDate(token, date).then(res => {
+    Api.findByDate(token, date, String(currentNetwork)).then(res => {
       setDay(res.data);
     });
   };

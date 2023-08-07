@@ -22,16 +22,30 @@ const Today = () => {
     notifications: [],
   });
 
+  const role = useTypedSelector(state => state.user.role);
   const token = useTypedSelector(state => state.user.token);
   const [deviceWidth, setDeviceWidth] = useState<number>(2000);
+  const [networks, setNetwork] = useState<any[]>([]);
+  const [currentNetwork, setCurrentsNetwork] = useState<number>(1);
 
   useEffect(() => {
     let aviableW = window.innerWidth;
     setDeviceWidth(aviableW);
-    Api.allNotifications(token).then(res => {
+  }, [setDeviceWidth]);
+
+  useEffect(() => {
+    Api.allNotifications(token, currentNetwork).then(res => {
       setTodayArr(res.data.notifications[0]);
     });
-  }, [setDeviceWidth]);
+  }, [currentNetwork]);
+
+  useEffect(() => {
+    Api.getNetworks(token).then(res => {
+      setNetwork(res.data.networks);
+      res.data.networks.lenght !== 0 &&
+        setCurrentsNetwork(res.data.networks[0].id);
+    });
+  }, []);
 
   if (deviceWidth >= 480) {
     return (
@@ -43,6 +57,19 @@ const Today = () => {
                 Расписание <span className={s.date}>{todayArr.date}</span>
               </div>
               событий на сегодня
+              {role === 2 && (
+                <select
+                  className={s.select}
+                  value={currentNetwork}
+                  onChange={e => {
+                    setCurrentsNetwork(Number(e.target.value));
+                  }}
+                >
+                  {networks.map(el => (
+                    <option value={el.id}>{el.name}</option>
+                  ))}
+                </select>
+              )}
             </div>
             <div className={s.container_event}>
               {todayArr.notifications.map((el, index) => (
@@ -88,7 +115,8 @@ const Today = () => {
                   <div className={s.sidebar}>
                     <div className={s.title}>
                       <div className={s.line_date}>
-                        Расписание <span className={s.date}>8 июля</span>
+                        Расписание{" "}
+                        <span className={s.date}>{todayArr.date}</span>
                       </div>
                       событий на сегодня
                     </div>
