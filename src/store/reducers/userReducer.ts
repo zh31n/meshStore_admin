@@ -1,9 +1,12 @@
 import { UserAction, UserActionEnum, defaultState } from "../types/user.type";
 
+
+const localToken = localStorage.getItem('token');
+
 const defaultState: defaultState = {
-  token: "",
+  token: localToken,
   role: 1,
-  reg: false,
+  reg: !localToken ? false : true,
 };
 
 export function userReducer(
