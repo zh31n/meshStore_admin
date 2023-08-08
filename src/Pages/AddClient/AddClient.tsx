@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import s from "./AddClient.module.scss";
 import Api from "../../Api/Api";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import InputMask from "react-input-mask";
 
 type UserArray = {
   id: 0;
@@ -74,13 +75,12 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
         </div>
         <div className={s.inpt_cont}>
           <div className={s.title}>Номер телефона*</div>
-          <input
-            type="number"
+          <InputMask
+            type="tel"
+            placeholder="+7 (916) 777-77-77"
             value={number}
-            onChange={e => {
-              setNumber(e.target.value);
-            }}
-            placeholder="+ _-___-___-___"
+            mask="+7 (999) 999-99-99"
+            onChange={({ target: { value } }) => setNumber(value)}
           />
         </div>
         <div className={s.inpt_cont}>
