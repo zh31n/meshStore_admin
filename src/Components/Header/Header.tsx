@@ -239,10 +239,7 @@ const Header = () => {
                 Настройки
               </Link>
             </div>
-            <div className={s.lang}>
-              <span style={{ color: "rgba(255,255,255,0.7)" }}>Русский</span>
-              <span>English</span>
-            </div>
+            <div className={s.lang}></div>
           </div>
         </div>
       </div>
