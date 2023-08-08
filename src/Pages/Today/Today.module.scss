@@ -26,10 +26,11 @@
 
       .container_event {
         transition: all linear 0.5s;
-        height: 81.8%;
+        height: 79.8%;
         padding-top: 2rem;
         margin-bottom: 1rem;
         overflow: auto;
+        padding-bottom: 1rem;
         overflow-x: hidden;
         display: flex;
         flex-direction: column;

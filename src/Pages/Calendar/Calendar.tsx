@@ -32,8 +32,7 @@ const Calendar = () => {
   useEffect(() => {
     Api.getNetworks(token).then(res => {
       setNetworks(res.data.networks);
-
-      res.data.networks.lenght !== 0 &&
+      res.data.networks.length !== 0 &&
         setCurrentNetwork(res.data.networks[0].id);
     });
   }, []);
