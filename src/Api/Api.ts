@@ -43,7 +43,7 @@ const Api = {
     return instance.get(`networks?token=${token}`);
   },
   getSettings(token: string, network: number = 3) {
-    return instance.get(`settings?token=${token}&network=${network}`);
+    return instance.get(`settings?token=${token}&group=${network}`);
   },
   changeNetwork(token: string, data: object) {
     return instance.put(`edit-network?token=${token}`, data);
@@ -54,8 +54,8 @@ const Api = {
   deleteNetwork(token: string, network: number) {
     return instance.delete(`delete-network/?token=${token}&network=${network}`);
   },
-  getAllBeacon(token: string) {
-    return instance.get(`beacons?token=${token}`);
+  getAllBeacon(token: string, network: number) {
+    return instance.get(`beacons?token=${token}&network=${network}`);
   },
   deleteBeacon(token: string, id: number) {
     return instance.delete(`delete-beacon?token=${token}&beacon=${id}`);
@@ -81,7 +81,7 @@ const Api = {
     return instance.post(`add-notification?token=${token}`, data);
   },
   getNotification(token: string, id: number) {
-    return instance.get(`notification?token=${token}&network=${id}`);
+    return instance.get(`notification?token=${token}&id=${id}`);
   },
   editNotification(token: string, data: any, id: number) {
     return instance.get(

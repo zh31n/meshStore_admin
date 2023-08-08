@@ -34,11 +34,12 @@ const ChangeEvent = ({ setNewArr }: any) => {
   const [date, setDate] = useState<string>("");
 
   const [finishedDate, setFinishedDate] = useState<string>("");
+  const [currentNetwork, setCurrentNetwork] = useState<number>(0);
 
   const [file, setFile] = useState<any>();
 
   useEffect(() => {
-    Api.getAllBeacon(token).then(res => {
+    Api.getAllBeacon(token, currentNetwork).then(res => {
       setAllBeacons(res.data.beacons);
       setCurrentBeacon(res.data.beacons[0].id);
     });
@@ -51,7 +52,7 @@ const ChangeEvent = ({ setNewArr }: any) => {
   const hadnleDelete = () => {
     Api.deleteNotification(token, Number(eventId)).then(res => {
       console.log(res);
-      Api.allNotifications(token).then(res => {
+      Api.allNotifications(token, currentNetwork).then(res => {
         setNewArr(res.data.notifications[0]);
       });
     });
@@ -74,7 +75,7 @@ const ChangeEvent = ({ setNewArr }: any) => {
       console.log(datee);
       Api.addNotification(token, datee).then(res => {
         console.log(res);
-        Api.allNotifications(token).then(res => {
+        Api.allNotifications(token, currentNetwork).then(res => {
           console.log(res.data);
           setNewArr(res.data.notifications[0]);
         });
@@ -95,7 +96,7 @@ const ChangeEvent = ({ setNewArr }: any) => {
       console.log(datee);
       Api.addNotification(token, datee).then(res => {
         console.log(res);
-        Api.allNotifications(token).then(res => {
+        Api.allNotifications(token, currentNetwork).then(res => {
           console.log(res.data);
           setNewArr(res.data.notifications[0]);
         });
@@ -106,6 +107,13 @@ const ChangeEvent = ({ setNewArr }: any) => {
 
   useEffect(() => {
     Api.getNotification(token, Number(eventId)).then(res => {
+      Api.getNetworks(token).then(response => {
+        response.data.networks.map((el: any) => {
+          if (el.name === res.data.network) {
+            setCurrentNetwork(el.id);
+          }
+        });
+      });
       console.log(res.data);
       setCurrentGroup(res.data.group.id);
       setText(res.data.text);

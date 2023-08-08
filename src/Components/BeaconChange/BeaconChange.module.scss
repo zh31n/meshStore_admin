@@ -4,6 +4,27 @@
   justify-content: space-around;
 }
 
+.select {
+  width: 350px;
+  font-size: 12px;
+  color: black;
+  font-family: "Manrope", sans-serif;
+  background-color: transparent;
+  margin-top: 5px;
+  border: 0;
+  color: rgba(18, 18, 18, 0.5);
+  outline: 0;
+
+  option {
+    font-family: "Manrope", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 112.1%; /* 13.452px */
+    color: rgba(18, 18, 18, 0.5);
+  }
+}
+
 .left_container {
   width: 40%;
   overflow-x: auto;
@@ -160,7 +181,8 @@
       line-height: 9.53px; /* 81.25% */
       width: 36.652px;
       margin-right: 18px;
-      box-shadow: 0px 4.344454765319824px 4.344454765319824px 0px rgba(66, 59, 255, 0.17);
+      box-shadow: 0px 4.344454765319824px 4.344454765319824px 0px
+        rgba(66, 59, 255, 0.17);
     }
   }
 }

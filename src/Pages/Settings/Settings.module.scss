@@ -20,6 +20,28 @@
       align-items: center;
       font-size: 16px;
       gap: 10px;
+      .select {
+        background-color: white;
+        width: 150px;
+        font-size: 12px;
+        color: black;
+        font-family: "Manrope", sans-serif;
+        background-color: transparent;
+        margin-top: 5px;
+        border: 0;
+        color: rgba(18, 18, 18, 0.5);
+        outline: 0;
+
+        option {
+          font-family: "Manrope", sans-serif;
+          background-color: white;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 112.1%; /* 13.452px */
+          color: rgba(18, 18, 18, 0.5);
+        }
+      }
       .nav_item {
         width: 120px;
         display: flex;
@@ -47,8 +69,8 @@
 }
 
 @media (max-width: 480px) {
-  .cont{
-    .title{
+  .cont {
+    .title {
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;

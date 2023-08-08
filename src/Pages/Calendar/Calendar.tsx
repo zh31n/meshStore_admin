@@ -27,6 +27,7 @@ const Calendar = () => {
   const [nextDat, setNextDay] = useState<number>(2);
 
   const token = useTypedSelector(state => state.user.token);
+  const role = useTypedSelector(state => state.user.role);
 
   useEffect(() => {
     Api.getNetworks(token).then(res => {
@@ -95,16 +96,18 @@ const Calendar = () => {
         <div className={s.button} onClick={() => setModalVis(true)}>
           Поиск по дате
         </div>
-        <div className={s.select}>
-          <select
-            value={currentNetwork}
-            onChange={e => setCurrentNetwork(Number(e.target.value))}
-          >
-            {networks.map(el => (
-              <option value={el.id}>{el.name}</option>
-            ))}
-          </select>
-        </div>
+        {role === 2 && (
+          <div className={s.select}>
+            <select
+              value={currentNetwork}
+              onChange={e => setCurrentNetwork(Number(e.target.value))}
+            >
+              {networks.map(el => (
+                <option value={el.id}>{el.name}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
       <div className={s.cont}>
         {calendarArr.map((el, index) => {

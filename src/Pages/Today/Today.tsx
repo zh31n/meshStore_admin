@@ -96,7 +96,12 @@ const Today = () => {
               />
               <Route
                 path={"/add"}
-                element={<AddEvent setNewArr={setTodayArr} />}
+                element={
+                  <AddEvent
+                    setNewArr={setTodayArr}
+                    currentNetwork={currentNetwork}
+                  />
+                }
               />
             </Routes>
           </div>
@@ -145,7 +150,12 @@ const Today = () => {
               />
               <Route
                 path={"/add"}
-                element={<AddEvent setNewArr={setTodayArr} />}
+                element={
+                  <AddEvent
+                    currentNetwork={currentNetwork}
+                    setNewArr={setTodayArr}
+                  />
+                }
               />
             </Routes>
           </div>

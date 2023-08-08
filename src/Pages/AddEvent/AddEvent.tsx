@@ -17,15 +17,17 @@ import { useDispatch } from "react-redux";
 interface notifications {
   date: string;
   day: number;
+
   len: number;
   notifications: any[];
 }
 
 interface Props {
   setNewArr: React.Dispatch<React.SetStateAction<notifications>>;
+  currentNetwork: number;
 }
 
-const AddEvent = ({ setNewArr }: Props) => {
+const AddEvent = ({ setNewArr, currentNetwork }: Props) => {
   const ref = useRef<any>();
 
   const [title, setTitle] = useState<string>("");
@@ -49,7 +51,7 @@ const AddEvent = ({ setNewArr }: Props) => {
   const dispatch: any = useDispatch();
 
   useEffect(() => {
-    Api.getAllBeacon(token).then(res => {
+    Api.getAllBeacon(token, currentNetwork).then(res => {
       setAllBeacons(res.data.beacons);
       setCurrentBeacon(res.data.beacons[0].id);
     });
@@ -83,13 +85,14 @@ const AddEvent = ({ setNewArr }: Props) => {
       datee.append("start", String(starting));
       datee.append("finish", String(`${finishedDate}T${finish}`));
       datee.append("title", String(title));
+      datee.append("network", String(currentNetwork));
       datee.append("text", String(text));
       datee.append("file", file[0]);
 
       console.log(datee);
       Api.addNotification(token, datee).then(res => {
         console.log(res);
-        Api.allNotifications(token).then(res => {
+        Api.allNotifications(token, currentNetwork).then(res => {
           console.log(res.data);
           setNewArr(res.data.notifications[0]);
         });
@@ -110,7 +113,7 @@ const AddEvent = ({ setNewArr }: Props) => {
       console.log(datee);
       Api.addNotification(token, datee).then(res => {
         console.log(res);
-        Api.allNotifications(token).then(res => {
+        Api.allNotifications(token, currentNetwork).then(res => {
           console.log(res.data);
           setNewArr(res.data.notifications[0]);
         });
