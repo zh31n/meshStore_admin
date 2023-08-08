@@ -103,8 +103,8 @@ const Users = () => {
           setCurrentNetwork={setCurrentNetwork}
           token={token}
           id={currentNetworkId}
+          changeUser={changingUsers}
           setUsers={setUsers}
-          changingUsers={changingUsers}
           setChangeNetwork={setChangeNetwork}
           setChangingUsers={setChangingUsers}
         />

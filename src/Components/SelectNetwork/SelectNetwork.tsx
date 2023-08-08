@@ -30,6 +30,7 @@ type Props = {
   setNetworks: any;
   setUsers: React.Dispatch<React.SetStateAction<UserArray[]>>;
   setChangingUsers: React.Dispatch<React.SetStateAction<boolean>>;
+  changeUser: boolean;
 };
 
 const SelectNetwork = ({
@@ -43,6 +44,7 @@ const SelectNetwork = ({
   setUsers,
   setChangingUsers,
   changeNetwork,
+  changeUser,
   setChangeNetwork,
 }: Props) => {
   const role = useTypedSelector(state => state.user.role);
@@ -82,7 +84,6 @@ const SelectNetwork = ({
             Изм
           </div>
         )}
-
         {role === 2
           ? networks.map((el, index) => (
               <div
@@ -158,7 +159,7 @@ const SelectNetwork = ({
             <div
               onClick={() => {
                 dispatch(setAddUsersDefault());
-                setChangingUsers(true);
+                setChangingUsers(!changeUser);
               }}
               className={styles.create_network}
             >
