@@ -104,6 +104,7 @@ const Users = () => {
           token={token}
           id={currentNetworkId}
           setUsers={setUsers}
+          changingUsers={changingUsers}
           setChangeNetwork={setChangeNetwork}
           setChangingUsers={setChangingUsers}
         />

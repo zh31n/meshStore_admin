@@ -1,8 +1,10 @@
 import s from "./SettingItem.module.scss";
 import fileImg from "../../assets/e_mater.svg";
 import Api from "../../Api/Api";
+import { useState } from "react";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useRef } from "react";
+import Modal from "../Modal/Modal";
 
 type Props = {
   tittle: any;
@@ -12,6 +14,7 @@ type Props = {
   filename: any;
   name: string;
   apifilename: string;
+  network: number;
   path: string;
   numbers: string;
   setNumber: React.Dispatch<React.SetStateAction<string>>;
@@ -29,6 +32,7 @@ const SettingItem = ({
   setText,
   setTittle,
   name,
+  network,
   numbers,
   apifilename,
   path,
@@ -37,13 +41,15 @@ const SettingItem = ({
 
   const token = useTypedSelector(state => state.user.token);
 
+  const [vis, setVis] = useState<boolean>(false);
+
   const handleSave = () => {
     const data = {
       name,
       title: tittle,
       text: text,
     };
-    Api.changeSettings(token, data).then(res => {
+    Api.changeSettings(token, data, network).then(res => {
       console.log(res);
       Api.getSettings(token).then(res => {
         if (apifilename === "screensaver-image-ru") {
@@ -60,6 +66,12 @@ const SettingItem = ({
 
   return (
     <div className={s.set_item}>
+      {vis && (
+        <Modal
+          path={`http://83.220.174.249:5123${path}?u=${numbers}`}
+          setModal={setVis}
+        />
+      )}
       <div className={s.header}>
         <div
           className={s.title}
@@ -81,15 +93,13 @@ const SettingItem = ({
             data.append("name", apifilename);
             data.append("file", file[0]);
 
-            Api.changeBackGround(token, 1, data).then(res => {
+            Api.changeBackGround(token, network, data).then(res => {
               console.log(res.data);
             });
           }}
         />
         <div className={s.file}>
-          <a href={`http://83.220.174.249:5123${path}?u=${numbers}`}>
-            {filename}
-          </a>
+          <p onClick={() => setVis(true)}>{filename}</p>
         </div>
       </div>
       <div className={s.main}>

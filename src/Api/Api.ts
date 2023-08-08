@@ -70,9 +70,12 @@ const Api = {
       beacon: network,
     });
   },
-  changeSettings(token: string, data: object) {
+  changeSettings(token: string, data: object, network: number) {
     console.log(data);
-    return instance.patch(`update-text?token=${token}`, data);
+    return instance.patch(
+      `update-text?token=${token}&network=${network}`,
+      data
+    );
   },
   allNotifications(token: string, network: number) {
     return instance.get(`notifications?token=${token}&network=${network}`);
@@ -94,8 +97,8 @@ const Api = {
       `delete_notification?token=${token}&notification-id=${id}`
     );
   },
-  getUsersGroup(token: string) {
-    return instance.get(`user-groups?token=${token}`);
+  getUsersGroup(token: string, network: number) {
+    return instance.get(`user-groups?token=${token}&network=${network}`);
   },
   createUserGroup(token: string, data: object) {
     return instance.post(`add-user-group?token=${token}&network=3`, {

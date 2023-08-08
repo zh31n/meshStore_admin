@@ -28,6 +28,7 @@ type Props = {
   setChangeNetwork: React.Dispatch<React.SetStateAction<boolean>>;
   id: number;
   setNetworks: any;
+  changingUsers: boolean;
   setUsers: React.Dispatch<React.SetStateAction<UserArray[]>>;
   setChangingUsers: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -41,6 +42,7 @@ const SelectNetwork = ({
   id,
   setNetworks,
   setUsers,
+  changingUsers,
   setChangingUsers,
   changeNetwork,
   setChangeNetwork,
@@ -158,7 +160,12 @@ const SelectNetwork = ({
             <div
               onClick={() => {
                 dispatch(setAddUsersDefault());
-                setChangingUsers(true);
+                if (changingUsers === false) {
+                  setChangingUsers(true);
+                }
+                if (changingUsers === true) {
+                  setChangingUsers(false);
+                }
               }}
               className={styles.create_network}
             >

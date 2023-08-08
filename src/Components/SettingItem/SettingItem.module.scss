@@ -31,6 +31,10 @@
       font-style: normal;
       font-weight: 600;
       line-height: 112.1%; /* 17.936px */
+      p {
+        color: black;
+        font-family: "Manrope", sans-serif;
+      }
     }
   }
   .btn {
@@ -94,7 +98,7 @@
 }
 
 @media (max-width: 480px) {
-  .set_item{
+  .set_item {
     width: 100%;
     height: auto;
     .main {

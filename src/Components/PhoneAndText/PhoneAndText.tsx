@@ -38,6 +38,7 @@ const PhoneAndText = ({ network }: { network: number }) => {
           <SettingItem
             tittle={tittltRu}
             path={filepathRu}
+            network={network}
             text={textRu}
             setText={setTextRu}
             setTittle={setTittltRu}
@@ -56,6 +57,7 @@ const PhoneAndText = ({ network }: { network: number }) => {
             tittle={tittleEn}
             path={filepathEn}
             text={textEn}
+            network={network}
             setText={setTextEn}
             setTittle={setTittleEn}
             filename={filenameEn}
