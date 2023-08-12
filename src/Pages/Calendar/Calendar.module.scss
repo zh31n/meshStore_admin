@@ -1,9 +1,15 @@
+.page_wrap{
+
+}
+
 .cont {
   max-height: 80%;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  .btns{
 
+  }
   .cont_day {
     width: 49%;
     height: 100%;
@@ -129,6 +135,21 @@
     overflow: auto;
     .cont_day {
       width: 100%;
+    }
+  }
+}
+
+@media (max-width: 375px){
+  .cont{
+    max-height: unset;
+    height: 60vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .cont_day{
+      max-height: 100%;
+      height: auto;
     }
   }
 }

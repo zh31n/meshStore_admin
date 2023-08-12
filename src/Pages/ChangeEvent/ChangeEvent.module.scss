@@ -296,6 +296,7 @@
     font-weight: 600;
   }
 }
+
 @media (max-height: 1600px) {
   .content {
     height: auto;
@@ -325,5 +326,18 @@
       height: auto;
       width: 100%;
     }
+  }
+}
+
+@media (max-width: 375px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    overflow-x: hidden;
+    height: 35vh;
+    margin-bottom: 1rem;
+
+
   }
 }

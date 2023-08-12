@@ -110,6 +110,19 @@
     width: 100%;
     height: auto;
 
+    .header {
+      .file {
+        width: 66px;
+        p {
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+      }
+    }
+
     .main {
       height: auto;
     }

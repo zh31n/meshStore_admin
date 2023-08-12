@@ -68,6 +68,17 @@
   }
 }
 
+@media (max-width: 720px){
+  .cont {
+    .title{
+      margin-bottom: 0;
+      .nav{
+        flex-direction: column;
+      }
+    }
+  }
+}
+
 @media (max-width: 480px) {
   .cont {
     .title {
