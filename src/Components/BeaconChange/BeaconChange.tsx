@@ -51,7 +51,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
             }
         });
 
-        if (change === false) {
+        if (!change) {
             Api.createBeacond(token, name, uuid, id).then(() => {
                 setName("");
                 setNetwork("");
@@ -62,7 +62,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
             });
         }
 
-        if (change === true) {
+        if (change) {
             const beacon = currentBeacon.id;
             Api.changeBeacon(token, name, uuid, beacon).then(() => {
                 setChange(false);
@@ -116,6 +116,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
                     </div>
                 ))}
             </div>
+            <div className={s.line}></div>
             <div className={s.right_container}>
                 <div className={s.container}>
                     {change ? <p>Внести изменения</p> : <p>Добавить новый маячок</p>}

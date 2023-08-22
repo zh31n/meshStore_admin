@@ -250,7 +250,7 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                             Список клиентов
                         </div>
                         <div className={s.user_items}>
-                            <select
+                            { allGroups.length !== 0 && <select
                                 value={currentGroup}
                                 onChange={e => {
                                     setCurrentGroup(Number(e.target.value));
@@ -261,7 +261,7 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                                         {el.name}
                                     </option>
                                 ))}
-                            </select>
+                            </select>}
                             <UserGroup currentGroup={currentGroup}/>
                         </div>
                         <NavLink to={`/profile/clients/add?id=${id}`} className={s.add_btn}>

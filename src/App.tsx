@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        {isReg == true ? (
+        {isReg ? (
           <>
             <Route path="*" element={<Navigate to={"/profile/today"} />} />
             <Route path={"/profile/*"} element={<Profile />} />

@@ -52,7 +52,7 @@ const UserItemEvent = ({ name, id }: Props) => {
       <div
         className={s.cont}
         style={{
-          background: "rgba(227, 255, 226, 1)",
+          background:  added ? "rgba(227, 255, 226, 1)" : '',
         }}
       >
         <div className={s.info}>

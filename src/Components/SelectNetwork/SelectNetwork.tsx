@@ -76,7 +76,7 @@ const SelectNetwork = ({
       <div className={styles.contanainer}>
         {role === 2 && (
             <NavLink to={"/profile/clients/network"} className={styles.nav_item_active}  onClick={() => {
-              changeNetwork === false ? setChangeNetwork(true) : setChangeNetwork(false)
+              !changeNetwork ? setChangeNetwork(true) : setChangeNetwork(false)
             }}>
               Изм
             </NavLink>

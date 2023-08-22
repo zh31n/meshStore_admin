@@ -15,7 +15,7 @@ const Settings = () => {
   useEffect(() => {
     Api.getNetworks(token).then(res => {
       setNetworks(res.data.networks);
-      res.data.networks.lenght !== 0 &&
+      res.data.networks.length !== 0 &&
         setCurrentNetwork(res.data.networks[0].id);
     });
   }, []);
@@ -38,7 +38,7 @@ const Settings = () => {
           )}
 
           <div
-            className={nav == false ? s.selected_nav : s.nav_item}
+            className={!nav ? s.selected_nav : s.nav_item}
             onClick={() => {
               setNav(!nav);
             }}
@@ -46,7 +46,7 @@ const Settings = () => {
             <p>маячки</p>
           </div>
           <div
-            className={nav == true ? s.selected_nav : s.nav_item}
+            className={nav ? s.selected_nav : s.nav_item}
             onClick={() => {
               setNav(!nav);
             }}
@@ -55,7 +55,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-      {nav == true ? (
+      {nav ? (
         <PhoneAndText network={currentNetwork} />
       ) : (
         <BeaconChange networks={currentNetwork} />

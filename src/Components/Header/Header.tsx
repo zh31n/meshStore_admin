@@ -1,7 +1,7 @@
 import {useState} from "react";
 import s from "./Header.module.scss";
 import {Link} from "react-router-dom";
-import exit from '../../assets/exit (2).svg';
+import exit from '../../assets/Logout 2.png';
 
 
 const Header = () => {
@@ -246,7 +246,7 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className={s.lang}>
-                            <img src={exit} onClick={deleteToken}/>
+                            <img alt={'exit icon'} style={{height:'24px',width:'auto',cursor:'pointer'}} src={exit} onClick={deleteToken}/>
                         </div>
                     </div>
                 </div>
