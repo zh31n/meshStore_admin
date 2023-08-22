@@ -3,7 +3,7 @@ import Api from "../../Api/Api";
 import styles from "./SelectNetwork.module.scss";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setAddUsersDefault } from "../../store/action/addUsersAction";
+import {setAddUsers } from "../../store/action/addUsersAction";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 type UserArray = {
@@ -75,14 +75,11 @@ const SelectNetwork = ({
     <div className={styles.nav_users}>
       <div className={styles.contanainer}>
         {role === 2 && (
-          <div
-            className={styles.nav_item_active}
-            onClick={() => {
-              setChangeNetwork(!changeNetwork);
-            }}
-          >
-            Изм
-          </div>
+            <NavLink to={"/profile/clients/network"} className={styles.nav_item_active}  onClick={() => {
+              changeNetwork === false ? setChangeNetwork(true) : setChangeNetwork(false)
+            }}>
+              Изм
+            </NavLink>
         )}
         {role === 2
           ? networks.map((el, index) => (
@@ -158,7 +155,7 @@ const SelectNetwork = ({
           element={
             <div
               onClick={() => {
-                dispatch(setAddUsersDefault());
+                dispatch(setAddUsers([]));
                 setChangingUsers(!changeUser);
               }}
               className={styles.create_network}

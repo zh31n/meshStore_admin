@@ -18,10 +18,11 @@ const UserItemEvent = ({ name, id }: Props) => {
 
   const [added, setAdded] = useState<boolean>(false);
 
+
   const dispatch: any = useDispatch();
 
   const handleDelete = () => {
-    let newArr: number[] = [];
+    const newArr: number[] = [];
     usersIds.map(el => {
       if (el !== id) {
         newArr.push(el);
@@ -32,16 +33,18 @@ const UserItemEvent = ({ name, id }: Props) => {
   };
 
   const handleAdd = () => {
-    let newArr = [...usersIds, id];
-    dispatch(setAddUsers(newArr));
+    dispatch(setAddUsers([...usersIds, id]));
   };
 
   useEffect(() => {
-    usersIds.map(el => {
+
+    usersIds.length !== 0 ? setAdded(false) : usersIds.map(el => {
       if (el === id) {
         setAdded(true);
       }
     });
+
+
   }, [usersIds]);
 
   return (

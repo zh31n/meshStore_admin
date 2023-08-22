@@ -78,13 +78,14 @@ const BeaconChange = ({networks}: { networks: number }) => {
 
     const [beaconName, setBeaconName] = useState<string>('')
     const beaconFilter: any[] = beaconContainer.filter(el => {
-        el.name.toLowerCase().includes(beaconName.toLowerCase())
+        return el.name.toLowerCase().includes(beaconName.toLowerCase())
     });
 
 
     useEffect(() => {
         Api.getAllBeacon(token, networks).then(res => {
             setBeaconContainer(res.data.beacons);
+            console.log(res.data)
         });
         Api.getNetworks(token).then(res => {
             setAllNetworks(res.data.networks);

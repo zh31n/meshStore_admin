@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://meshstore.site/api/",
+  // baseURL: "https://meshstore.site/api/",
+  baseURL: "http://83.220.174.249:5123/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": true,

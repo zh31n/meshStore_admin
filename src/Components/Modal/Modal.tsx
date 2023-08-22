@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './Modal.module.scss'
 
 type Props = {
   path: string;
@@ -9,15 +10,9 @@ const Modal = ({ path, setModal }: Props) => {
   return (
     <div
       onClick={() => setModal(false)}
-      style={{
-        width: "100%",
-        height: "100vh",
-        position: "fixed",
-        top: "0",
-        left: "0",
-      }}
+      className={styles.cont}
     >
-      <div onClick={e => e.stopPropagation()} style={{ maxWidth: "60%" }}>
+      <div onClick={e => e.stopPropagation()} >
         <img src={path} />
       </div>
     </div>

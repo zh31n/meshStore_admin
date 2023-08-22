@@ -29,12 +29,12 @@ const Today = () => {
     const [currentNetwork, setCurrentsNetwork] = useState<number>(1);
 
     useEffect(() => {
-        let aviableW = window.innerWidth;
-        setDeviceWidth(aviableW);
+        setDeviceWidth(window.innerWidth);
     }, [setDeviceWidth]);
 
     useEffect(() => {
         Api.allNotifications(token, currentNetwork).then(res => {
+            console.log(res.data)
             setTodayArr(res.data.notifications[0]);
         });
     }, [currentNetwork]);

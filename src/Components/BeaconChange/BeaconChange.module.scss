@@ -66,6 +66,8 @@
     justify-content: space-between;
     align-items: center;
 
+
+
     img {
       cursor: pointer;
     }
@@ -184,6 +186,30 @@
       box-shadow: 0px 4.344454765319824px 4.344454765319824px 0px
         rgba(66, 59, 255, 0.17);
     }
+  }
+}
+
+
+.input {
+  color: black;
+  font-family: Manrope;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 112.1%;
+  width: 100%;
+  border: none;
+  margin-bottom: 10px;
+  outline: none;
+  background-color: white;
+
+  ::placeholder {
+    color: rgba(18, 18, 18, 0.5);
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    color: white;
+    display: unset;
   }
 }
 
