@@ -1,13 +1,11 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import s from "./Header.module.scss";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import exit from '../../assets/exit (2).svg';
 
 
 const Header = () => {
-    const navigate = useNavigate();
     const [currentLink, setCurrentLink] = useState<string>("today");
-    const token = localStorage.getItem('token');
     const deleteToken = () => {
         localStorage.removeItem('token');
         location.reload()

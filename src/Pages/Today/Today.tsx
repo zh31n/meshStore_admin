@@ -90,7 +90,7 @@ const Today = () => {
                         <Routes>
                             <Route
                                 path={"/:eventId"}
-                                element={<ChangeEvent setNewArr={setTodayArr}/>}
+                                element={<ChangeEvent setNewArr={setTodayArr} id={currentNetwork}  />}
                             />
                             <Route
                                 path={"/add"}

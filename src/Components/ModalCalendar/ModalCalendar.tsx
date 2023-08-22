@@ -17,6 +17,7 @@ type Props = {
 };
 
 const ModalCalendar = ({ setModal, currentNetwork }: Props) => {
+
   const token = useTypedSelector(state => state.user.token);
   const [date, setDate] = useState<string>("");
   const [day, setDay] = useState<day>({

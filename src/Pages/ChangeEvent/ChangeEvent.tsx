@@ -9,7 +9,7 @@ import Api from "../../Api/Api";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import UserGroup from "../../Components/UserGroup/UserGroup";
 
-const ChangeEvent = ({setNewArr}: any) => {
+const ChangeEvent = ({setNewArr, id}: any) => {
     const token = useTypedSelector(state => state.user.token);
 
     const {eventId} = useParams();
@@ -34,16 +34,16 @@ const ChangeEvent = ({setNewArr}: any) => {
     const [date, setDate] = useState<string>("");
 
     const [finishedDate, setFinishedDate] = useState<string>("");
-    const [currentNetwork, setCurrentNetwork] = useState<number>(0);
+    const [_, setCurrentNetwork] = useState<number>(0);
 
     const [file, setFile] = useState<any>();
 
     useEffect(() => {
-        Api.getAllBeacon(token, currentNetwork).then(res => {
+        Api.getAllBeacon(token, Number(id)).then(res => {
             setAllBeacons(res.data.beacons);
             setCurrentBeacon(res.data.beacons[0].id);
         });
-        Api.getUsersGroup(token).then(res => {
+        Api.getUsersGroup(token, Number(id)).then(res => {
             setAllGroups(res.data.user_groups);
             setCurrentGroup(res.data.user_groups[0].id);
         });
@@ -52,56 +52,33 @@ const ChangeEvent = ({setNewArr}: any) => {
     const hadnleDelete = () => {
         Api.deleteNotification(token, Number(eventId)).then(res => {
             console.log(res);
-            Api.allNotifications(token, currentNetwork).then(res => {
+            Api.allNotifications(token, Number(id)).then(res => {
                 setNewArr(res.data.notifications[0]);
             });
         });
     };
 
     const handleSave = () => {
-        if (file) {
-            const datee = new FormData();
+        const datee = new FormData();
+        const starting = `${date}T${start}`;
 
-            const starting = `${date}T${start}`;
+        datee.append("beacon", String(currentBeacon));
+        datee.append('network', String(id))
+        datee.append("group", String(currentGroup));
+        datee.append("start", String(starting));
+        datee.append("finish", String(`${finishedDate}T${finish}`));
+        datee.append("title", String(title));
+        datee.append("text", String(text));
+        file ? datee.append("file", file[0]) : datee.append("file", '')
 
-            datee.append("beacon", String(currentBeacon));
-            datee.append("group", String(currentGroup));
-            datee.append("start", String(starting));
-            datee.append("finish", String(`${finishedDate}T${finish}`));
-            datee.append("title", String(title));
-            datee.append("text", String(text));
-            datee.append("file", file[0]);
-
-            console.log(datee);
-            Api.addNotification(token, datee).then(res => {
-                console.log(res);
-                Api.allNotifications(token, currentNetwork).then(res => {
-                    console.log(res.data);
-                    setNewArr(res.data.notifications[0]);
-                });
+        console.log(datee);
+        Api.editNotification(token,datee, Number(eventId)).then(res => {
+            console.log(res);
+            Api.allNotifications(token, Number(id)).then(res => {
+                console.log(res.data);
+                setNewArr(res.data.notifications[0]);
             });
-        } else {
-            const datee = new FormData();
-
-            const starting = `${date}T${start}`;
-
-            datee.append("beacon", String(currentBeacon));
-            datee.append("group", String(currentGroup));
-            datee.append("start", String(starting));
-            datee.append("finish", String(`${finishedDate}T${finish}`));
-            datee.append("title", String(title));
-            datee.append("text", String(text));
-            datee.append("file", "");
-
-            console.log(datee);
-            Api.addNotification(token, datee).then(res => {
-                console.log(res);
-                Api.allNotifications(token, currentNetwork).then(res => {
-                    console.log(res.data);
-                    setNewArr(res.data.notifications[0]);
-                });
-            });
-        }
+        });
         navlink.current.click();
     };
 
@@ -133,7 +110,7 @@ const ChangeEvent = ({setNewArr}: any) => {
         <>
             <div className={s.title}>
                 Изменение события для расписания
-                <img className={s.trash} src={trash} alt="trash icon"/>
+                <img className={s.trash} src={trash} alt="trash icon" onClick={hadnleDelete}/>
             </div>
             <NavLink to={"/"} ref={navlink} style={{display: "none"}}>
                 asd
@@ -166,7 +143,7 @@ const ChangeEvent = ({setNewArr}: any) => {
                         <select
                             value={currentBeacon}
                             onChange={e => {
-                                const value: number = Number(e.target.value);
+                                const value = Number(e.target.value);
                                 setCurrentBeacon(value);
                                 console.log(value);
                             }}
@@ -287,14 +264,11 @@ const ChangeEvent = ({setNewArr}: any) => {
                             </select>
                             <UserGroup currentGroup={currentGroup}/>
                         </div>
-                        <NavLink to={"/profile/clients/add"} className={s.add_btn}>
+                        <NavLink to={`/profile/clients/add?id=${id}`} className={s.add_btn}>
                             +
                         </NavLink>
                     </div>
                 </div>
-            </div>
-            <div className={s.red_btn} onClick={hadnleDelete}>
-                Удалить
             </div>
             <div className={s.blue_btn} onClick={handleSave}>
                 Сохранить

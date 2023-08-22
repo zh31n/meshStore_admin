@@ -10,6 +10,7 @@ import {
   setAddUsers,
   setAddUsersDefault,
 } from "../../store/action/addUsersAction";
+import useQuery from "../../hooks/useQuery.ts";
 
 type userGroup = {
   id: number;
@@ -19,6 +20,9 @@ type userGroup = {
 };
 
 const AddClientsEvent = (props: any) => {
+
+  const id: any = useQuery('id')
+
   const [name, setName] = useState<string>("");
 
   const [changedName, setChangedName] = useState<string>("");
@@ -33,7 +37,9 @@ const AddClientsEvent = (props: any) => {
   const [array, setArray] = useState<userGroup[]>([]);
 
   useEffect(() => {
-    Api.getUsersGroup(token).then(res => {
+    Api.getUsersGroup(token, Number(id)).then(res => {
+      console.log(token, props.currentNetwork)
+      console.log(res.data)
       if (res.data.user_groups.lenght !== 0) {
         setArray(res.data.user_groups);
         setCurrentGroup(res.data.user_groups[0].id);
@@ -56,7 +62,7 @@ const AddClientsEvent = (props: any) => {
 
   const deleteGroup = () => {
     Api.deleteUserGroup(token, currentGroup).then(() => {
-      Api.getUsersGroup(token).then(res => {
+      Api.getUsersGroup(token, Number(id)).then(res => {
         setArray(res.data.user_groups);
         setCurrentGroup(res.data.user_groups[0].id);
       });
@@ -71,7 +77,7 @@ const AddClientsEvent = (props: any) => {
     console.log(users);
     Api.createUserGroup(token, data).then(() => {
       props.setChange(false);
-      Api.getUsersGroup(token).then(res => {
+      Api.getUsersGroup(token, Number(id)).then(res => {
         setArray(res.data.user_groups);
         setCurrentGroup(res.data.user_groups[0].id);
         dispatch(setAddUsers(res.data.user_groups[0].users_ids));
@@ -82,7 +88,8 @@ const AddClientsEvent = (props: any) => {
   const handleSave = () => {
     Api.changeUserGroup(token, currentGroup, users, changedName).then(res => {
       console.log(res.data);
-      Api.getUsersGroup(token).then(res => {
+      Api.getUsersGroup(token, Number(id)).then(res => {
+        console.log(res.data)
         if (res.data.user_groups.lenght !== 0) {
           setArray(res.data.user_groups);
           setCurrentGroup(res.data.user_groups[0].id);

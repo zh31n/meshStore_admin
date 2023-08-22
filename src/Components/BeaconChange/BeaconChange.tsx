@@ -76,6 +76,12 @@ const BeaconChange = ({networks}: { networks: number }) => {
         }
     };
 
+    const [beaconName, setBeaconName] = useState<string>('')
+    const beaconFilter: any[] = beaconContainer.filter(el => {
+        el.name.toLowerCase().includes(beaconName.toLowerCase())
+    });
+
+
     useEffect(() => {
         Api.getAllBeacon(token, networks).then(res => {
             setBeaconContainer(res.data.beacons);
@@ -89,7 +95,8 @@ const BeaconChange = ({networks}: { networks: number }) => {
     return (
         <div className={s.main_container}>
             <div className={s.left_container}>
-                {beaconContainer.map((el, index) => (
+                <input className={s.input} placeholder={'Название маячков'} value={beaconName} onChange={(e) => setBeaconName(e.target.value)} />
+                {beaconFilter.map((el, index) => (
                     <div key={index} className={s.item_container}>
                         <div>
                             <div>НС</div>

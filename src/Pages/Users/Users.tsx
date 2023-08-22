@@ -188,6 +188,7 @@ const Users = () => {
                   setChange={setChangingUsers}
                   change={changingUsers}
                   addedUsers={addedUsers}
+                  currentNetwork={currentNetworkId}
                   setAddedUsers={setAddedUsers}
                 />
               }

@@ -68,6 +68,27 @@
   }
 }
 
+.input {
+  margin-top: 0px;
+  width: 100%;
+  margin-left: 0px;
+  margin-left: 1rem;
+  height: 100%;
+  background: transparent;
+  color: white;
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 112.1%;
+  }
+}
+
 @media (max-width: 720px){
   .cont {
     .title{

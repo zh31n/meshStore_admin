@@ -1,6 +1,5 @@
 import s from "./AddEvent.module.scss";
 import { useEffect, useState, useRef } from "react";
-import trash from "../../assets/Trash.svg";
 import calend from "../../assets/e_data.svg";
 import upload from "../../assets/File_Upload.svg";
 import e_users from "../../assets/clients.svg";
@@ -55,7 +54,7 @@ const AddEvent = ({ setNewArr, currentNetwork }: Props) => {
       setAllBeacons(res.data.beacons);
       setCurrentBeacon(res.data.beacons[0].id);
     });
-    Api.getUsersGroup(token).then(res => {
+    Api.getUsersGroup(token, currentNetwork).then(res => {
       if (res.data.user_groups.length !== 0) {
         setAllGroups(res.data.user_groups);
         setCurrentGroup(res.data.user_groups[0].id);
@@ -125,7 +124,6 @@ const AddEvent = ({ setNewArr, currentNetwork }: Props) => {
     <div>
       <div className={s.title}>
         Новое событие для расписания
-        <img className={s.trash} src={trash} alt="trash icon" />
       </div>
       <div className={s.content}>
         <div className={s.right}>
@@ -265,7 +263,7 @@ const AddEvent = ({ setNewArr, currentNetwork }: Props) => {
               </select>
               <UserGroup currentGroup={currentGroup} />
             </div>
-            <NavLink to={"/profile/clients/add"} className={s.add_btn}>
+            <NavLink to={`/profile/clients/add?id=${currentNetwork}`} className={s.add_btn}>
               +
             </NavLink>
           </div>
