@@ -162,7 +162,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
                     </div>
                 </div>
                 <div className={s.btn} onClick={handleClick}>
-                    {change ? "Обновить информация" : "Добавить маячок"}
+                    {change ? "Обновить информацию" : "Добавить маячок"}
                 </div>
             </div>
         </div>
