@@ -6,8 +6,8 @@ const MobileNav = () => {
   const [currentLink, setCurrentLink] = useState<string>("today");
 
   return (
-    <div className={s.mob_nav}>
-      <div className="container">
+    <div className={s.mob_nav} >
+      <div className="container" style={{background:'black'}}>
         <div className={s.nav_i}>
           <Link
             to={"/profile/today"}
