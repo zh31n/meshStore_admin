@@ -1,12 +1,11 @@
 import { UserAction, UserActionEnum, defaultState } from "../types/user.type";
 
 
-const localToken = localStorage.getItem('token');
 
 const defaultState: defaultState = {
-  token: typeof(localToken) === "string" ? localToken : '',
+  token: '',
   role: 1,
-  reg: !localToken ? false : true,
+  reg: false,
 };
 
 export function userReducer(

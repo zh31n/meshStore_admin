@@ -37,13 +37,16 @@ const UserItemEvent = ({ name, id }: Props) => {
   };
 
   useEffect(() => {
-
-    usersIds.length !== 0 ? setAdded(false) : usersIds.map(el => {
-      if (el === id) {
-        setAdded(true);
-      }
-    });
-
+    setAdded(false)
+    if(usersIds.length === 0){
+      setAdded(false)
+    } else {
+      usersIds.find(el => {
+        if(el === id){
+          setAdded(true);
+        }
+      })
+    }
 
   }, [usersIds]);
 

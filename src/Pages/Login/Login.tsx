@@ -26,6 +26,7 @@ const Login = () => {
         Api.Auth(login, password).then(res => {
             if (res.status == 200) {
                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem('role', res.data.role)
                 const token: string = res.data.token;
                 const role: number = res.data.role;
                 const data = {token, role};

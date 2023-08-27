@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from './Modal.module.scss'
 
 type Props = {
@@ -7,6 +7,11 @@ type Props = {
 };
 
 const Modal = ({ path, setModal }: Props) => {
+
+  useEffect(() => {
+    console.log(path)
+  }, []);
+
   return (
     <div
       onClick={() => setModal(false)}

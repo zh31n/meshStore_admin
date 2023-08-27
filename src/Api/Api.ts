@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: "https://meshstore.site/api/",
-  baseURL: "http://83.220.174.249:5123/api/",
+  baseURL: "https://meshstore.site/api/",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": true,
@@ -11,7 +10,7 @@ const instance = axios.create({
 
 const Api = {
   Auth(email: string, password: string) {
-    return instance.get(`auth-admin?email=${email}&password=${password}`);
+    return instance.get(`auth-admin?email=${email}&password=${password}&remember=true`);
   },
   getUsers(token: string) {
     return instance.get(`users?token=${token}`);
@@ -43,7 +42,7 @@ const Api = {
   getNetworks(token: string) {
     return instance.get(`networks?token=${token}`);
   },
-  getSettings(token: string, network: number = 3) {
+  getSettings(token: string, network: number) {
     return instance.get(`settings?token=${token}&group=${network}`);
   },
   changeNetwork(token: string, data: object) {
@@ -88,7 +87,7 @@ const Api = {
     return instance.get(`notification?token=${token}&id=${id}`);
   },
   editNotification(token: string, data: any, id: number) {
-    return instance.get(
+    return instance.put(
       `edit-notification?token=${token}&notification=${id}`,
       data
     );
@@ -117,7 +116,7 @@ const Api = {
     return instance.put(`edit-user-group?token=${token}&group-id=${id}`, data);
   },
   changeBackGround(token: string, network: number, data: any) {
-    return instance(
+    return instance.patch(
       `update-background?token=${token}&network=${network}`,
       data
     );
@@ -127,6 +126,9 @@ const Api = {
       `notifications-date?token=${token}&date=${date}&network=${network}`
     );
   },
+  checkToken(token: string){
+    return instance.get(`check-token?token=${token}`)
+  }
 };
 
 export default Api;

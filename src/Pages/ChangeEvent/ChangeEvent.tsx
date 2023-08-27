@@ -1,13 +1,14 @@
 import {useEffect, useRef, useState} from "react";
 import s from "./ChangeEvent.module.scss";
 import trash from "../../assets/Trash.svg";
-import calend from "../../assets/e_data.svg";
 import upload from "../../assets/File_Upload.svg";
 import e_users from "../../assets/clients.svg";
 import {NavLink, useParams} from "react-router-dom";
 import Api from "../../Api/Api";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import UserGroup from "../../Components/UserGroup/UserGroup";
+import {useDispatch} from "react-redux";
+import {setAddUsers} from "../../store/action/addUsersAction.ts";
 
 const ChangeEvent = ({setNewArr, id}: any) => {
     const token = useTypedSelector(state => state.user.token);
@@ -18,6 +19,8 @@ const ChangeEvent = ({setNewArr, id}: any) => {
 
     const navlink = useRef<any>();
 
+    const dispatch: any = useDispatch()
+
     const [title, setTitle] = useState<string>("");
     const [text, setText] = useState<string>("");
     const [filename, setFileName] = useState<string>("");
@@ -27,11 +30,12 @@ const ChangeEvent = ({setNewArr, id}: any) => {
     const [allGroups, setAllGroups] = useState<any[]>([]);
 
     const [currentBeacon, setCurrentBeacon] = useState<number>(1);
-    const [currentGroup, setCurrentGroup] = useState<number>(0);
+    const [currentGroup, setCurrentGroup] = useState<any>(0);
 
     const [start, setStart] = useState<string>("");
     const [finish, setFinish] = useState<string>("");
-    const [date, setDate] = useState<string>("");
+
+    const [dataStart, setDataStart] = useState<string>('')
 
     const [finishedDate, setFinishedDate] = useState<string>("");
     const [_, setCurrentNetwork] = useState<number>(0);
@@ -45,37 +49,41 @@ const ChangeEvent = ({setNewArr, id}: any) => {
         });
         Api.getUsersGroup(token, Number(id)).then(res => {
             setAllGroups(res.data.user_groups);
-            setCurrentGroup(res.data.user_groups[0].id);
+            setCurrentGroup(JSON.stringify(res.data.user_groups[0]));
+            dispatch(setAddUsers(res.data.user_groups[0].users_ids))
         });
     }, []);
 
     const hadnleDelete = () => {
-        Api.deleteNotification(token, Number(eventId)).then(res => {
-            console.log(res);
+        Api.deleteNotification(token, Number(eventId)).then(() => {
             Api.allNotifications(token, Number(id)).then(res => {
                 setNewArr(res.data.notifications[0]);
             });
         });
+        navlink.current.click();
     };
 
     const handleSave = () => {
-        const datee = new FormData();
-        const starting = `${date}T${start}`;
+        const date = new FormData();
 
-        datee.append("beacon", String(currentBeacon));
-        datee.append('network', String(id))
-        datee.append("group", String(currentGroup));
-        datee.append("start", String(starting));
-        datee.append("finish", String(`${finishedDate}T${finish}`));
-        datee.append("title", String(title));
-        datee.append("text", String(text));
-        file ? datee.append("file", file[0]) : datee.append("file", '')
+        const groupData = JSON.parse(currentGroup)
+        const time = `${dataStart}T${start}`
+        const endTime = `${finishedDate}T${finish}`
 
-        console.log(datee);
-        Api.editNotification(token,datee, Number(eventId)).then(res => {
-            console.log(res);
+
+        date.append("beacon", String(currentBeacon));
+        date.append('network', String(id))
+        date.append("group", String(groupData.id));
+        date.append("start", String(time));
+        date.append("finish", String(endTime));
+        date.append("title", String(title));
+        date.append("text", String(text));
+        file ? date.append("file", file[0]) : date.append("file", '')
+
+        Api.editNotification(token, date, Number(eventId)).then(res => {
+            console.log(res.data);
             Api.allNotifications(token, Number(id)).then(res => {
-                console.log(res.data);
+                console.log(res.data.notifications[0].notifications)
                 setNewArr(res.data.notifications[0]);
             });
         });
@@ -91,18 +99,20 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                     }
                 });
             });
-            console.log(res.data);
+            Api.getUsersGroup(token, Number(id)).then(res => {
+                setAllGroups(res.data.user_groups);
+                setCurrentGroup(JSON.stringify(res.data.user_groups[0]));
+                dispatch(setAddUsers(res.data.user_groups[0].users_ids))
+            });
             setCurrentGroup(res.data.group.id);
             setText(res.data.text);
             setTitle(res.data.title);
-            setCurrentBeacon(res.data.beacon.id);
             setStart(res.data.start.split(" ")[1]);
             setFinish(res.data.finish.split(" ")[1]);
-            setDate(res.data.start.split(" ")[0]);
+            setDataStart(res.data.start.split(" ")[0]);
             setFinishedDate(res.data.finish.split(" ")[0]);
             setLink(res.data.link);
             setFileName(res.data.file);
-            console.log(res.data);
         });
     }, [eventId]);
 
@@ -170,17 +180,14 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                             <div className={s.timing}>
                                 <input
                                     type="date"
-                                    value={date}
+                                    style={{marginLeft: "5px"}}
+                                    value={dataStart}
                                     onChange={e => {
-                                        setDate(e.target.value);
+                                        setDataStart(e.target.value);
                                     }}
                                 />
                             </div>
-                            <img
-                                style={{marginLeft: "10px"}}
-                                src={calend}
-                                alt="calendar icon"
-                            />
+
                         </div>
                         <div style={{display: "flex", gap: "10px", marginTop: "10px"}}>
                             <div className={s.timing}>
@@ -202,11 +209,7 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                                     }}
                                 />
                             </div>
-                            <img
-                                style={{marginLeft: "10px"}}
-                                src={calend}
-                                alt="calendar icon"
-                            />
+
                         </div>
                     </div>
                 </div>
@@ -253,14 +256,18 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                             { allGroups.length !== 0 && <select
                                 value={currentGroup}
                                 onChange={e => {
-                                    setCurrentGroup(Number(e.target.value));
+                                    const data = JSON.parse(e.target.value)
+                                    setCurrentGroup(e.target.value);
+                                    dispatch(setAddUsers(data.users_ids))
+
                                 }}
                             >
-                                {allGroups.map(el => (
-                                    <option key={el.id} value={el.id}>
+                                {allGroups.map(el =>
+                                     <option key={el.id} value={JSON.stringify(el)}>
                                         {el.name}
                                     </option>
-                                ))}
+
+                                )}
                             </select>}
                             <UserGroup currentGroup={currentGroup}/>
                         </div>

@@ -1,9 +1,8 @@
 .mob_nav {
+  background-color: #000;
   display: none;
   height: 300px;
   margin-top: 10px;
-  background-color: #000;
-
   .nav_i {
     display: flex;
     justify-content: space-between;
@@ -11,13 +10,14 @@
     background-color: #000;
 
     .nav_item {
+
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       color: rgba(255, 255, 255, 0.5);
       font-variant-numeric: lining-nums proportional-nums;
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Manrope',sans-serif;
       font-size: 12px;
       font-style: normal;
       font-weight: 600;
@@ -26,15 +26,14 @@
         stroke: #838383;
       }
     }
-
-    .nav_item_active {
+    .nav_item_active{
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       color: rgba(255, 255, 255, 1);
       font-variant-numeric: lining-nums proportional-nums;
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Manrope',sans-serif;
       font-size: 12px;
       font-style: normal;
       font-weight: 600;

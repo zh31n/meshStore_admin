@@ -51,7 +51,7 @@ const SettingItem = ({
     };
     Api.changeSettings(token, data, network).then(res => {
       console.log(res);
-      Api.getSettings(token).then(res => {
+      Api.getSettings(token, network).then(res => {
         if (apifilename === "screensaver-image-ru") {
           setPath(res.data.data.screensaver_image_ru.link);
           setFileName(res.data.data.screensaver_image_ru.filename);
@@ -68,7 +68,7 @@ const SettingItem = ({
     <div className={s.set_item}>
       {vis && (
         <Modal
-          path={`http://83.220.174.249:5123${path}?u=${numbers}`}
+          path={`https://meshstore.site${path}?u=${numbers}`}
           setModal={setVis}
         />
       )}
@@ -93,8 +93,12 @@ const SettingItem = ({
             data.append("name", apifilename);
             data.append("file", file[0]);
 
-            Api.changeBackGround(token, network, data).then(res => {
-              console.log(res.data);
+            Api.changeBackGround(token, network, data).then(() => {
+              Api.getSettings(token, network).then(res => {
+                apifilename === 'screensaver-image-ru' ? setPath(res.data.data.screensaver_image_ru.link) : setPath(res.data.data.screensaver_image_en.link)
+                setNumber(res.data.data.last_updated);
+                console.log(res.data.data)
+              })
             });
           }}
         />

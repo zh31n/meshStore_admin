@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import s from "./AddClientsEvent.module.scss";
 import clientsI from "../../assets/clients.svg";
 import Api from "../../Api/Api";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 import trash from "../../assets/Trash.svg";
 import UserGroup from "../../Components/UserGroup/UserGroup";
-import { useDispatch } from "react-redux";
-import {
-  setAddUsers,
-  setAddUsersDefault,
-} from "../../store/action/addUsersAction";
+import {useDispatch} from "react-redux";
+import {setAddUsers, setAddUsersDefault,} from "../../store/action/addUsersAction";
 import useQuery from "../../hooks/useQuery.ts";
 
 type userGroup = {
@@ -38,13 +35,10 @@ const AddClientsEvent = (props: any) => {
 
   useEffect(() => {
     Api.getUsersGroup(token, Number(id)).then(res => {
-      console.log(token, props.currentNetwork)
-      console.log(res.data)
       if (res.data.user_groups.lenght !== 0) {
         setArray(res.data.user_groups);
         setCurrentGroup(res.data.user_groups[0].id);
         dispatch(setAddUsers(res.data.user_groups[0].users_ids));
-        console.log(res.data.user_groups[0]);
       } else {
         dispatch(setAddUsersDefault());
       }
@@ -55,7 +49,6 @@ const AddClientsEvent = (props: any) => {
     array.map(el => {
       if (el.id === currentGroup) {
         dispatch(setAddUsers(el.users_ids));
-        console.log(el.users_ids);
       }
     });
   }, [currentGroup]);
@@ -86,15 +79,12 @@ const AddClientsEvent = (props: any) => {
   };
 
   const handleSave = () => {
-    Api.changeUserGroup(token, currentGroup, users, changedName).then(res => {
-      console.log(res.data);
+    Api.changeUserGroup(token, currentGroup, users, changedName).then(() => {
       Api.getUsersGroup(token, Number(id)).then(res => {
-        console.log(res.data)
         if (res.data.user_groups.lenght !== 0) {
           setArray(res.data.user_groups);
           setCurrentGroup(res.data.user_groups[0].id);
           dispatch(setAddUsers(res.data.user_groups[0].users_ids));
-          console.log(res.data.user_groups[0]);
         } else {
           dispatch(setAddUsersDefault());
         }

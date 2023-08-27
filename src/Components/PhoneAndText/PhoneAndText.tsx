@@ -18,7 +18,8 @@ const PhoneAndText = ({ network }: { network: number }) => {
   const [numbers, setNumbers] = useState<string>("");
 
   useEffect(() => {
-    Api.getSettings(token, network).then(res => {
+    console.log(network)
+    Api.getSettings(token, Number(network)).then(res => {
       setFilenameEn(res.data.data.screensaver_image_en.filename);
       setFilenameRu(res.data.data.screensaver_image_ru.filename);
       setFilepathRu(res.data.data.screensaver_image_ru.link);
@@ -28,6 +29,7 @@ const PhoneAndText = ({ network }: { network: number }) => {
       setTextEn(res.data.data.screensaver_text_en.text);
       setTextRu(res.data.data.screensaver_text_ru.text);
       setNumbers(res.data.data.last_updated);
+      console.log(res.data.data)
     });
   }, [network]);
 

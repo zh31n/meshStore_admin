@@ -8,6 +8,7 @@ const Header = () => {
     const [currentLink, setCurrentLink] = useState<string>("today");
     const deleteToken = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         location.reload()
     }
 
