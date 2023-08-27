@@ -92,18 +92,19 @@
 @media (max-width: 480px) {
   .header {
     height: 60px;
-    justify-content: center;
+    justify-content: flex-end;
+
 
     .header_inner {
-      justify-content: center;
-
+      //justify-content: space-between;
+      gap: 20px;
       .nav {
         display: none;
       }
 
-      .lang {
-        display: none;
-      }
+      //.lang {
+      //  display: none;
+      //}
     }
   }
 

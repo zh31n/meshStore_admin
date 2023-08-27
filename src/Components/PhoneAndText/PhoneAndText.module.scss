@@ -56,3 +56,10 @@
     display: none;
   }
 }
+@media (max-height: 569px){
+  .cont_i{
+    .cont_inf{
+      height: 40vh;
+    }
+  }
+}

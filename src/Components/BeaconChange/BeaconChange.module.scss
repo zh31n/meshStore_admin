@@ -39,7 +39,6 @@
   height: 100%;
   display: flex;
   margin-top: 2rem;
-  display: flex;
   flex-direction: column;
   align-items: center;
 
@@ -231,7 +230,7 @@
 @media (max-width: 480px) {
   .main_container {
     flex-direction: column-reverse;
-    height: 50vh;
+    height:50vh;
     gap: 15px;
     overflow: auto;
     justify-content: flex-start;
@@ -243,5 +242,11 @@
   }
   .right_container {
     width: 100%;
+    height: auto;
+  }
+}
+@media (max-height: 569px){
+  .main_container{
+    height: 45vh;
   }
 }
