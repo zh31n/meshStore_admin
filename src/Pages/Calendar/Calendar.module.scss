@@ -127,13 +127,16 @@
 
 @media (max-width: 480px) {
   .cont {
-    max-height: 100%;
+    max-height: unset;
+    height: 60vh;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     overflow: auto;
     .cont_day {
+      max-height: 100%;
+      height: auto;
       width: 100%;
     }
   }
