@@ -34,7 +34,6 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
 
   const handleClick = () => {
     const phone = Number(number.replace(/\D/g,''));
-    alert(phone);
     Api.addUser(token, name, email, phone, "", currentNetwork, role).then(
       res => {
         if (res.data.error) {
