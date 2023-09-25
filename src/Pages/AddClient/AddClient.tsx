@@ -33,7 +33,7 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
   const token = useTypedSelector(state => state.user.token);
 
   const handleClick = () => {
-    const phone = Number(number.replace(/\D/g,''));
+    const phone = number.replace(/\D/g,'');
     Api.addUser(token, name, email, phone, "", currentNetwork, role).then(
       res => {
         if (res.data.error) {

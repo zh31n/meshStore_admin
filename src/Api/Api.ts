@@ -22,7 +22,7 @@ const Api = {
     token: string,
     name: string,
     email: string,
-    phone: number,
+    phone: string,
     tagId: string,
     network: number,
     role: number
