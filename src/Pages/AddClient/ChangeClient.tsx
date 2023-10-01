@@ -73,7 +73,7 @@ const ChangeClient = ({ setUsers }: Props) => {
 
   return (
     <div className={s.cont}>
-      <div className={s.back_btn} onClick={(a)=>dispatch(setUsersChangeDefault())}>Назад</div>
+      <div className={s.back_btn} onClick={(_a)=>dispatch(setUsersChangeDefault())}>Назад</div>
       <div
         className={s.title}
         // onClick={() => {
