@@ -35,12 +35,15 @@
   padding-top: 2rem;
 
   .users {
-    width: 49%;
+    width: 48%;
     display: flex;
     gap: 1rem;
     flex-direction: column;
-    height: 72vh;
-    overflow: auto;
+    height: 50vh;
+    max-height: 72vh;
+    overflow-y: scroll;
+    padding-right: 1%;
+    // overflow: auto;
   }
 
   .left {
