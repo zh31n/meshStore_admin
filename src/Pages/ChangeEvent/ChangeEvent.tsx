@@ -43,6 +43,10 @@ const ChangeEvent = ({setNewArr, id}: any) => {
 
     const [file, setFile] = useState<any>();
 
+    const [groupId, SetGroupId] = useState("");
+
+    // const [curGroup, setCurGroup] = useState("");
+
     useEffect(() => {
         Api.getAllBeacon(token, Number(id)).then(res => {
             setAllBeacons(res.data.beacons);
@@ -271,8 +275,8 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                                     const data = JSON.parse(e.target.value)
                                     setCurrentGroup(e.target.value);
                                     dispatch(setAddUsers(data.users_ids))
-                                    dispatch(setCurrentUserGroup(data))
-                                    console.log(data)
+                                    // dispatch(setCurrentUserGroup(data))
+                                    SetGroupId(data.id);
                                 }}
                             >
                                 {allGroups.map(el =>
@@ -283,7 +287,8 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                             </select>}
                             <UserGroup currentGroup={currentGroup}/>
                         </div>
-                        <NavLink to={`/profile/clients/add?id=${id}`} className={s.add_btn}>
+                        <button onClick={(a)=>{alert()}}></button>
+                        <NavLink to={`/profile/clients/add?id=${id}&group=`+groupId} className={s.add_btn}>
                             +
                         </NavLink>
                     </div>

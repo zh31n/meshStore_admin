@@ -5,8 +5,8 @@ const instance = axios.create({
     headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json',
     },
 });
 
@@ -83,7 +83,7 @@ const Api = {
         return instance.get(`notifications?token=${token}&network=${network}`);
     },
     addNotification(token: string, data: any) {
-        return instance.post(`add-notification?token=${token}`, data);
+        return instance.post(`add-notification?token=${token}`, data, {headers: {'Content-Type': 'multipart/form-data'}});
     },
     getNotification(token: string, id: number) {
         return instance.get(`notification?token=${token}&id=${id}`);

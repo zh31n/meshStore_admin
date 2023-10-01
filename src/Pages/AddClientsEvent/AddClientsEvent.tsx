@@ -18,7 +18,9 @@ type userGroup = {
 
 const AddClientsEvent = (props: any) => {
 
-    const id: any = useQuery('id')
+    const id: any = useQuery('id');
+
+    const group_id: any = useQuery('group');
 
     const [name, setName] = useState<string>("");
 
@@ -32,15 +34,28 @@ const AddClientsEvent = (props: any) => {
     const [currentGroup, setCurrentGroup] = useState<number>(0);
 
     const [array, setArray] = useState<userGroup[]>([]);
-    const currentGroupRId: string = useTypedSelector(state => state.addCurrentKey.currentGroupName.id);
-    const currentGroupUsers: number[] = useTypedSelector(state => state.addCurrentKey.currentGroupName.users_ids);
+
+    const check_if_exists = function(arr: any, id: any){
+        for (var i in arr){
+            if(arr[i].id == id){
+                return true
+            }
+            return false
+        }
+    }
+    // const currentGroupRId: string = useTypedSelector(state => state.addCurrentKey.currentGroupName.id);
+    // const currentGroupUsers: number[] = useTypedSelector(state => state.addCurrentKey.currentGroupName.users_ids);
     useEffect(() => {
         Api.getUsersGroup(token, Number(id)).then(res => {
             if (res.data.user_groups.lenght !== 0) {
                 setArray(res.data.user_groups);
-                // setCurrentGroup(res.data.user_groups[0].id);
-                setCurrentGroup(Number(currentGroupRId));
-                dispatch(setAddUsers(currentGroupUsers));
+                if(group_id){
+                    setCurrentGroup(group_id);
+                }else{
+                    setCurrentGroup(res.data.user_groups[0].id);
+                }
+                // setCurrentGroup(Number(currentGroupRId));
+                // dispatch(setAddUsers(currentGroupUsers));
             } else {
                 dispatch(setAddUsersDefault());
             }
