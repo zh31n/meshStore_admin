@@ -28,7 +28,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
     const [name, setName] = useState("");
     const [network, setNetwork] = useState<string>("");
     const token = useTypedSelector(state => state.user.token);
-    // const role = useTypedSelector(state => state.user.role);
+    const role = useTypedSelector(state => state.user.role);
 
     const handleDelete = () => {
         const id = currentBeacon.id;
