@@ -133,7 +133,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
                             placeholder="550e8400-e29b-41d4-a716-446655440000"
                         />
                     </div>
-                    {role === 2 && (
+                    {/* {role === 2 && (
                         <div className={s.input_container}>
                             <p>Название сети</p>
                             <select
@@ -149,7 +149,7 @@ const BeaconChange = ({networks}: { networks: number }) => {
                                 ))}
                             </select>
                         </div>
-                    )}
+                    )} */}
                     <div className={s.input_container}>
                         <p>Название маячка</p>
                         <input

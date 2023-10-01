@@ -30,7 +30,7 @@
 
 .blue_btn {
   width: 100%;
-  margin-top: 20%;
+  margin-top: 10%;
   height: 55px;
   border-radius: 12px;
   background: #443bff;
@@ -300,6 +300,7 @@
   .content {
     height: auto;
     max-height: 50vh;
+    overflow-y: scroll;
   }
 }
 
