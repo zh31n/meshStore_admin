@@ -1,4 +1,4 @@
-.page_wrap{
+.page_wrap {
 
 }
 
@@ -7,9 +7,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  .btns{
+
+  .btns {
 
   }
+
   .cont_day {
     width: 49%;
     height: 100%;
@@ -83,10 +85,12 @@
   display: flex;
   gap: 15px;
   align-items: center;
+
   .select {
     height: 30px;
     border-radius: 12px;
     background-color: white;
+
     select {
       width: 200px;
       font-size: 12px;
@@ -134,6 +138,7 @@
     align-items: center;
     gap: 10px;
     overflow: auto;
+
     .cont_day {
       max-height: 100%;
       height: auto;
@@ -142,20 +147,21 @@
   }
 }
 
-@media (max-width: 375px){
-  .cont{
+@media (max-width: 375px) {
+  .cont {
     max-height: unset;
     height: 60vh;
     overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    .cont_day{
+
+    .cont_day {
       max-height: 100%;
       height: auto;
     }
   }
-  .button{
+  .button {
     font-size: 10px;
   }
 }

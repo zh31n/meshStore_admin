@@ -9,6 +9,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import UserGroup from "../../Components/UserGroup/UserGroup";
 import {useDispatch} from "react-redux";
 import {setAddUsers} from "../../store/action/addUsersAction.ts";
+import {setCurrentUserGroup} from "../../store/reducers/addCurrentUsersGroup.ts";
 
 const ChangeEvent = ({setNewArr, id}: any) => {
     const token = useTypedSelector(state => state.user.token);
@@ -69,18 +70,27 @@ const ChangeEvent = ({setNewArr, id}: any) => {
         const groupData = JSON.parse(currentGroup)
         const time = `${dataStart}T${start}`
         const endTime = `${finishedDate}T${finish}`
-
-
-        date.append("beacon", String(currentBeacon));
-        date.append('network', String(id))
-        date.append("group", String(groupData.id));
-        date.append("start", String(time));
-        date.append("finish", String(endTime));
-        date.append("title", String(title));
-        date.append("text", String(text));
         file ? date.append("file", file[0]) : date.append("file", '')
+        const data:any = {
+            beacon: currentBeacon,
+            network: id,
+            group: groupData.id,
+            start: time,
+            finish: endTime,
+            title: title,
+            text: text,
+            file: date.get('file') || ''
+        }
+        // date.append("beacon", currentBeacon);
+        // date.append('network', String(id))
+        // date.append("group", String(groupData.id));
+        // date.append("start", String(time));
+        // date.append("finish", String(endTime));
+        // date.append("title", String(title));
+        // date.append("text", String(text));
 
-        Api.editNotification(token, date, Number(eventId)).then(res => {
+
+        Api.editNotification(token, data, Number(eventId)).then(res => {
             console.log(res.data);
             Api.allNotifications(token, Number(id)).then(res => {
                 console.log(res.data.notifications[0].notifications)
@@ -105,6 +115,7 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                 dispatch(setAddUsers(res.data.user_groups[0].users_ids))
             });
             setCurrentGroup(res.data.group.id);
+            dispatch(setCurrentUserGroup(res.data.group.id))
             setText(res.data.text);
             setTitle(res.data.title);
             setStart(res.data.start.split(" ")[1]);
@@ -253,20 +264,21 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                             Список клиентов
                         </div>
                         <div className={s.user_items}>
-                            { allGroups.length !== 0 && <select
+                            {allGroups.length !== 0 && <select
                                 value={currentGroup}
                                 onChange={e => {
+                                    // debugger
                                     const data = JSON.parse(e.target.value)
                                     setCurrentGroup(e.target.value);
                                     dispatch(setAddUsers(data.users_ids))
-
+                                    dispatch(setCurrentUserGroup(data))
+                                    console.log(data)
                                 }}
                             >
                                 {allGroups.map(el =>
-                                     <option key={el.id} value={JSON.stringify(el)}>
+                                    <option key={el.id} value={JSON.stringify(el)}>
                                         {el.name}
                                     </option>
-
                                 )}
                             </select>}
                             <UserGroup currentGroup={currentGroup}/>

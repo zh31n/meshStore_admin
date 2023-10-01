@@ -6,6 +6,8 @@ import ChangeEvent from "../ChangeEvent/ChangeEvent";
 import AddEvent from "../AddEvent/AddEvent";
 import Api from "../../Api/Api";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {setCurrentNetwork} from "../../store/reducers/addCurrentUsersGroup.ts";
+import {useDispatch} from "react-redux";
 
 interface notifications {
     date: string;
@@ -21,7 +23,7 @@ const Today = () => {
         len: 2,
         notifications: [],
     });
-
+    const dispatch:any = useDispatch();
     const role = useTypedSelector(state => state.user.role);
     const token = useTypedSelector(state => state.user.token);
     const [deviceWidth, setDeviceWidth] = useState<number>(2000);
@@ -43,7 +45,8 @@ const Today = () => {
         Api.getNetworks(token).then(res => {
             setNetwork(res.data.networks);
             res.data.networks.lenght !== 0 &&
-            setCurrentsNetwork(res.data.networks[0].id);
+            setCurrentsNetwork(res.data.networks[0].id)
+            dispatch(setCurrentNetwork(res.data.networks[0].id));
         });
     }, []);
 
@@ -63,6 +66,7 @@ const Today = () => {
                                     value={currentNetwork}
                                     onChange={e => {
                                         setCurrentsNetwork(Number(e.target.value));
+                                        dispatch(setCurrentNetwork(Number(e.target.value)))
                                     }}
                                 >
                                     {networks.map(el => (

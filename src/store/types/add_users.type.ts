@@ -10,4 +10,5 @@ export interface action {
 export enum ActionType {
   SET_USERS = "SET_USERS",
   SET_DEFAULT = "SET_DEFAULT",
+  SET_CURRENT_GROUP = 'SET_CURRENT_GROUP'
 }
