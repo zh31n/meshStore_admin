@@ -73,15 +73,15 @@ const ChangeClient = ({ setUsers }: Props) => {
 
   return (
     <div className={s.cont}>
+      <div className={s.back_btn} onClick={(a)=>dispatch(setUsersChangeDefault())}>Назад</div>
       <div
         className={s.title}
-        onClick={() => {
-          console.log(user);
-        }}
+        // onClick={() => {
+        //   console.log(user);
+        // }}
       >
         Изменить текущего клиента
       </div>
-
       <div className={s.inputs_cont}>
         <div className={s.inpt_cont}>
           <div className={s.title}>Имя/ логин клиента*</div>

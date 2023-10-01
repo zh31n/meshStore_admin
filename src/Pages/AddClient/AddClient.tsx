@@ -49,6 +49,7 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
         setEmail("");
         setRole(0);
         if (res.data.success == true) {
+          // alert(123);
           Api.getUsers(token).then(res => {
             setUsers(res.data.users);
           });
@@ -97,7 +98,7 @@ const AddClient = ({ currentNetwork, setUsers }: Props) => {
           <select value={role} onChange={e => setRole(Number(e.target.value))}>
             <option value={0}>Клиент</option>
             <option value={1}>Администратор</option>
-            <option value={2}>Главный администратор</option>
+            <option value={3}>Сотрудник</option>
           </select>
         </div>
       </div>
