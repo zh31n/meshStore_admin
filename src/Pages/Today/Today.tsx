@@ -8,6 +8,7 @@ import Api from "../../Api/Api";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {setCurrentNetwork} from "../../store/reducers/addCurrentUsersGroup.ts";
 import {useDispatch} from "react-redux";
+import useQuery from "../../hooks/useQuery.ts";
 
 interface notifications {
     date: string;
@@ -28,6 +29,7 @@ const Today = () => {
     const token = useTypedSelector(state => state.user.token);
     const [deviceWidth, setDeviceWidth] = useState<number>(2000);
     const [networks, setNetwork] = useState<any[]>([]);
+    const curNetwork = useQuery("id");
     const [currentNetwork, setCurrentsNetwork] = useState<number>(1);
 
     useEffect(() => {
@@ -101,7 +103,7 @@ const Today = () => {
                                 element={
                                     <AddEvent
                                         setNewArr={setTodayArr}
-                                        currentNetwork={currentNetwork}
+                                        currentNetwork={Number(curNetwork)}
                                     />
                                 }
                             />
@@ -154,7 +156,7 @@ const Today = () => {
                                 path={"/add"}
                                 element={
                                     <AddEvent
-                                        currentNetwork={currentNetwork}
+                                        currentNetwork={Number(curNetwork)}
                                         setNewArr={setTodayArr}
                                     />
                                 }

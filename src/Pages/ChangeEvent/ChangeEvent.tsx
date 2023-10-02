@@ -52,11 +52,11 @@ const ChangeEvent = ({setNewArr, id}: any) => {
             setAllBeacons(res.data.beacons);
             setCurrentBeacon(res.data.beacons[0].id);
         });
-        Api.getUsersGroup(token, Number(id)).then(res => {
-            setAllGroups(res.data.user_groups);
-            setCurrentGroup(JSON.stringify(res.data.user_groups[0]));
-            dispatch(setAddUsers(res.data.user_groups[0].users_ids))
-        });
+        // Api.getUsersGroup(token, Number(id)).then(res => {
+        //     setAllGroups(res.data.user_groups);
+        //     setCurrentGroup(JSON.stringify(res.data.user_groups[0]));
+        //     dispatch(setAddUsers(res.data.user_groups[0].users_ids))
+        // });
     }, []);
 
     const hadnleDelete = () => {
@@ -113,10 +113,15 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                     }
                 });
             });
+            let temp_id = res.data.group.id;
             Api.getUsersGroup(token, Number(id)).then(res => {
-                setAllGroups(res.data.user_groups);
-                setCurrentGroup(JSON.stringify(res.data.user_groups[0]));
-                dispatch(setAddUsers(res.data.user_groups[0].users_ids))
+                res.data.user_groups.map((el: any, index: number)=>{
+                    if(el.id == temp_id){
+                        setAllGroups(res.data.user_groups);
+                        setCurrentGroup(JSON.stringify(res.data.user_groups[index]));
+                        dispatch(setAddUsers(res.data.user_groups[index].users_ids))
+                    }
+                })
             });
             setCurrentGroup(res.data.group.id);
             dispatch(setCurrentUserGroup(res.data.group.id))
@@ -275,7 +280,7 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                                     const data = JSON.parse(e.target.value)
                                     setCurrentGroup(e.target.value);
                                     dispatch(setAddUsers(data.users_ids))
-                                    // dispatch(setCurrentUserGroup(data))
+                                    dispatch(setCurrentUserGroup(data))
                                     SetGroupId(data.id);
                                 }}
                             >
@@ -287,7 +292,6 @@ const ChangeEvent = ({setNewArr, id}: any) => {
                             </select>}
                             <UserGroup currentGroup={currentGroup}/>
                         </div>
-                        <button onClick={(a)=>{alert()}}></button>
                         <NavLink to={`/profile/clients/add?id=${id}&group=`+groupId} className={s.add_btn}>
                             +
                         </NavLink>

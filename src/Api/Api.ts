@@ -91,7 +91,8 @@ const Api = {
     editNotification(token: string, data: any, id: number) {
         return instance.put(
             `edit-notification?token=${token}&notification=${id}`,
-            data
+            data,
+            {headers: {'Content-Type': 'multipart/form-data'}}
         );
     },
     deleteNotification(token: string, id: number) {

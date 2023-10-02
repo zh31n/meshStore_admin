@@ -55,6 +55,7 @@ const AddEvent = ({setNewArr, currentNetwork}: Props) => {
             setCurrentBeacon(res.data.beacons[0].id);
         });
         Api.getUsersGroup(token, currentNetwork).then(res => {
+            console.log(currentNetwork, res.data);
             if (res.data.user_groups.length !== 0) {
                 setAllGroups(res.data.user_groups);
                 setCurrentGroup(res.data.user_groups[0].id);

@@ -100,7 +100,7 @@ const Calendar = () => {
           <div className={s.select}>
             <select
               value={currentNetwork}
-              onChange={e => setCurrentNetwork(Number(e.target.value))}
+              onChange={e =>{setCurrentNetwork(Number(e.target.value));}}
             >
               {networks.map(el => (
                 <option value={el.id}>{el.name}</option>
@@ -135,7 +135,7 @@ const Calendar = () => {
                     />
                   ))}
                 </div>
-                <Link to={"/profile/today/add"} className={s.btn}>
+                <Link to={"/profile/today/add?id="+currentNetwork} className={s.btn}>
                   +
                 </Link>
               </div>
@@ -171,7 +171,7 @@ const Calendar = () => {
                     }
                   })}
                 </div>
-                <Link to={"/profile/today/add"} className={s.btn}>
+                <Link to={"/profile/today/add?id="+currentNetwork} className={s.btn}>
                   +
                 </Link>
               </div>

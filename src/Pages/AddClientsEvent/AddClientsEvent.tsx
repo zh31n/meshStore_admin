@@ -35,14 +35,6 @@ const AddClientsEvent = (props: any) => {
 
     const [array, setArray] = useState<userGroup[]>([]);
 
-    const check_if_exists = function(arr: any, id: any){
-        for (var i in arr){
-            if(arr[i].id == id){
-                return true
-            }
-            return false
-        }
-    }
     // const currentGroupRId: string = useTypedSelector(state => state.addCurrentKey.currentGroupName.id);
     // const currentGroupUsers: number[] = useTypedSelector(state => state.addCurrentKey.currentGroupName.users_ids);
     useEffect(() => {
