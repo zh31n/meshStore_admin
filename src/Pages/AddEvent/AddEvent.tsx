@@ -105,6 +105,7 @@ const AddEvent = ({setNewArr, currentNetwork}: Props) => {
             Api.allNotifications(token, currentNetwork).then(res => {
                 console.log(res.data);
                 setNewArr(res.data.notifications[0]);
+                // window.location.reload();
             });
         });
         // } else {
